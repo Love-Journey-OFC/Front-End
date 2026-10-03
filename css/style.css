@@ -643,7 +643,8 @@ button {
   align-items: center;
   gap: 50px;
   padding: 80px max(10%, calc((100% - 1160px) / 2));
-  background: linear-gradient(174deg, #ffdc8c 0 83%, #f6d16d 83% 100%);
+  background: url("../assets/imgs/background-call-to-action.png") center / cover
+    no-repeat;
   position: relative;
   overflow: hidden;
 }
@@ -655,20 +656,6 @@ button {
   width: 100%;
   height: 36px;
   background: var(--green);
-  clip-path: polygon(
-    0 30%,
-    9% 12%,
-    20% 0,
-    31% 37%,
-    39% 65%,
-    52% 85%,
-    66% 77%,
-    78% 40%,
-    90% 31%,
-    100% 55%,
-    100% 100%,
-    0 100%
-  );
 }
 .start-copy {
   position: relative;
@@ -696,35 +683,15 @@ button {
   padding: 10px 25px;
   font-size: 14px;
 }
-.journey-emblem {
+.journey-emblem img {
   justify-self: center;
-  width: 440px;
-  height: 440px;
-  border-radius: 50%;
-  background: #f1cf57;
+  width: 80%;
   position: relative;
   display: grid;
   place-items: center;
   color: white;
 }
-.journey-emblem::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 50%;
-  height: 100%;
-  background: #d15f8f;
-  border-radius: 220px 0 0 220px;
-}
-.emblem-heart {
-  position: relative;
-  z-index: 1;
-  font-size: 198px;
-  line-height: 1;
-  color: #fff7f5;
-  text-shadow: 0 0 2px white;
-}
+
 .journey-emblem > span {
   position: absolute;
   z-index: 2;
