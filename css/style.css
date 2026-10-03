@@ -20,6 +20,7 @@ body {
   font-family: Nunito, Arial, sans-serif;
   color: var(--ink);
   background: #fff;
+  padding: 0px;
 }
 a {
   color: inherit;
@@ -111,7 +112,6 @@ button {
   inset: 0;
   background: url("../assets/imgs/background-hero.png") center 43% / cover
     no-repeat;
-  transform: scale(1.01);
 }
 .hero-content {
   position: relative;
@@ -310,7 +310,7 @@ button {
   background-image: url("../assets/imgs/jornada.png");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: 90% 90%;
 }
 .feature-cta {
   position: absolute;
@@ -326,7 +326,9 @@ button {
   font-size: clamp(12px, 1vw, 14px);
   font-weight: 800;
   box-shadow: 0 4px 9px #00000014;
-  transition: transform 0.2s, filter 0.2s;
+  transition:
+    transform 0.2s,
+    filter 0.2s;
 }
 .feature-cta:hover {
   transform: translateY(-2px);
@@ -341,28 +343,63 @@ button {
   color: #fff4bf;
 }
 .feature-cta-one {
+  position: absolute;
   left: 61%;
-  top: 17%;
+
+  top: 7%;
 }
+
 .feature-cta-two {
-  left: 5%;
-  top: 40%;
+  position: absolute;
+
+  left: 7%;
+  top: 30%;
 }
 .feature-cta-three {
+  position: absolute;
+
   left: 60%;
-  top: 68%;
+  top: 55%;
 }
 .feature-cta-four {
-  left: 4%;
-  top: 94%;
+  position: absolute;
+
+  left: 7%;
+  top: 80%;
+}
+.feature-cta-one h3,
+.feature-cta-two h3,
+.feature-cta-three h3,
+.feature-cta-four h3 {
+  white-space: normal;
+  font-size: 30px;
+  color: #5ba77a;
+  margin: 0px;
+}
+
+.feature-cta-one p,
+.feature-cta-two p,
+.feature-cta-three p,
+.feature-cta-four p {
+  font-size: 20px;
+  width: 60%;
+  margin: 0;
+}
+
+.feature-cta-one,
+.feature-cta-two,
+.feature-cta-three,
+.feature-cta-four {
+  gap: 10px;
+  width: 45%;
 }
 
 .testimonials {
   position: relative;
   min-height: 920px;
-  background: var(--pink);
+  background: url("../assets/imgs/background-pink.png") center / cover no-repeat;
   color: white;
-  padding: 140px max(6%, calc((100% - 1210px) / 2)) 270px;
+  padding: 300px max(6%, calc((100% - 1210px) / 2)) 270px;
   text-align: center;
 }
 .testimonials h2 {
@@ -476,20 +513,15 @@ button {
   margin: auto;
   padding: 45px 38px 48px;
   border-radius: 12px;
-  background: linear-gradient(180deg, #bfe4fa 0 59%, #fff6c4 59% 81%, #c4e7f4);
+  background: url("../assets/imgs/background-nuvem.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
 }
-.pricing-board::before {
-  content: "☁  ☁";
-  position: absolute;
-  right: 3%;
-  top: 34px;
-  font-size: 70px;
-  letter-spacing: 28px;
-  color: #fff9;
-}
+
 .pricing-heading {
   position: relative;
   text-align: center;
@@ -497,13 +529,13 @@ button {
 }
 .pricing-heading h2 {
   margin: 0;
-  color: #f47e90;
+  color: #f5888e;
   font-size: 34px;
   font-weight: 900;
 }
 .pricing-heading h3 {
   margin: 1px 0 0;
-  color: #f47e90;
+  color: #f5888e;
   font-size: 43px;
   line-height: 1.2;
 }
