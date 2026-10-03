@@ -565,6 +565,18 @@ button {
   margin: -14px -5px -4px;
   box-shadow: 0 8px 18px #71623a27;
 }
+
+.plan-highlight strong,
+.plan-highlight h4,
+.plan-highlight p,
+.plan-highlight li {
+  color: #fff !important;
+}
+
+.plan-highlight strong {
+  font-weight: bold;
+}
+
 .price {
   font-size: 25px;
   color: #d9b33e;
@@ -626,7 +638,6 @@ button {
 }
 .badge {
   position: absolute;
-  top: -29px;
   right: 12px;
   padding: 5px 11px;
   border-radius: 12px;
@@ -647,6 +658,7 @@ button {
     no-repeat;
   position: relative;
   overflow: hidden;
+  margin-bottom: -1000px;
 }
 .start::before {
   content: "";
