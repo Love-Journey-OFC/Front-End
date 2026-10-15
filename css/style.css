@@ -1337,3 +1337,16 @@ button {
     column-gap: 15px;
   }
 }
+
+@media (max-width: 700px) {
+  .site-header { z-index: 20; }
+  .main-nav { z-index: 21; max-height: calc(100vh - 58px); overflow-y: auto; }
+  .main-nav.open { display: flex; }
+  .brand { min-width: 0; }
+}
+
+@media (max-width: 380px) {
+  .site-header { padding-right: 12px; padding-left: 12px; }
+  .brand { gap: 6px; font-size: 13px; }
+  .menu-toggle { padding: 7px; }
+}

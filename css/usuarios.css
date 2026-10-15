@@ -1713,3 +1713,49 @@ button {
     display: none !important;
 }
 
+
+/* Ajustes finais para tablet e celular */
+@media (max-width: 768px) {
+  html, body { max-width: 100%; overflow-x: hidden; }
+  .app-layout { width: 100%; min-height: 100vh; flex-direction: column; }
+  .sidebar {
+    width: 100%; min-width: 0; min-height: 0; height: auto;
+    padding: 1rem; gap: .75rem; flex-direction: column; justify-content: flex-start;
+  }
+  .brand { justify-content: center; margin: 0; }
+  .sidebar-nav { width: 100%; min-width: 0; }
+  .sidebar-nav ul {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: .4rem; width: 100%;
+  }
+  .sidebar-nav li { min-width: 0; }
+  .nav-link {
+    min-width: 0; min-height: 42px; justify-content: center;
+    padding: .55rem .45rem; gap: .4rem; text-align: center;
+    font-size: clamp(.7rem, 2.4vw, .9rem); overflow-wrap: anywhere;
+  }
+  .sidebar-footer-card { display: none; }
+  .main-content {
+    width: 100%; min-width: 0; min-height: 0; height: auto;
+    padding: clamp(.8rem, 3.5vw, 1.4rem); overflow: visible;
+  }
+  .dashboard-grid { width: 100%; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .dashboard-grid > *, .card, .page-header > *, .header-title-wrapper { min-width: 0; }
+  .page-header { flex-wrap: wrap; align-items: flex-start; gap: .8rem; }
+  .header-title-wrapper { flex: 1 1 220px; }
+  .main-content img { max-width: 100%; }
+}
+
+@media (max-width: 520px) {
+  .sidebar { padding: .75rem; }
+  .sidebar-nav ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nav-link { padding: .55rem .3rem; gap: .35rem; font-size: clamp(.68rem, 3vw, .82rem); }
+  .main-content { padding: .75rem; }
+  .page-header h2 { font-size: clamp(1.1rem, 5vw, 1.45rem); }
+  .header-logo { width: 42px; height: 42px; }
+  .card { padding: clamp(.8rem, 4vw, 1.1rem); }
+  .resources-grid, .completed-grid, .moments-grid, .entries-grid, .achievement-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 145px), 1fr));
+  }
+  .emotions-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

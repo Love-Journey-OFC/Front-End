@@ -501,3 +501,27 @@ body.corpo-esqueci {
   }
 
 }
+/* Ajustes finais para telas estreitas */
+@media (max-width: 600px) {
+  html, body { width: 100%; max-width: 100%; min-width: 0; }
+  body { overflow-x: hidden; }
+  .tela-login, .tela-cadastro, .tela-esqueci, .tela-senha-redefinida,
+  .painel-login, .painel-form, .painel-esqueci, .painel-senha-redefinida,
+  .painel-visual, .painel-visual-login, .painel-visual-esqueci,
+  .painel-visual-redefinida, .container, .pagina-profissional,
+  .card-profissional, form {
+    width: 100%; max-width: 100%; min-width: 0;
+  }
+  .tela-login, .tela-cadastro, .tela-esqueci, .tela-senha-redefinida {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  input, select, textarea, button { max-width: 100%; }
+  input, select, textarea { min-width: 0; font-size: 16px; }
+  img, svg { max-width: 100%; }
+  button, a { overflow-wrap: anywhere; }
+}
+
+@media (max-width: 380px) {
+  .painel-login, .painel-form, .painel-esqueci, .painel-senha-redefinida,
+  .card-profissional { padding-left: 14px; padding-right: 14px; }
+}
