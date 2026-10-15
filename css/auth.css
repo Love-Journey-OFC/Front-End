@@ -179,35 +179,6 @@ body {
   outline-offset: 3px;
 }
 
-.link-inicio {
-  position: fixed;
-  z-index: 20;
-  top: 20px;
-  left: 24px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 15px;
-  border: 1px solid rgba(95, 98, 91, 0.14);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--texto-escuro);
-  font-size: 0.85rem;
-  font-weight: 800;
-  text-decoration: none;
-  box-shadow: 0 6px 20px rgba(80, 76, 55, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.link-inicio:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 9px 24px rgba(80, 76, 55, 0.16);
-}
-
-@media (max-width: 480px) {
-  .link-inicio { top: 12px; left: 12px; padding: 8px 12px; font-size: 0.78rem; }
-}
-
 .icone-flutuante {
   position: fixed;
   left: 0;
