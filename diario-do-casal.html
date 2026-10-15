@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="./assets/imgs/cibelly/imagemciba/logo.png" type="image/png" />
+
+    <title>Love Journey - Diários</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./css/cibelly.css" />
+  </head>
+
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div>
+          <div class="brand">
+            <img
+              src="./assets/imgs/cibelly/imagemciba/logo.png"
+              alt="Logo Love Journey"
+              class="brand-logo"
+            />
+
+            <h1 class="brand-name">Love Journey</h1>
+          </div>
+
+          <nav class="sidebar-nav">
+            <ul>
+              <li>
+                <a href="./dashboard-casal.html" class="nav-link">
+                  <span class="icon">🏠</span>
+                  Início
+                </a>
+              </li>
+
+              <li>
+                <a href="./diario-do-casal.html" class="nav-link active">
+                  <span class="icon">📖</span>
+                  Diário do casal
+                </a>
+              </li>
+
+              <li>
+                <a href="./dashboard-emocoes.html" class="nav-link">
+                  <span class="icon">💖</span>
+                  Minhas emoções
+                </a>
+              </li>
+
+              <li>
+                <a href="./desafios-do-casal.html" class="nav-link">
+                  <span class="icon">🎯</span>
+                  Desafios
+                </a>
+              </li>
+
+              <li>
+                <a href="./apoio-psicologico.html" class="nav-link">
+                  <span class="icon">🎧</span>
+                  Apoio
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div class="sidebar-footer-card">
+          <h3>Love Journey</h3>
+
+          <p>Cuidar do amor é escolher um ao outro, todos os dias.</p>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <img
+          src="./assets/imgs/cibelly/imagemciba/fundo.png.jpeg"
+          alt="Plano de fundo Love Journey"
+          class="bg-image"
+        />
+
+        <header class="page-header">
+          <div class="header-title-wrapper">
+            <img
+              src="./assets/imgs/cibelly/imagemciba/logo.png"
+              alt="Logo Love Journey"
+              class="header-logo"
+            />
+
+            <div>
+              <h2>Diários</h2>
+
+              <p class="header-subtitle">
+                Registros, textos, momentos e agora também o seu diário pessoal.
+              </p>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" id="btn-new-entry">
+            <span>+</span>
+            Novo registro
+          </button>
+        </header>
+
+        <div class="tab-group">
+          <button class="tab-btn active">Registros e momentos</button>
+
+          <button class="tab-btn">Diário pessoal</button>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="col-main">
+            <section class="card moments-card">
+              <div class="card-header">
+                <h3>
+                  <span class="card-icon">📷</span>
+                  Momentos especiais
+                </h3>
+
+                <button class="btn btn-secondary btn-sm">Ver todos</button>
+              </div>
+
+              <p class="card-instruction">
+                Melhores momentos que vivemos juntos.
+              </p>
+
+              <div class="moments-grid">
+                <article class="moment-item theme-pink">
+                  <img
+                    src="./assets/imgs/cibelly/imagemciba/casal por do sol.jpeg"
+                    alt="Casal no pôr do sol"
+                  />
+
+                  <span class="item-date"> 12/07/2025 </span>
+
+                  <p class="item-text">Nosso primeiro pôr do sol juntos.</p>
+                </article>
+
+                <article class="moment-item theme-purple">
+                  <img
+                    src="./assets/imgs/cibelly/imagemciba/casal girando na chuva.jpeg"
+                    alt="Casal girando na chuva"
+                  />
+
+                  <span class="item-date"> 08/07/2025 </span>
+
+                  <p class="item-text">Você e eu sempre.</p>
+                </article>
+
+                <article class="moment-item theme-teal">
+                  <img
+                    src="./assets/imgs/cibelly/imagemciba/casal piquinique.jpeg"
+                    alt="Casal no piquenique"
+                  />
+
+                  <span class="item-date"> 03/07/2025 </span>
+
+                  <p class="item-text">Aquele dia no parque.</p>
+                </article>
+
+                <article class="moment-item theme-yellow">
+                  <img src="./assets/imgs/cibelly/imagemciba/casal rindo.jpeg" alt="Casal rindo" />
+
+                  <span class="item-date"> 26/06/2025 </span>
+
+                  <p class="item-text">Nossas risadas.</p>
+                </article>
+              </div>
+            </section>
+
+            <section class="card diary-card">
+              <div class="card-header">
+                <h3>
+                  <span class="card-icon">📝</span>
+                  Diário pessoal
+                </h3>
+
+                <button class="btn btn-secondary btn-sm">Ver todos</button>
+              </div>
+
+              <p class="card-instruction">
+                Seus pensamentos, sentimentos e tudo que quiser compartilhar.
+              </p>
+
+              <div class="tag-group filter-group">
+                <button class="tag tag-button active">Todos</button>
+
+                <button class="tag tag-button">Reflexões</button>
+
+                <button class="tag tag-button">Sonhos</button>
+
+                <button class="tag tag-button">Desabafos</button>
+
+                <button class="tag tag-button">Gratidão</button>
+              </div>
+
+              <div class="entries-grid">
+                <article class="entry-item theme-pink">
+                  <div class="entry-top">
+                    <h4 class="item-title">🙏 Gratidão</h4>
+
+                    <span class="item-heart"> ♥ </span>
+                  </div>
+
+                  <p class="item-text">
+                    Hoje eu só queria te dizer que sou muito grata por tudo que
+                    vivemos até agora...
+                  </p>
+
+                  <img
+                    src="./assets/imgs/cibelly/imagemciba/cartascasal.jpeg"
+                    alt="Cartas que recebi"
+                  />
+                </article>
+
+                <article class="entry-item theme-purple">
+                  <div class="entry-top">
+                    <h4 class="item-title">💭 Reflexão</h4>
+
+                    <span class="item-heart"> ♥ </span>
+                  </div>
+
+                  <p class="item-text">
+                    Tô cansada, mas feliz. É incrível como tudo fica mais leve
+                    com você...
+                  </p>
+
+                  <img
+                    src="./assets/imgs/cibelly/imagemciba/sombra do casal de maodada (1).jpeg"
+                    alt="Casal de mãos dadas"
+                  />
+                </article>
+
+                <article class="entry-item theme-teal">
+                  <div class="entry-top">
+                    <h4 class="item-title">🌙 Sonhos</h4>
+
+                    <span class="item-heart"> ♥ </span>
+                  </div>
+
+                  <p class="item-text">
+                    Tenho tantos planos... E quero viver todos eles ao seu lado.
+                  </p>
+
+                  <img src="./assets/imgs/cibelly/imagemciba/italia.jpeg" alt="Possíveis viagens" />
+                </article>
+
+                <article class="entry-item theme-yellow">
+                  <div class="entry-top">
+                    <h4 class="item-title">💬 Desabafo</h4>
+
+                    <span class="item-heart"> ♥ </span>
+                  </div>
+
+                  <p class="item-text">
+                    Tem dias que bate uma ansiedade, mas eu lembro de você e
+                    tudo fica melhor.
+                  </p>
+
+                  <img
+                    src="./assets/imgs/cibelly/imagemciba/casal mao dada praia.jpeg"
+                    alt="Casal de mãos dadas na praia"
+                  />
+                </article>
+              </div>
+            </section>
+
+            <div class="bottom-row">
+              <section class="card shortcuts-card">
+                <div class="card-header">
+                  <h3>
+                    <span class="card-icon">⚡</span>
+                    Atalhos rápidos
+                  </h3>
+                </div>
+
+                <div class="shortcut-list">
+                  <a href="./diario-do-casal.html" class="shortcut">
+                    <span class="icon">✍️</span>
+                    Escrever no diário
+                  </a>
+
+                  <a href="./diario-do-casal.html" class="shortcut">
+                    <span class="icon">📷</span>
+                    Momentos especiais
+                  </a>
+
+                  <a href="./diario-do-casal.html" class="shortcut">
+                    <span class="icon">🖼️</span>
+                    Adicionar fotos
+                  </a>
+
+                  <a href="./diario-do-casal.html" class="shortcut">
+                    <span class="icon">💖</span>
+                    Ver memórias
+                  </a>
+
+                  <a href="./diario-do-casal.html" class="shortcut">
+                    <span class="icon">📅</span>
+                    Ver calendário
+                  </a>
+                </div>
+              </section>
+
+              <section class="card calendar-card">
+                <div class="card-header">
+                  <h3>
+                    <span class="card-icon">📅</span>
+                    Calendário
+                  </h3>
+                </div>
+
+                <div class="calendar-weekdays">
+                  <span>DOM</span>
+                  <span>SEG</span>
+                  <span>TER</span>
+                  <span>QUA</span>
+                  <span>QUI</span>
+                  <span>SEX</span>
+                  <span>SÁB</span>
+                </div>
+
+                <div class="calendar-days">
+                  <span></span>
+                  <span></span>
+
+                  <span>1</span>
+                  <span>2</span>
+                  <span>3</span>
+                  <span>4</span>
+                  <span>5</span>
+
+                  <span>6</span>
+                  <span>7</span>
+                  <span class="today">8</span>
+                  <span>9</span>
+                  <span>10</span>
+                  <span>11</span>
+                  <span>12</span>
+
+                  <span>13</span>
+                  <span>14</span>
+                  <span>15</span>
+                  <span>16</span>
+                  <span>17</span>
+                  <span>18</span>
+                  <span>19</span>
+
+                  <span>20</span>
+                  <span>21</span>
+                  <span>22</span>
+                  <span>23</span>
+                  <span>24</span>
+                  <span>25</span>
+                  <span>26</span>
+
+                  <span>27</span>
+                  <span>28</span>
+                  <span>29</span>
+                  <span>30</span>
+                  <span>31</span>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <aside class="col-side">
+            <section class="card summary-card">
+              <div class="card-header">
+                <h3>
+                  <span class="card-icon">📖</span>
+                  Resumo do nosso diário
+                </h3>
+              </div>
+
+              <div class="summary-list">
+                <div class="summary-item">
+                  <span class="summary-icon pink"> 📷 </span>
+
+                  <div class="summary-body">
+                    <div class="summary-top">
+                      <strong class="summary-title">
+                        Momentos especiais
+                      </strong>
+
+                      <span class="summary-date"> 12/07/2025 </span>
+                    </div>
+
+                    <p class="summary-text">
+                      Nosso primeiro pôr do sol juntos...
+                    </p>
+                  </div>
+                </div>
+
+                <div class="summary-item">
+                  <span class="summary-icon teal"> 📝 </span>
+
+                  <div class="summary-body">
+                    <div class="summary-top">
+                      <strong class="summary-title"> Diário pessoal </strong>
+
+                      <span class="summary-date"> 10/07/2025 </span>
+                    </div>
+
+                    <p class="summary-text">
+                      Hoje eu só queria te dizer que...
+                    </p>
+                  </div>
+                </div>
+
+                <div class="summary-item">
+                  <span class="summary-icon pink"> 📷 </span>
+
+                  <div class="summary-body">
+                    <div class="summary-top">
+                      <strong class="summary-title">
+                        Momentos especiais
+                      </strong>
+
+                      <span class="summary-date"> 08/07/2025 </span>
+                    </div>
+
+                    <p class="summary-text">
+                      Um dia perfeito, do nosso jeito...
+                    </p>
+                  </div>
+                </div>
+
+                <div class="summary-item">
+                  <span class="summary-icon teal"> 📝 </span>
+
+                  <div class="summary-body">
+                    <div class="summary-top">
+                      <strong class="summary-title"> Diário pessoal </strong>
+
+                      <span class="summary-date"> 05/07/2025 </span>
+                    </div>
+
+                    <p class="summary-text">Tô cansada, mas feliz...</p>
+                  </div>
+                </div>
+
+                <div class="summary-item">
+                  <span class="summary-icon pink"> 📷 </span>
+
+                  <div class="summary-body">
+                    <div class="summary-top">
+                      <strong class="summary-title">
+                        Momentos especiais
+                      </strong>
+
+                      <span class="summary-date"> 28/06/2025 </span>
+                    </div>
+
+                    <p class="summary-text">
+                      Nossas pequenas grandes aventuras...
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="card journey-card">
+              <div class="card-header">
+                <h3>
+                  <span class="card-icon">🚩</span>
+                  Nossa jornada
+                </h3>
+              </div>
+
+              <p class="card-instruction">Juntos há 128 dias</p>
+
+              <div class="journey-progress">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  aria-valuenow="82"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-label="Progresso da jornada"
+                >
+                  <div class="progress-fill"></div>
+                </div>
+
+                <span class="progress-heart"> ♥ </span>
+              </div>
+            </section>
+
+            <section class="card reminder-card">
+              <div class="card-header">
+                <h3>
+                  <span class="card-icon">💡</span>
+                  Hoje no nosso diário
+                </h3>
+              </div>
+
+              <div class="quote-box">
+                <span class="quote-heart"> ♥ </span>
+
+                <p class="quote-text">
+                  “O amor também se constrói nos detalhes do dia a dia.”
+                </p>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
