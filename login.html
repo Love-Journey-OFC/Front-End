@@ -1,255 +1,179 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Journey | Entrar</title>
 
-  <title>Love Journey | Entrar</title>
+    <link rel="stylesheet" href="./css/autenticacao/autenticacao.css" />
+    <link rel="stylesheet" href="./css/autenticacao/login.css" />
+  </head>
 
-  <link rel="stylesheet" href="./css/autenticacao/style.css">
-  <link rel="stylesheet" href="./css/autenticacao/login.css">
-</head>
-
-<body class="corpo-login">
-
-  <main class="tela-login">
-
-    <!-- ==========================================
+  <body class="corpo-login">
+    <main class="tela-login">
+      <!-- ==========================================
          LADO ESQUERDO — LOGIN
          ========================================== -->
 
-    <section class="painel-login">
+      <section class="painel-login">
+        <div class="conteudo-login">
+          <!-- LOGO (imagem no lugar do texto) -->
 
-      <div class="conteudo-login">
+          <img
+            src="./assets/imgs/logo love journey.png"
+            alt="Love Journey"
+            class="logo-login-img"
+          />
 
-        <!-- LOGO (imagem no lugar do texto) -->
+          <!-- TÍTULO -->
 
-        <img
-          src="./assets/imgs/autenticacao/icone_tipo.png"
-          alt="Love Journey"
-          class="logo-login-img"
-        >
+          <h2 class="titulo-login">Bem-vindo de volta!</h2>
 
+          <p class="subtitulo-login">
+            Entre na sua conta para continuar sua jornada.
+          </p>
 
-        <!-- TÍTULO -->
-
-        <h2 class="titulo-login">
-          Bem-vindo de volta!
-        </h2>
-
-        <p class="subtitulo-login">
-          Entre na sua conta para continuar sua jornada.
-        </p>
-
-
-        <!-- ==========================================
+          <!-- ==========================================
              FORMULÁRIO
              ========================================== -->
 
-        <form id="form-login" novalidate>
+          <form id="form-login" novalidate>
+            <!-- E-MAIL -->
 
-
-          <!-- E-MAIL -->
-
-          <div class="campo-login">
-
-            <label for="email">
-              E-mail
-            </label>
-
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Digite seu e-mail"
-              autocomplete="email"
-              required
-            >
-
-            <span
-              class="mensagem-erro"
-              id="erro-email"
-            ></span>
-
-          </div>
-
-
-          <!-- SENHA -->
-
-          <div class="campo-login">
-
-            <div class="label-senha">
-
-              <label for="senha">
-                Senha
-              </label>
-
-              <a
-                href="recuperar-senha.html"
-                class="link-esqueci"
-              >
-                Esqueceu a senha?
-              </a>
-
-            </div>
-
-
-            <div class="campo-senha">
+            <div class="campo-login">
+              <label for="email"> E-mail </label>
 
               <input
-                type="password"
-                id="senha"
-                name="senha"
-                placeholder="Digite sua senha"
-                autocomplete="current-password"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Digite seu e-mail"
+                autocomplete="email"
                 required
-              >
+              />
 
-              <button
-                type="button"
-                class="botao-olho-login"
-                id="mostrar-senha"
-                aria-label="Mostrar senha"
-              >
-                👁
-              </button>
-
+              <span class="mensagem-erro" id="erro-email"></span>
             </div>
 
-            <span
-              class="mensagem-erro"
-              id="erro-senha"
-            ></span>
+            <!-- SENHA -->
 
-          </div>
+            <div class="campo-login">
+              <div class="label-senha">
+                <label for="senha"> Senha </label>
 
+                <a href="recuperar-senha.html" class="link-esqueci">
+                  Esqueceu a senha?
+                </a>
+              </div>
 
-          <!-- LEMBRAR-ME -->
+              <div class="campo-senha">
+                <input
+                  type="password"
+                  id="senha"
+                  name="senha"
+                  placeholder="Digite sua senha"
+                  autocomplete="current-password"
+                  required
+                />
 
-          <label class="lembrar-login">
+                <button
+                  type="button"
+                  class="botao-olho-login"
+                  id="mostrar-senha"
+                  aria-label="Mostrar senha"
+                >
+                  👁
+                </button>
+              </div>
 
-            <input
-              type="checkbox"
-              id="lembrar"
-              name="lembrar"
-            >
+              <span class="mensagem-erro" id="erro-senha"></span>
+            </div>
 
-            <span>
-              Lembrar de mim
-            </span>
+            <!-- LEMBRAR-ME -->
 
-          </label>
+            <label class="lembrar-login">
+              <input type="checkbox" id="lembrar" name="lembrar" />
 
+              <span> Lembrar de mim </span>
+            </label>
 
-          <!-- ENTRAR -->
+            <!-- ENTRAR -->
 
-          <button
-            type="submit"
-            class="btn btn-rosa btn-entrar"
-          >
-            Entrar
-          </button>
+            <button type="submit" class="btn btn-rosa btn-entrar">
+              Entrar
+            </button>
 
+            <!-- DIVISOR -->
 
-          <!-- DIVISOR -->
+            <div class="divisor-login">
+              <span></span>
 
-          <div class="divisor-login">
+              <p>ou</p>
 
-            <span></span>
+              <span></span>
+            </div>
 
-            <p>ou</p>
+            <!-- GOOGLE -->
 
-            <span></span>
+            <button type="button" class="btn-google" id="botao-google">
+              <svg
+                class="icone-google"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  fill="#4285F4"
+                  d="M21.35 12.27c0-.79-.07-1.55-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42Z"
+                />
 
-          </div>
+                <path
+                  fill="#34A853"
+                  d="M12 21.5c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.7-1.72-5.47-4.03H3.28v2.53A9.75 9.75 0 0 0 12 21.5Z"
+                />
 
+                <path
+                  fill="#FBBC05"
+                  d="M6.53 13.59A5.86 5.86 0 0 1 6.22 12c0-.55.11-1.08.31-1.59V7.88H3.28A9.5 9.5 0 0 0 2.25 12c0 1.53.37 2.97 1.03 4.12l3.25-2.53Z"
+                />
 
-          <!-- GOOGLE -->
+                <path
+                  fill="#EA4335"
+                  d="M12 6.38c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.5 14.63 2.5 12 2.5a9.75 9.75 0 0 0-8.72 5.38l3.25 2.53C7.3 8.1 9.46 6.38 12 6.38Z"
+                />
+              </svg>
 
-          <button
-            type="button"
-            class="btn-google"
-            id="botao-google"
-          >
+              Entrar com o Google
+            </button>
 
-            <svg
-              class="icone-google"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
+            <!-- CADASTRO -->
 
-              <path
-                fill="#4285F4"
-                d="M21.35 12.27c0-.79-.07-1.55-.22-2.27H12v4.3h5.24a4.48 4.48 0 0 1-1.94 2.94v2.45h3.14c1.84-1.69 2.91-4.18 2.91-7.42Z"
-              />
+            <p class="texto-cadastro">
+              Ainda não tem uma conta?
 
-              <path
-                fill="#34A853"
-                d="M12 21.5c2.63 0 4.84-.87 6.45-2.35l-3.14-2.45c-.87.58-1.98.92-3.31.92-2.54 0-4.7-1.72-5.47-4.03H3.28v2.53A9.75 9.75 0 0 0 12 21.5Z"
-              />
+              <a href="cadastro.html"> Criar conta </a>
+            </p>
+          </form>
+        </div>
+      </section>
 
-              <path
-                fill="#FBBC05"
-                d="M6.53 13.59A5.86 5.86 0 0 1 6.22 12c0-.55.11-1.08.31-1.59V7.88H3.28A9.5 9.5 0 0 0 2.25 12c0 1.53.37 2.97 1.03 4.12l3.25-2.53Z"
-              />
-
-              <path
-                fill="#EA4335"
-                d="M12 6.38c1.43 0 2.71.49 3.72 1.45l2.79-2.79C16.84 3.5 14.63 2.5 12 2.5a9.75 9.75 0 0 0-8.72 5.38l3.25 2.53C7.3 8.1 9.46 6.38 12 6.38Z"
-              />
-
-            </svg>
-
-            Entrar com o Google
-
-          </button>
-
-
-          <!-- CADASTRO -->
-
-          <p class="texto-cadastro">
-
-            Ainda não tem uma conta?
-
-            <a href="cadastro.html">
-              Criar conta
-            </a>
-
-          </p>
-
-        </form>
-
-      </div>
-
-    </section>
-
-
-    <!-- ==========================================
+      <!-- ==========================================
          LADO DIREITO — TEMPLATE
          ========================================== -->
 
-    <section class="painel-visual-login">
+      <section class="painel-visual-login">
+        <div class="logo-marca-login">
+          <img
+            src="./assets/imgs/logo love journey.png"
+            alt="Love Journey"
+            class="imagem-login"
+          />
+        </div>
+      </section>
+    </main>
 
-      <div class="logo-marca-login">
-
-        <img
-          src="./assets/imgs/autenticacao/logo-icone.png"
-          alt="Love Journey"
-          class="imagem-login"
-        >
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <script src="./js/autenticacao/login.js"></script>
-
-</body>
-
+    <script src="./js/autenticacao/login.js"></script>
+  </body>
 </html>
