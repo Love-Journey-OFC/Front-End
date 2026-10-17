@@ -84,6 +84,7 @@ button {
     align-items: center;
     gap: 9px;
     margin-bottom: 2.5rem;
+    text-decoration: none;
 }
 
 .brand-logo {
