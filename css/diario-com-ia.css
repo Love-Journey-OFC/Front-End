@@ -417,12 +417,22 @@ button {
 }
 
 
-.chat-tabs,
 .chat-tools {
   display: flex;
   align-items: center;
 
   gap: 8px;
+}
+
+
+.tab-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 0;
+  background-color: #fdecf2;
+  border-radius: 20px;
 }
 
 
@@ -440,26 +450,33 @@ button {
 }
 
 
-.chat-tab {
+.tab-btn {
   display: inline-flex;
   align-items: center;
 
   gap: 8px;
 
-  padding: 8px 17px;
+  padding: 8px 18px;
 
-  border-radius: 20px;
+  border-radius: 16px;
 
   color: var(--text-primary);
 
-  background-color: #fdecf2;
+  background: transparent;
 
   font-size: 0.85rem;
   font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
 
-.chat-tab.active {
+.tab-btn:hover {
+  background-color: rgba(242, 82, 135, 0.1);
+}
+
+
+.tab-btn.active {
   color: #ffffff;
 
   background-color: var(--primary-pink);
@@ -1187,7 +1204,7 @@ button {
   }
 
 
-  .chat-tab {
+  .tab-btn {
     padding: 7px 11px;
   }
 

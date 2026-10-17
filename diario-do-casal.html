@@ -115,7 +115,7 @@
             </div>
           </div>
 
-          <button class="btn btn-primary" id="btn-new-entry">
+          <button class="btn btn-primary" id="btn-new-entry" type="button" aria-haspopup="dialog" aria-controls="new-entry-dialog">
             <span>+</span>
             Novo registro
           </button>
@@ -124,7 +124,7 @@
         <div class="tab-group">
           <button class="tab-btn active">Registros e momentos</button>
 
-          <button class="tab-btn">Diário pessoal</button>
+          <a class="tab-btn" href="./diario-com-ia.html">Diário pessoal</a>
         </div>
 
         <div class="dashboard-grid">
@@ -531,5 +531,39 @@
         </div>
       </main>
     </div>
+    <dialog class="entry-dialog" id="new-entry-dialog" aria-labelledby="entry-dialog-title">
+      <form class="entry-form" id="new-entry-form">
+        <div class="entry-dialog-header">
+          <div>
+            <span class="entry-dialog-kicker">Diário pessoal</span>
+            <h2 id="entry-dialog-title">O que está pensando?</h2>
+            <p>Este espaço é seu. Escreva no seu tempo.</p>
+          </div>
+          <button class="entry-dialog-close" type="button" data-close-entry aria-label="Fechar">&times;</button>
+        </div>
+        <label class="entry-field-label" for="entry-category">Categoria</label>
+        <select id="entry-category" name="category" required>
+          <option value="Reflexões">Reflexões</option>
+          <option value="Sonhos">Sonhos</option>
+          <option value="Desabafos">Desabafos</option>
+          <option value="Gratidão">Gratidão</option>
+        </select>
+        <label class="entry-field-label" for="entry-content">Seu registro</label>
+        <textarea id="entry-content" name="content" rows="6" maxlength="2000" placeholder="Escreva aqui o que está passando pela sua cabeça..." required></textarea>
+        <label class="entry-field-label" for="entry-photo">Foto <span class="entry-optional">(opcional)</span></label>
+        <input class="entry-photo-input" id="entry-photo" name="photo" type="file" accept="image/*">
+        <p class="entry-photo-help">Escolha uma foto para acompanhar este momento.</p>
+        <img class="entry-photo-preview" id="entry-photo-preview" alt="Prévia da foto selecionada" hidden>
+        <p class="entry-form-message" id="entry-form-message" role="status" aria-live="polite"></p>
+        <div class="entry-form-footer">
+          <span class="entry-private-note"><i class="fa-solid fa-lock" aria-hidden="true"></i> Seu registro fica salvo neste dispositivo.</span>
+          <div class="entry-form-actions">
+            <button class="btn btn-secondary" type="button" data-close-entry>Cancelar</button>
+            <button class="btn btn-primary" type="submit">Salvar registro</button>
+          </div>
+        </div>
+      </form>
+    </dialog>
+    <script src="./js/diario-do-casal.js" defer></script>
   </body>
 </html>
