@@ -122,21 +122,21 @@
         </header>
 
         <div class="tab-group">
-          <button class="tab-btn active">Registros e momentos</button>
+          <a class="tab-btn active" href="#moments-section">Registros e momentos</a>
 
           <a class="tab-btn" href="./diario-com-ia.html">Diário pessoal</a>
         </div>
 
         <div class="dashboard-grid">
           <div class="col-main">
-            <section class="card moments-card">
+            <section class="card moments-card" id="moments-section">
               <div class="card-header">
                 <h3>
                   <span class="card-icon"><i aria-hidden="true" class="fa-solid fa-camera"></i></span>
                   Momentos especiais
                 </h3>
 
-                <button class="btn btn-secondary btn-sm">Ver todos</button>
+                <button class="btn btn-secondary btn-sm" type="button" data-show-moments>Ver todos</button>
               </div>
 
               <p class="card-instruction">
@@ -144,7 +144,7 @@
               </p>
 
               <div class="moments-grid">
-                <article class="moment-item theme-pink">
+                <article class="moment-item theme-pink" role="button" tabindex="0">
                   <img
                     src="/assets/imgs/cibelly_diario/sol_casal.png"
                     alt="Casal no pôr do sol"
@@ -155,7 +155,7 @@
                   <p class="item-text">Nosso primeiro pôr do sol juntos.</p>
                 </article>
 
-                <article class="moment-item theme-purple">
+                <article class="moment-item theme-purple" role="button" tabindex="0">
                   <img
                     src="/assets/imgs/cibelly_diario/chuva_casal.png"
                     alt="Casal girando na chuva"
@@ -166,7 +166,7 @@
                   <p class="item-text">Você e eu sempre.</p>
                 </article>
 
-                <article class="moment-item theme-teal">
+                <article class="moment-item theme-teal" role="button" tabindex="0">
                   <img
                     src="/assets/imgs/cibelly_diario/piquenique_casal.png"
                     alt="Casal no piquenique"
@@ -177,7 +177,7 @@
                   <p class="item-text">Aquele dia no parque.</p>
                 </article>
 
-                <article class="moment-item theme-yellow">
+                <article class="moment-item theme-yellow" role="button" tabindex="0">
                   <img
                     src="/assets/imgs/cibelly_diario/rindo_casal.png"
                     alt="Casal rindo"
@@ -197,7 +197,7 @@
                   Diário pessoal
                 </h3>
 
-                <button class="btn btn-secondary btn-sm">Ver todos</button>
+                <button class="btn btn-secondary btn-sm" type="button" data-show-entries>Ver todos</button>
               </div>
 
               <p class="card-instruction">
@@ -305,35 +305,37 @@
                     Escrever no diário
                   </a>
 
-                  <a href="./diario-do-casal.html" class="shortcut">
+                  <a href="#moments-section" class="shortcut" data-shortcut="moments">
                     <span class="icon"><i aria-hidden="true" class="fa-solid fa-camera"></i></span>
                     Momentos especiais
                   </a>
 
-                  <a href="./diario-do-casal.html" class="shortcut">
+                  <a href="#new-entry-dialog" class="shortcut" data-shortcut="photo">
                     <span class="icon"><i aria-hidden="true" class="fa-solid fa-image"></i></span>
                     Adicionar fotos
                   </a>
 
-                  <a href="./diario-do-casal.html" class="shortcut">
+                  <a href="#moments-section" class="shortcut" data-shortcut="memories">
                     <span class="icon"><i aria-hidden="true" class="fa-solid fa-heart"></i></span>
                     Ver memórias
                   </a>
 
-                  <a href="./diario-do-casal.html" class="shortcut">
+                  <a href="#calendar-card" class="shortcut" data-shortcut="calendar">
                     <span class="icon"><i aria-hidden="true" class="fa-solid fa-calendar-days"></i></span>
                     Ver calendário
                   </a>
                 </div>
               </section>
 
-              <section class="card calendar-card">
+              <section class="card calendar-card" id="calendar-card">
                 <div class="card-header">
                   <h3>
                     <span class="card-icon"><i aria-hidden="true" class="fa-solid fa-calendar-days"></i></span>
                     Calendário
                   </h3>
                 </div>
+
+                <div class="calendar-month-nav"><button type="button" data-calendar-prev aria-label="Mês anterior">‹</button><strong data-calendar-label></strong><button type="button" data-calendar-next aria-label="Próximo mês">›</button></div>
 
                 <div class="calendar-weekdays">
                   <span>DOM</span>
@@ -345,46 +347,7 @@
                   <span>SÁB</span>
                 </div>
 
-                <div class="calendar-days">
-                  <span></span>
-                  <span></span>
-
-                  <span>1</span>
-                  <span>2</span>
-                  <span>3</span>
-                  <span>4</span>
-                  <span>5</span>
-
-                  <span>6</span>
-                  <span>7</span>
-                  <span class="today">8</span>
-                  <span>9</span>
-                  <span>10</span>
-                  <span>11</span>
-                  <span>12</span>
-
-                  <span>13</span>
-                  <span>14</span>
-                  <span>15</span>
-                  <span>16</span>
-                  <span>17</span>
-                  <span>18</span>
-                  <span>19</span>
-
-                  <span>20</span>
-                  <span>21</span>
-                  <span>22</span>
-                  <span>23</span>
-                  <span>24</span>
-                  <span>25</span>
-                  <span>26</span>
-
-                  <span>27</span>
-                  <span>28</span>
-                  <span>29</span>
-                  <span>30</span>
-                  <span>31</span>
-                </div>
+                <div class="calendar-days" data-calendar-days></div>
               </section>
             </div>
           </div>
@@ -548,6 +511,9 @@
           <option value="Desabafos">Desabafos</option>
           <option value="Gratidão">Gratidão</option>
         </select>
+
+        <label class="entry-field-label" for="entry-date">Data do registro</label>
+        <input id="entry-date" name="date" type="date" required>
         <label class="entry-field-label" for="entry-content">Seu registro</label>
         <textarea id="entry-content" name="content" rows="6" maxlength="2000" placeholder="Escreva aqui o que está passando pela sua cabeça..." required></textarea>
         <label class="entry-field-label" for="entry-photo">Foto <span class="entry-optional">(opcional)</span></label>

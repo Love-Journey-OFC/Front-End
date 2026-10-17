@@ -466,6 +466,9 @@ button {
     line-height: 1;
 }
 
+.favorite.is-favorite { color: #d92664; }
+.favorite.is-favorite i { font-weight: 900; }
+
 /* --------------------------------------------------------------------------
    CONVERSE COM ALGUÉM
    -------------------------------------------------------------------------- */
@@ -563,7 +566,40 @@ button {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
 }
+
+.resource-card:hover, .resource-card:focus-visible { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(90, 40, 70, .12); outline: 2px solid var(--primary-pink); outline-offset: 2px; }
+
+.support-dialog { border: 0; border-radius: 20px; padding: 0; width: min(560px, calc(100% - 28px)); max-height: min(88vh, 760px); color: var(--text-primary); box-shadow: 0 20px 70px rgba(37, 20, 53, .28); }
+.support-dialog::backdrop { background: rgba(36, 24, 51, .58); backdrop-filter: blur(3px); }
+.support-dialog-card { padding: 24px; max-height: min(88vh, 760px); overflow: auto; font-family: var(--font-family); }
+.support-dialog-card header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+.support-dialog-card h2 { color: #2c3e50; font-size: 1.25rem; line-height: 1.35; }
+.support-kicker { color: var(--primary-pink); letter-spacing: .08em; font-size: .68rem; font-weight: 700; margin-bottom: 4px; }
+.support-close { background: transparent; color: #6d6071; font-size: 1.8rem; line-height: 1; }
+.support-dialog-content { font-size: .9rem; line-height: 1.65; }
+.support-dialog-content > * + * { margin-top: 12px; }
+.support-dialog-content p { color: #625a65; }
+.support-dialog-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.support-dialog-actions button { border: 0; border-radius: 10px; padding: 10px 16px; font: 600 .85rem var(--font-family); cursor: pointer; }
+.support-primary { background: var(--primary-pink); color: white; }
+.support-secondary { background: #f4edf2; color: #514653; }
+.support-label { display: block; color: #514653; font-size: .83rem; font-weight: 600; margin-top: 12px; }
+.support-label input, .support-label select, .support-label textarea { display: block; width: 100%; margin-top: 5px; padding: 10px 12px; border: 1px solid #ded5df; border-radius: 10px; background: #fff; color: #302a39; font: 400 .9rem var(--font-family); }
+.support-label textarea { resize: vertical; }
+.support-prompt { padding: 13px 15px; background: #fff0f5; border-radius: 12px; }
+.support-prompt strong { color: #c52f68; }
+.support-prompt p { margin-top: 5px; color: #6b4054; font-style: italic; }
+.support-demo-note { font-size: .75rem; color: var(--text-muted) !important; }
+.support-contacts { margin-top: 20px; }
+.support-contact-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.support-contact { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; padding: 14px; border-radius: 12px; background: #fff0f5; }
+.support-contact strong, .support-contact small { display: block; }
+.support-contact small { color: var(--text-muted); font-size: .75rem; }
+.support-contact p { margin-top: 6px; font-size: .8rem; color: #625a65; }
+.support-remove { color: #a32653; background: transparent; font-size: .78rem; }
 
 .resource-card img {
     width: 100%;

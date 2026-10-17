@@ -1191,6 +1191,9 @@ button {
     width: 100%;
 }
 
+.calendar-month-nav { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 8px 0 14px; text-transform: capitalize; color: var(--text-primary); }
+.calendar-month-nav button { width: 30px; height: 30px; border-radius: 50%; background: #fce4ec; color: var(--primary-pink); font-size: 1.2rem; line-height: 1; }
+
 .calendar-weekdays,
 .calendar-days {
 
@@ -1243,6 +1246,31 @@ button {
 
     border-radius: 50%;
 }
+
+.calendar-days button.calendar-day { width: 30px; height: 30px; margin: auto; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: transparent; color: var(--text-light); font: inherit; font-size: .8rem; position: relative; }
+.calendar-days button.calendar-day:hover { background: #fce4ec; }
+.calendar-days button.calendar-day.has-entry::after { content: ""; position: absolute; width: 4px; height: 4px; border-radius: 50%; bottom: 2px; background: var(--primary-pink); }
+.calendar-days button.calendar-day.today { background: var(--primary-pink); color: #fff; font-weight: 600; }
+.calendar-days button.calendar-day.today::after { background: #fff; }
+.calendar-days button.calendar-day:focus-visible, .moment-item:focus-visible { outline: 2px solid var(--primary-pink); outline-offset: 2px; }
+
+.entry-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
+.entry-actions button { padding: 3px 0; color: #8b3c61; background: transparent; font-size: .72rem; font-weight: 600; }
+.entry-actions button:hover { color: var(--primary-hover); text-decoration: underline; }
+.diary-detail-dialog { border: 0; border-radius: 18px; padding: 0; width: min(700px, calc(100% - 28px)); max-height: 88vh; color: var(--text-primary); box-shadow: 0 20px 70px rgba(37, 20, 53, .28); }
+.diary-detail-dialog::backdrop { background: rgba(36, 24, 51, .58); backdrop-filter: blur(3px); }
+.diary-detail-card { padding: 22px; max-height: 88vh; overflow: auto; font-family: var(--font-family); }
+.diary-detail-card header { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 18px; }
+.diary-detail-card h2 { color: #2c3e50; font-size: 1.2rem; }
+.diary-detail-kicker { color: var(--primary-pink); font-size: .68rem; font-weight: 700; letter-spacing: .08em; }
+.diary-detail-card header button { color: #6d6071; background: transparent; font-size: 1.8rem; line-height: 1; }
+.diary-detail-content { display: grid; gap: 12px; }
+.diary-detail-content .moment-item, .diary-detail-content .entry-item { cursor: default; }
+.diary-detail-content .moment-item img, .diary-detail-content .entry-item img { max-width: 100%; border-radius: 10px; }
+.diary-detail-card footer { display: flex; justify-content: flex-end; margin-top: 18px; }
+.diary-detail-card footer button, .calendar-add-entry { border: 0; border-radius: 10px; padding: 9px 15px; background: var(--primary-pink); color: #fff; font: 600 .84rem var(--font-family); cursor: pointer; }
+.diary-detail-content .calendar-add-entry { justify-self: start; margin-top: 12px; }
+.moment-item { cursor: pointer; }
 
 .calendar-days .today {
 
