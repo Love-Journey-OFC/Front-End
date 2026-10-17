@@ -1,7 +1,8 @@
 /* ==========================================================================
    LOVE JOURNEY - MEUS USUÁRIOS
-   Estrutura padronizada + cards responsivos
+   CSS COMPLETO E CORRIGIDO
    ========================================================================== */
+
 
 /* ==========================================================================
    1. VARIÁVEIS E RESET
@@ -18,6 +19,7 @@
     --bg-overlay: rgba(255, 255, 255, 0.45);
 
     --card-bg: #ffffff;
+
     --card-radius: 16px;
     --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
 
@@ -35,6 +37,11 @@
     --font-family: "Poppins", sans-serif;
 }
 
+
+/* ==========================================================================
+   RESET
+   ========================================================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -46,11 +53,11 @@ html {
 }
 
 body {
+    min-height: 100vh;
     font-family: var(--font-family);
     color: var(--text-primary);
     background-color: #f4f5f7;
     line-height: 1.5;
-    overflow-x: hidden;
 }
 
 button,
@@ -64,30 +71,44 @@ button {
     outline: none;
 }
 
+img {
+    max-width: 100%;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--primary-pink);
+    outline-offset: 2px;
+}
+
+
 /* ==========================================================================
-   2. LAYOUT PRINCIPAL
+   2. ESTRUTURA PRINCIPAL
    ========================================================================== */
 
 .app-layout {
     display: flex;
-    min-height: 100vh;
     width: 100%;
+    min-height: 100vh;
 }
+
 
 /* ==========================================================================
    SIDEBAR
    ========================================================================== */
 
 .sidebar {
-    width: 230px;
-    min-width: 230px;
+    width: 240px;
+    min-width: 240px;
     min-height: 100vh;
+
+    padding: 2rem 1.5rem;
+
     background-color: var(--bg-sidebar);
-    padding: 1.5rem 1.1rem;
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
     flex-shrink: 0;
 }
@@ -95,83 +116,138 @@ button {
 .brand {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 0 5px;
-    margin-bottom: 2rem;
+
+    gap: 9px;
+
+    margin-bottom: 2.5rem;
 }
 
 .brand-logo {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
+
     object-fit: contain;
+
     flex-shrink: 0;
 }
 
 .brand-name {
-    font-size: 1.2rem;
-    font-weight: 700;
     color: #f49aaa;
+
+    font-size: 1.35rem;
+    font-weight: 700;
+
     letter-spacing: -0.5px;
     line-height: 1;
 }
 
+
+/* ==========================================================================
+   NAVEGAÇÃO
+   ========================================================================== */
+
+.sidebar-nav {
+    width: 100%;
+}
+
 .sidebar-nav ul {
-    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+
+    gap: 8px;
+
+    list-style: none;
+}
+
+.sidebar-nav li {
+    list-style: none;
 }
 
 .nav-link {
     display: flex;
     align-items: center;
-    gap: 10px;
 
-    padding: 10px 13px;
+    width: 100%;
+
+    gap: 12px;
+
+    padding: 12px 16px;
 
     color: var(--text-primary);
+
     text-decoration: none;
 
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     font-weight: 500;
 
-    border-radius: 10px;
+    border-radius: 12px;
 
-    transition: 0.25s ease;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        transform 0.2s ease;
+}
+
+.sidebar-nav .icon {
+    width: 19px;
+    height: 19px;
+
+    color: currentColor;
+
+    flex-shrink: 0;
+
+    transition: transform 0.2s ease;
 }
 
 .nav-link:hover {
-    background-color: rgba(72, 169, 130, 0.12);
+    background-color: rgba(242, 82, 135, 0.1);
+}
+
+.nav-link:hover .icon {
+    transform: scale(1.05);
 }
 
 .nav-link.active {
-    background-color: var(--secondary-hover);
     color: #ffffff;
 
-    box-shadow: 0 4px 12px rgba(58, 140, 107, 0.3);
+    background-color: var(--primary-pink);
+
+    box-shadow: 0 4px 12px rgba(242, 82, 135, 0.3);
 }
 
-.sidebar-footer-card {
-    background-color: #fbcfe8;
-    padding: 1rem;
 
-    border-radius: 14px;
+/* ==========================================================================
+   CARD INFERIOR DA SIDEBAR
+   ========================================================================== */
+
+.sidebar-footer-card {
+    margin-top: auto;
+
+    padding: 1.2rem;
+
     text-align: center;
 
-    margin-top: auto;
+    background-color: #fbcfe8;
+
+    border-radius: 16px;
 }
 
 .sidebar-footer-card h3 {
+    margin-bottom: 8px;
+
     color: var(--primary-pink);
-    font-size: 0.95rem;
-    margin-bottom: 7px;
+
+    font-size: 1rem;
 }
 
 .sidebar-footer-card p {
-    font-size: 0.76rem;
     color: #881337;
+
+    font-size: 0.82rem;
+
     line-height: 1.4;
 }
+
 
 /* ==========================================================================
    3. CONTEÚDO PRINCIPAL
@@ -184,45 +260,28 @@ button {
     min-width: 0;
     min-height: 100vh;
 
-    padding: 1.8rem 2.2rem;
+    padding: 2rem clamp(1rem, 2.5vw, 2.5rem);
 
     overflow-x: hidden;
-    overflow-y: auto;
 
-    z-index: 1;
+    isolation: isolate;
 }
 
 .bg-image {
-    position: fixed;
+    position: absolute;
 
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 230px;
+    inset: 0;
 
-    width: calc(100% - 230px);
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 
     object-fit: cover;
 
-    z-index: -2;
-    pointer-events: none;
-}
-
-.main-content::before {
-    content: "";
-
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 230px;
-
-    background: rgba(255, 255, 255, 0.08);
-
     z-index: -1;
+
     pointer-events: none;
 }
+
 
 /* ==========================================================================
    CABEÇALHO
@@ -234,93 +293,104 @@ button {
     justify-content: space-between;
 
     gap: 20px;
-    margin-bottom: 1.5rem;
+
+    margin-bottom: 2rem;
 }
 
 .header-title-wrapper {
     display: flex;
     align-items: center;
-    gap: 14px;
 
     min-width: 0;
+
+    gap: 16px;
 }
 
 .header-logo {
-    width: 50px;
-    height: 50px;
+    width: 52px;
+    height: 52px;
 
     object-fit: contain;
+
     flex-shrink: 0;
 }
 
 .page-header h2 {
     color: #ffffff;
 
-    font-size: 1.7rem;
+    font-size: 1.8rem;
     font-weight: 700;
-
-    line-height: 1.2;
-
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .header-subtitle {
-    max-width: 650px;
+    color: #eee5ea;
 
-    color: #ffffff;
-
-    font-size: 0.82rem;
-    font-weight: 400;
-
-    line-height: 1.35;
-
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    font-size: 0.95rem;
+    font-weight: 600;
 }
 
+
 /* ==========================================================================
-   BOTÕES
+   4. BOTÕES
    ========================================================================== */
 
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 7px;
 
-    padding: 9px 17px;
+    gap: 8px;
+
+    padding: 10px 20px;
 
     border-radius: 20px;
 
-    font-size: 0.82rem;
+    font-size: 0.9rem;
     font-weight: 600;
 
-    transition: 0.25s ease;
-
-    white-space: nowrap;
+    transition: all 0.3s ease;
 }
 
 .btn-primary {
-    background-color: var(--primary-pink);
     color: #ffffff;
+    background-color: var(--primary-pink);
 }
 
 .btn-primary:hover {
     background-color: var(--primary-hover);
+
     box-shadow: 0 4px 12px rgba(242, 82, 135, 0.4);
 }
 
 .btn-success {
-    background-color: var(--secondary-green);
     color: #ffffff;
+    background-color: var(--secondary-green);
 }
 
 .btn-success:hover {
     background-color: var(--secondary-hover);
 }
 
+.btn-secondary {
+    padding: 6px 12px;
+
+    color: #ffffff;
+
+    background-color: var(--secondary-green);
+
+    border-radius: 8px;
+
+    font-size: 0.8rem;
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-hover);
+}
+
 .btn-sm {
     padding: 6px 12px;
-    font-size: 0.75rem;
+
+    font-size: 0.8rem;
 }
 
 .btn-block {
@@ -328,125 +398,74 @@ button {
 }
 
 .btn-light {
-    height: 38px;
+    height: 42px;
 
-    padding: 0 12px;
+    padding: 0 14px;
 
-    background-color: rgba(255, 255, 255, 0.95);
     color: var(--text-muted);
 
-    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.95);
 
-    font-size: 0.72rem;
+    border-radius: 12px;
+
+    font-size: 0.8rem;
 }
 
 .btn-soft {
-    background-color: #f9d3e2;
     color: #b0155a;
 
-    border-radius: 8px;
+    background-color: #f9d3e2;
+
+    border-radius: 10px;
 }
 
 .btn-soft:hover {
     background-color: #f5c0d6;
 }
 
+button.link-action {
+    padding: 0;
+
+    font-family: inherit;
+
+    background: transparent;
+}
+
+
 /* ==========================================================================
-   4. GRID PRINCIPAL DOS CARDS
+   5. GRID PRINCIPAL
    ========================================================================== */
 
 .dashboard-grid {
     display: grid;
 
-    grid-template-columns:
-        minmax(220px, 3fr)
-        minmax(380px, 6fr)
-        minmax(230px, 3fr);
-
-    grid-template-rows: 600px auto;
-
-    gap: 18px;
-
     width: 100%;
     max-width: 1500px;
+
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+
+    gap: 20px;
 
     align-items: stretch;
 }
 
-/*
-   Desktop:
-
-   ┌──────────┬──────────────────┬──────────────┐
-   │ Usuários │      Conversa    │   Detalhes   │
-   │          │                  │              │
-   │          │                  │              │
-   ├──────────┴──────────────────┤              │
-   │ Solicitações / Observações  │              │
-   └─────────────────────────────┴──────────────┘
-*/
-
-.users-column {
-    grid-column: 1;
-    grid-row: 1;
-
-    min-width: 0;
-    min-height: 0;
-}
-
-.conversation-card {
-    grid-column: 2;
-    grid-row: 1;
-
-    min-width: 0;
-    min-height: 0;
-}
-
-.details-column {
-    grid-column: 3;
-    grid-row: 1 / 3;
-
-    min-width: 0;
-    min-height: 0;
-
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    padding-right: 3px;
-}
-
-.requests-card {
-    grid-column: 1 / 3;
-    grid-row: 2;
-
-    min-width: 0;
-}
-
-.notes-card {
-    grid-column: 2;
-    grid-row: 2;
-
-    min-width: 0;
-}
 
 /* ==========================================================================
    CARDS
    ========================================================================== */
 
 .card {
-    width: 100%;
     min-width: 0;
+
+    padding: 1.5rem;
 
     background-color: var(--card-bg);
 
     border-radius: var(--card-radius);
 
-    padding: 1.2rem;
-
     box-shadow: var(--card-shadow);
+
+    overflow-wrap: break-word;
 }
 
 .card-header {
@@ -462,28 +481,95 @@ button {
 .card-header h3 {
     display: flex;
     align-items: center;
-    gap: 7px;
 
-    min-width: 0;
+    gap: 8px;
 
     color: #2c3e50;
 
-    font-size: 0.92rem;
+    font-size: 1.05rem;
     font-weight: 600;
 }
 
-.card-icon {
-    font-size: 1rem;
-    flex-shrink: 0;
+.card-icon,
+.tip-icon {
+    font-size: 1.1rem;
 }
 
+.card-instruction {
+    margin-bottom: 1.2rem;
+
+    color: var(--text-muted);
+
+    font-size: 0.82rem;
+}
+
+
 /* ==========================================================================
-   5. LISTA DE USUÁRIOS
+   6. COLUNAS PRINCIPAIS
+   ========================================================================== */
+
+.users-column,
+.conversation-card,
+.history-card,
+.evolution-card,
+.requests-card,
+.notes-card,
+.details-column {
+    min-width: 0;
+}
+
+
+/* LISTA DE USUÁRIOS */
+
+.users-column {
+    grid-column: 1 / -1;
+
+    container: users / inline-size;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 0;
+    height: clamp(320px, 45vh, 420px);
+}
+
+
+/* CONVERSA */
+
+.conversation-card {
+    grid-column: 1 / -1;
+
+    container: chat / inline-size;
+
+    display: flex;
+    flex-direction: column;
+
+    height: clamp(520px, 78vh, 700px);
+
+    padding: 0;
+
+    overflow: hidden;
+}
+
+
+/* CARDS INFERIORES */
+
+.history-card,
+.evolution-card,
+.requests-card,
+.notes-card {
+    grid-column: 1 / -1;
+}
+
+
+/* ==========================================================================
+   7. BUSCA
    ========================================================================== */
 
 .search-row {
     display: flex;
-    gap: 7px;
+
+    gap: 8px;
 
     margin-bottom: 10px;
 }
@@ -492,18 +578,20 @@ button {
     flex: 1;
     min-width: 0;
 
-    height: 38px;
+    height: 42px;
 
-    padding: 0 12px;
+    padding: 0 14px;
 
-    border: none;
-    outline: none;
-
-    border-radius: 10px;
+    color: var(--text-primary);
 
     background-color: rgba(255, 255, 255, 0.96);
 
-    font-size: 0.75rem;
+    border: none;
+    border-radius: 12px;
+
+    outline: none;
+
+    font-size: 0.8rem;
 
     box-shadow: var(--card-shadow);
 }
@@ -516,8 +604,9 @@ button {
     flex-shrink: 0;
 }
 
+
 /* ==========================================================================
-   ABAS
+   8. ABAS
    ========================================================================== */
 
 .tab-group {
@@ -525,9 +614,8 @@ button {
 
     gap: 3px;
 
+    margin-bottom: 12px;
     padding: 3px;
-
-    margin-bottom: 11px;
 
     background-color: var(--bg-overlay);
 
@@ -538,18 +626,20 @@ button {
     flex: 1;
     min-width: 0;
 
-    padding: 6px 5px;
-
-    border-radius: 15px;
-
-    background: transparent;
+    padding: 6px 4px;
 
     color: var(--text-primary);
 
-    font-size: 0.65rem;
+    background: transparent;
+
+    border-radius: 15px;
+
+    font-size: 0.7rem;
     font-weight: 600;
 
-    transition: 0.25s ease;
+    line-height: 1.25;
+
+    transition: all 0.2s ease;
 }
 
 .tab-btn:hover {
@@ -557,48 +647,51 @@ button {
 }
 
 .tab-btn.active {
-    background-color: var(--primary-pink);
     color: #ffffff;
+
+    background-color: var(--primary-pink);
 }
 
+
 /* ==========================================================================
-   USUÁRIOS
+   9. LISTA DE USUÁRIOS
    ========================================================================== */
 
 .user-list {
     display: flex;
     flex-direction: column;
 
-    gap: 7px;
+    flex: 1;
 
-    max-height: calc(600px - 125px);
+    min-height: 0;
 
-    overflow-y: auto;
+    gap: 8px;
 
     padding-right: 3px;
+
+    overflow-y: auto;
 }
 
 .user-item {
     display: flex;
     align-items: center;
 
-    gap: 8px;
-
-    width: 100%;
     min-width: 0;
 
-    padding: 8px 9px;
+    gap: 8px;
 
-    background-color: var(--card-bg);
+    padding: 9px 10px;
+
+    background-color: #ffffff;
 
     border: 2px solid transparent;
-    border-radius: 11px;
+    border-radius: 12px;
 
     box-shadow: var(--card-shadow);
 
     cursor: pointer;
 
-    transition: 0.2s ease;
+    transition: border-color 0.2s ease;
 }
 
 .user-item:hover {
@@ -618,19 +711,29 @@ button {
     display: block;
 
     overflow: hidden;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+
     text-overflow: ellipsis;
     white-space: nowrap;
+}
 
-    font-size: 0.76rem;
-    font-weight: 600;
+.user-info p {
+    overflow: hidden;
+
+    color: var(--text-muted);
+
+    font-size: 0.72rem;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .user-status {
     display: inline-block;
 
-    font-size: 0.58rem;
-
-    margin-left: 2px;
+    font-size: 0.68rem;
 }
 
 .user-status.online {
@@ -649,34 +752,23 @@ button {
     color: var(--text-muted);
 }
 
-.user-info p {
-    overflow: hidden;
-
-    white-space: nowrap;
-    text-overflow: ellipsis;
-
-    color: var(--text-muted);
-
-    font-size: 0.64rem;
-}
-
 .user-item em {
     flex-shrink: 0;
 
     color: var(--text-muted);
 
-    font-size: 0.58rem;
+    font-size: 0.68rem;
     font-style: normal;
 }
 
 .favorite {
     flex-shrink: 0;
 
-    background: transparent;
-
     color: var(--primary-pink);
 
-    font-size: 0.95rem;
+    background: transparent;
+
+    font-size: 1rem;
     line-height: 1;
 }
 
@@ -688,40 +780,41 @@ button {
     font-size: 1.1rem;
 }
 
+
 /* ==========================================================================
-   6. AVATARES
+   10. AVATARES
    ========================================================================== */
 
 .avatar {
-    width: 38px;
-    height: 38px;
-
     display: flex;
     align-items: center;
     justify-content: center;
 
-    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
 
-    border-radius: 50%;
+    flex-shrink: 0;
 
     color: #ffffff;
 
-    font-size: 0.85rem;
+    border-radius: 50%;
+
+    font-size: 0.9rem;
     font-weight: 600;
 }
 
 .avatar.large {
-    width: 50px;
-    height: 50px;
+    width: 52px;
+    height: 52px;
 
-    font-size: 1rem;
+    font-size: 1.05rem;
 }
 
 .avatar.mini {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
 
-    font-size: 0.7rem;
+    font-size: 0.75rem;
 }
 
 .avatar.purple {
@@ -752,20 +845,10 @@ button {
     background-color: #5c6bc0;
 }
 
+
 /* ==========================================================================
-   7. CHAT / CONVERSA
+   11. CONVERSA
    ========================================================================== */
-
-.conversation-card {
-    display: flex;
-    flex-direction: column;
-
-    height: 600px;
-
-    padding: 0;
-
-    overflow: hidden;
-}
 
 .conversation-header {
     display: flex;
@@ -774,9 +857,7 @@ button {
 
     gap: 12px;
 
-    min-height: 82px;
-
-    padding: 14px 17px;
+    padding: 14px 18px;
 
     border-bottom: 1px solid #f1f1f1;
 
@@ -787,9 +868,9 @@ button {
     display: flex;
     align-items: center;
 
-    gap: 10px;
-
     min-width: 0;
+
+    gap: 12px;
 }
 
 .conversation-user > div {
@@ -799,62 +880,60 @@ button {
 .conversation-user h3 {
     overflow: hidden;
 
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
     color: #2c3e50;
 
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     font-weight: 600;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .conversation-user p {
+    margin-bottom: 4px;
+
     color: var(--text-muted);
 
-    font-size: 0.67rem;
-
-    margin-bottom: 4px;
-}
-
-.conversation-user .user-status {
-    margin-left: 5px;
+    font-size: 0.75rem;
 }
 
 .conversation-actions {
     display: flex;
 
-    gap: 5px;
+    gap: 6px;
 
     flex-shrink: 0;
 }
 
 .conversation-actions button {
-    width: 32px;
-    height: 32px;
-
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 9px;
-
-    background-color: #fce4ec;
+    width: 34px;
+    height: 34px;
 
     color: var(--primary-pink);
 
-    font-size: 0.85rem;
+    background-color: #fce4ec;
+
+    border-radius: 10px;
+
+    font-size: 0.9rem;
 }
+
 
 /* ==========================================================================
    MENSAGENS
    ========================================================================== */
 
 .messages {
-    flex: 1;
-    min-height: 0;
-
     display: flex;
     flex-direction: column;
+
+    flex: 1;
+
+    min-height: 0;
 
     gap: 14px;
 
@@ -867,12 +946,12 @@ button {
     display: flex;
     align-items: flex-start;
 
-    gap: 8px;
-
     width: fit-content;
     max-width: 78%;
 
     min-width: 0;
+
+    gap: 8px;
 }
 
 .message.sent {
@@ -886,15 +965,15 @@ button {
 }
 
 .bubble p {
-    padding: 10px 13px;
-
-    border-radius: 0 13px 13px 13px;
-
-    background-color: #f3e5f5;
+    padding: 10px 14px;
 
     color: #5e3a73;
 
-    font-size: 0.72rem;
+    background-color: #f3e5f5;
+
+    border-radius: 0 14px 14px 14px;
+
+    font-size: 0.8rem;
 
     line-height: 1.5;
 
@@ -902,11 +981,11 @@ button {
 }
 
 .message.sent .bubble p {
-    border-radius: 13px 0 13px 13px;
+    color: #880e4f;
 
     background-color: #fce4ec;
 
-    color: #880e4f;
+    border-radius: 14px 0 14px 14px;
 }
 
 .bubble time {
@@ -914,12 +993,13 @@ button {
 
     margin-top: 3px;
 
-    text-align: right;
-
     color: var(--text-muted);
 
-    font-size: 0.58rem;
+    text-align: right;
+
+    font-size: 0.68rem;
 }
+
 
 /* ==========================================================================
    ANEXO
@@ -931,27 +1011,27 @@ button {
     display: flex;
     align-items: center;
 
-    gap: 6px;
-
     max-width: 85%;
 
-    padding: 8px 11px;
+    gap: 6px;
 
-    border: 2px solid var(--color-pink);
-
-    border-radius: 10px;
+    padding: 8px 12px;
 
     color: var(--primary-pink);
 
-    font-size: 0.65rem;
+    border: 2px solid var(--color-pink);
+    border-radius: 12px;
+
+    font-size: 0.72rem;
 
     overflow: hidden;
 }
 
 .attachment b {
-    white-space: nowrap;
     overflow: hidden;
+
     text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .file-size {
@@ -961,6 +1041,7 @@ button {
 
     white-space: nowrap;
 }
+
 
 /* ==========================================================================
    CAMPO DE MENSAGEM
@@ -972,15 +1053,13 @@ button {
 
     gap: 8px;
 
-    margin: 0 16px 15px;
-
+    margin: 0 16px 16px;
     padding: 6px 8px;
 
-    border: 1px solid #f3d0dc;
-
-    border-radius: 12px;
-
     background-color: #fffafc;
+
+    border: 1px solid #f3d0dc;
+    border-radius: 12px;
 
     flex-shrink: 0;
 }
@@ -993,30 +1072,114 @@ button {
     flex: 1;
     min-width: 0;
 
-    border: none;
-    outline: none;
+    color: var(--text-primary);
 
     background: transparent;
 
-    font-size: 0.7rem;
+    border: none;
+    outline: none;
+
+    font-size: 0.8rem;
 }
 
 .message-input button {
-    width: 31px;
-    height: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
 
     flex-shrink: 0;
 
-    border-radius: 9px;
+    color: #ffffff;
 
     background-color: var(--primary-pink);
 
-    color: #ffffff;
+    border-radius: 10px;
 }
 
+
 /* ==========================================================================
-   8. DETALHES DO USUÁRIO
+   12. TAGS
    ========================================================================== */
+
+.tag-group {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.tag {
+    padding: 4px 12px;
+
+    color: var(--primary-pink);
+
+    background-color: #ffffff;
+
+    border: 1px solid var(--primary-pink);
+    border-radius: 16px;
+
+    font-size: 0.75rem;
+}
+
+.tag.pink {
+    color: var(--primary-pink);
+
+    background-color: #fce4ec;
+
+    border-color: var(--primary-pink);
+}
+
+.tag.green {
+    color: var(--secondary-hover);
+
+    background-color: #e0f2f1;
+
+    border-color: var(--secondary-green);
+}
+
+.tag.purple {
+    color: #ab47bc;
+
+    background-color: #f3e5f5;
+
+    border-color: #ab47bc;
+}
+
+.tag.yellow {
+    color: #b26a00;
+
+    background-color: #fffde7;
+
+    border-color: #ffa726;
+}
+
+
+/* ==========================================================================
+   13. DETALHES DO USUÁRIO
+   ========================================================================== */
+
+.details-column {
+    grid-column: 1 / -1;
+
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+
+    align-items: start;
+}
+
+.details-column > .details-title {
+    grid-column: 1 / -1;
+}
+
+.details-column .card {
+    padding: 1.2rem;
+}
 
 .details-title {
     display: flex;
@@ -1024,19 +1187,17 @@ button {
     justify-content: space-between;
 
     gap: 10px;
-
-    padding: 12px 15px;
 }
 
 .details-title h3 {
     display: flex;
     align-items: center;
 
-    gap: 7px;
+    gap: 8px;
 
     color: #2c3e50;
 
-    font-size: 0.88rem;
+    font-size: 1.05rem;
     font-weight: 600;
 }
 
@@ -1044,9 +1205,7 @@ button {
     display: flex;
     align-items: center;
 
-    gap: 10px;
-
-    padding: 13px;
+    gap: 12px;
 }
 
 .profile-summary > div {
@@ -1057,28 +1216,30 @@ button {
     display: block;
 
     overflow: hidden;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+
     text-overflow: ellipsis;
     white-space: nowrap;
-
-    font-size: 0.82rem;
-    font-weight: 600;
 }
 
 .profile-summary p {
+    margin-bottom: 4px;
+
     color: var(--text-muted);
 
-    font-size: 0.65rem;
-
-    margin-bottom: 4px;
+    font-size: 0.75rem;
 }
 
 .about-text {
     color: var(--text-light);
 
-    font-size: 0.68rem;
+    font-size: 0.78rem;
 
     line-height: 1.5;
 }
+
 
 /* ==========================================================================
    QUESTIONÁRIO
@@ -1088,7 +1249,7 @@ button {
     display: flex;
     align-items: center;
 
-    gap: 7px;
+    gap: 8px;
 
     margin-bottom: 10px;
 }
@@ -1114,42 +1275,46 @@ button {
 }
 
 .q-progress small {
-    font-size: 0.62rem;
-
-    font-weight: 600;
-
     color: var(--text-muted);
+
+    font-size: 0.7rem;
+    font-weight: 600;
 }
 
 .answers dt {
-    margin-top: 8px;
+    margin-top: 10px;
 
     color: var(--primary-pink);
 
-    font-size: 0.67rem;
+    font-size: 0.75rem;
     font-weight: 600;
 }
 
 .answers dd {
     color: var(--text-light);
 
-    font-size: 0.63rem;
+    font-size: 0.75rem;
 
     line-height: 1.4;
 }
 
 .details-column .btn-block {
-    margin-top: 11px;
+    margin-top: 12px;
 }
 
+
 /* ==========================================================================
-   HISTÓRICO
+   14. HISTÓRICO
    ========================================================================== */
 
-.history-item {
-    margin-bottom: 8px;
+.history-card .card-header,
+.evolution-card .card-header {
+    margin-bottom: 14px;
+}
 
-    padding-left: 8px;
+.history-item {
+    margin-bottom: 10px;
+    padding-left: 10px;
 
     border-left: 3px solid var(--color-pink);
 }
@@ -1161,115 +1326,70 @@ button {
 .history-item strong {
     color: var(--primary-pink);
 
-    font-size: 0.64rem;
+    font-size: 0.72rem;
 }
 
 .history-item p {
     color: var(--text-light);
 
-    font-size: 0.63rem;
+    font-size: 0.75rem;
 }
 
+
 /* ==========================================================================
-   GRÁFICO
+   15. EVOLUÇÃO
    ========================================================================== */
 
 .evolution-chart {
     display: block;
 
     width: 100%;
-    height: 75px;
+    height: auto;
+    max-height: 180px;
 
-    margin-bottom: 6px;
+    margin-bottom: 12px;
+
+    color: var(--primary-pink);
+}
+
+.evolution-stats {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 4px 18px;
 }
 
 .stat-line {
+    margin-top: 0;
+
     color: var(--text-light);
 
-    font-size: 0.65rem;
-
-    margin-top: 3px;
+    font-size: 0.75rem;
 }
+
 
 /* ==========================================================================
-   9. TAGS
+   16. SOLICITAÇÕES
    ========================================================================== */
-
-.tag {
-    display: inline-flex;
-    align-items: center;
-
-    padding: 3px 9px;
-
-    border: 1px solid var(--primary-pink);
-    border-radius: 15px;
-
-    background-color: #ffffff;
-
-    color: var(--primary-pink);
-
-    font-size: 0.62rem;
-}
-
-.tag.purple {
-    background-color: #f3e5f5;
-
-    border-color: #ab47bc;
-
-    color: #ab47bc;
-
-    font-weight: 600;
-}
-
-/* ==========================================================================
-   10. LINKS
-   ========================================================================== */
-
-.link-action {
-    background: transparent;
-
-    color: var(--primary-pink);
-
-    font-family: inherit;
-
-    font-size: 0.63rem;
-    font-weight: 600;
-
-    text-decoration: none;
-
-    white-space: nowrap;
-
-    transition: 0.2s;
-}
-
-.link-action:hover {
-    color: var(--primary-hover);
-}
-
-/* ==========================================================================
-   11. SOLICITAÇÕES
-   ========================================================================== */
-
-.requests-card {
-    min-height: 105px;
-}
 
 .requests-body {
     display: flex;
     align-items: center;
-
-    gap: 12px;
+    flex-wrap: wrap;
 
     min-width: 0;
+
+    gap: 12px;
 }
 
 .requests-body p {
-    flex: 1;
+    flex: 1 1 140px;
+
     min-width: 0;
 
     color: var(--text-light);
 
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 
 .requests-body b {
@@ -1282,327 +1402,100 @@ button {
     flex-shrink: 0;
 }
 
-.avatar-stack .avatar + .avatar {
-    margin-left: -10px;
-}
-
 .avatar-stack .avatar {
     border: 2px solid #ffffff;
 }
 
+.avatar-stack .avatar + .avatar {
+    margin-left: -10px;
+}
+
+
 /* ==========================================================================
-   12. RESPONSIVIDADE
+   17. LINKS
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   TELAS GRANDES / NOTEBOOKS
-   -------------------------------------------------------------------------- */
+.link-action {
+    display: inline-block;
 
-@media (max-width: 1250px) {
+    color: var(--primary-pink);
 
-    .main-content {
-        padding: 1.5rem;
-    }
+    text-decoration: none;
 
-    .dashboard-grid {
-        grid-template-columns:
-            minmax(200px, 4fr)
-            minmax(340px, 6fr)
-            minmax(220px, 4fr);
+    font-size: 0.8rem;
+    font-weight: 600;
 
-        gap: 14px;
-    }
-
-    .page-header h2 {
-        font-size: 1.5rem;
-    }
-
-    .header-subtitle {
-        font-size: 0.76rem;
-    }
+    transition: color 0.2s;
 }
 
-/* --------------------------------------------------------------------------
-   TABLET GRANDE
-   -------------------------------------------------------------------------- */
-
-@media (max-width: 1100px) {
-
-    .dashboard-grid {
-        grid-template-columns: repeat(12, minmax(0, 1fr));
-
-        grid-template-rows: auto;
-
-        align-items: start;
-    }
-
-    .users-column {
-        grid-column: 1 / 6;
-        grid-row: 1;
-    }
-
-    .conversation-card {
-        grid-column: 6 / 13;
-        grid-row: 1;
-
-        height: 600px;
-    }
-
-    .details-column {
-        grid-column: 1 / 13;
-        grid-row: 2;
-
-        display: grid;
-
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-
-        gap: 14px;
-
-        overflow: visible;
-    }
-
-    .details-column > .details-title {
-        grid-column: 1 / -1;
-    }
-
-    .requests-card {
-        grid-column: 1 / 8;
-        grid-row: 3;
-    }
-
-    .notes-card {
-        grid-column: 8 / 13;
-        grid-row: 3;
-    }
+.link-action:hover {
+    color: var(--primary-hover);
 }
 
-/* --------------------------------------------------------------------------
-   TABLET
-   -------------------------------------------------------------------------- */
+.arrow {
+    display: inline-block;
 
-@media (max-width: 900px) {
+    margin-left: 2px;
 
-    .sidebar {
-        width: 200px;
-        min-width: 200px;
-    }
-
-    .bg-image,
-    .main-content::before {
-        left: 200px;
-        width: calc(100% - 200px);
-    }
-
-    .main-content {
-        padding: 1.2rem;
-    }
-
-    .dashboard-grid {
-        display: grid;
-
-        grid-template-columns: 1fr;
-
-        gap: 14px;
-    }
-
-    .users-column,
-    .conversation-card,
-    .details-column,
-    .requests-card,
-    .notes-card {
-        grid-column: 1;
-        grid-row: auto;
-    }
-
-    .conversation-card {
-        height: 580px;
-    }
-
-    .details-column {
-        display: grid;
-
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-
-        overflow: visible;
-    }
-
-    .details-column > .details-title {
-        grid-column: 1 / -1;
-    }
-
-    .requests-card,
-    .notes-card {
-        grid-column: 1;
-    }
+    transition: transform 0.2s ease;
 }
 
-/* --------------------------------------------------------------------------
-   TABLET PEQUENO / CELULAR
-   -------------------------------------------------------------------------- */
+.link-action:hover .arrow {
+    transform: translateX(2px);
+}
 
-@media (max-width: 768px) {
 
-    .app-layout {
-        flex-direction: column;
-    }
+/* ==========================================================================
+   18. ROLAGEM
+   ========================================================================== */
 
-    .sidebar {
-        width: 100%;
-        min-width: 100%;
-        min-height: auto;
+.user-list::-webkit-scrollbar,
+.messages::-webkit-scrollbar {
+    width: 5px;
+}
 
-        padding: 0.8rem 1rem;
+.user-list::-webkit-scrollbar-thumb,
+.messages::-webkit-scrollbar-thumb {
+    background-color: #e9b5c8;
 
-        flex-direction: row;
-        align-items: center;
+    border-radius: 10px;
+}
 
-        gap: 15px;
-    }
+.user-list::-webkit-scrollbar-track,
+.messages::-webkit-scrollbar-track {
+    background: transparent;
+}
 
-    .sidebar-top {
-        display: flex;
-        align-items: center;
 
-        gap: 15px;
+/* ==========================================================================
+   19. UTILITÁRIO
+   ========================================================================== */
 
-        min-width: 0;
-    }
+.is-hidden {
+    display: none !important;
+}
 
-    .brand {
-        margin: 0;
-    }
 
-    .brand-name {
-        font-size: 1rem;
-    }
+/* ==========================================================================
+   20. CONTAINER QUERIES
+   ========================================================================== */
 
-    .sidebar-nav ul {
-        flex-direction: row;
+@container users (max-width: 330px) {
 
-        gap: 5px;
-    }
-
-    .nav-link {
-        padding: 8px 10px;
-
-        font-size: 0.72rem;
-    }
-
-    .sidebar-footer-card {
+    .user-item em,
+    .chevron {
         display: none;
     }
 
-    .bg-image,
-    .main-content::before {
-        left: 0;
-        width: 100%;
-    }
-
-    .main-content {
-        width: 100%;
-        min-height: calc(100vh - 65px);
-
-        padding: 1rem;
-    }
-
-    .page-header {
-        align-items: flex-start;
-        flex-direction: column;
-
-        gap: 12px;
-    }
-
-    .header-title-wrapper {
-        width: 100%;
-    }
-
-    .header-subtitle {
-        max-width: 100%;
-    }
-
-    .page-header .btn {
-        align-self: flex-start;
-    }
-
-    .details-column {
-        grid-template-columns: 1fr;
-    }
-
-    .details-column > .details-title {
-        grid-column: 1;
-    }
-
-    .conversation-card {
-        height: 560px;
-    }
-
-    .message {
-        max-width: 88%;
-    }
-
-    .requests-body {
-        flex-wrap: wrap;
+    .tab-btn small {
+        display: block;
     }
 }
 
-/* --------------------------------------------------------------------------
-   CELULAR
-   -------------------------------------------------------------------------- */
+@container users (max-width: 280px) {
 
-@media (max-width: 600px) {
-
-    .sidebar {
-        padding: 0.7rem 0.8rem;
-    }
-
-    .sidebar-top {
-        width: 100%;
-
-        flex-direction: column;
-        align-items: stretch;
-
-        gap: 8px;
-    }
-
-    .brand {
-        justify-content: center;
-    }
-
-    .sidebar-nav ul {
-        justify-content: center;
-    }
-
-    .nav-link {
-        justify-content: center;
-
-        padding: 7px 8px;
-
-        font-size: 0.68rem;
-    }
-
-    .nav-link .icon {
+    .favorite {
         display: none;
-    }
-
-    .header-title-wrapper {
-        align-items: flex-start;
-    }
-
-    .header-logo {
-        width: 42px;
-        height: 42px;
-    }
-
-    .page-header h2 {
-        font-size: 1.3rem;
-    }
-
-    .header-subtitle {
-        font-size: 0.68rem;
-    }
-
-    .dashboard-grid {
-        gap: 12px;
     }
 
     .search-row {
@@ -1612,32 +1505,12 @@ button {
     .search-row .btn {
         width: 100%;
     }
+}
 
-    .tab-btn {
-        font-size: 0.58rem;
-    }
-
-    .user-item {
-        padding: 8px;
-    }
-
-    .user-item em,
-    .favorite,
-    .chevron {
-        display: none;
-    }
-
-    .conversation-card {
-        height: 520px;
-    }
+@container chat (max-width: 480px) {
 
     .conversation-header {
         padding: 12px;
-    }
-
-    .conversation-actions button {
-        width: 29px;
-        height: 29px;
     }
 
     .conversation-actions button:nth-child(2) {
@@ -1645,8 +1518,8 @@ button {
     }
 
     .messages {
-        padding: 13px;
         gap: 12px;
+        padding: 13px;
     }
 
     .message {
@@ -1654,108 +1527,295 @@ button {
     }
 
     .bubble p {
-        font-size: 0.67rem;
         padding: 9px 11px;
-    }
-
-    .attachment {
-        max-width: 100%;
-
-        font-size: 0.6rem;
     }
 
     .message-input {
         margin: 0 10px 10px;
     }
+}
 
-    .card {
+
+/* ==========================================================================
+   21. TABLET - 700PX+
+   ========================================================================== */
+
+@media (min-width: 700px) {
+
+    .history-card,
+    .evolution-card,
+    .requests-card,
+    .notes-card {
+        grid-column: span 6;
+    }
+
+    .details-column {
+        grid-column: 1 / -1;
+    }
+}
+
+
+/* ==========================================================================
+   22. DESKTOP - 1001PX+
+   ========================================================================== */
+
+@media (min-width: 1001px) {
+
+    .users-column {
+        grid-column: span 5;
+
+        height: clamp(520px, 78vh, 700px);
+    }
+
+    .conversation-card {
+        grid-column: span 7;
+    }
+
+    .details-column {
+        grid-column: 1 / -1;
+    }
+}
+
+
+/* ==========================================================================
+   23. TELAS GRANDES - 1500PX+
+   ========================================================================== */
+
+@media (min-width: 1500px) {
+
+    .dashboard-grid {
+        grid-template-columns: repeat(16, minmax(0, 1fr));
+    }
+
+    .users-column {
+        grid-column: span 4;
+    }
+
+    .conversation-card {
+        grid-column: span 8;
+    }
+
+    .history-card {
+        grid-column: 1 / span 6;
+    }
+
+    .evolution-card {
+        grid-column: 7 / span 6;
+    }
+
+    .requests-card {
+        grid-column: 1 / span 6;
+    }
+
+    .notes-card {
+        grid-column: 7 / span 6;
+    }
+
+    .details-column {
+        grid-column: 13 / span 4;
+        grid-row: 1 / span 3;
+
+        display: flex;
+        flex-direction: column;
+
+        align-self: start;
+    }
+
+    .details-column .card {
+        width: 100%;
+    }
+}
+
+
+/* ==========================================================================
+   24. TABLET / MOBILE - ATÉ 900PX
+   ========================================================================== */
+
+@media (max-width: 900px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+
+        overflow-x: hidden;
+    }
+
+    .app-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-width: 0;
+        min-height: auto;
+
         padding: 1rem;
+
+        gap: 0.75rem;
+    }
+
+    .brand {
+        justify-content: center;
+
+        margin-bottom: 0.5rem;
+    }
+
+    .sidebar-nav ul {
+        display: grid;
+
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+
+        gap: 0.4rem;
+    }
+
+    .nav-link {
+        justify-content: center;
+
+        min-height: 42px;
+
+        padding: 0.55rem 0.45rem;
+
+        gap: 0.4rem;
+
+        text-align: center;
+
+        font-size: clamp(0.7rem, 2.4vw, 0.9rem);
+    }
+
+    .sidebar-footer-card {
+        display: none;
+    }
+
+    .main-content {
+        width: 100%;
+        min-height: auto;
+
+        padding: clamp(0.8rem, 3.5vw, 1.4rem);
+
+        overflow: visible;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 0.8rem;
+    }
+
+    .header-title-wrapper {
+        width: 100%;
+    }
+
+    .page-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .page-header .btn {
+        align-self: flex-start;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+
+        gap: 1.25rem;
+    }
+
+    .users-column,
+    .conversation-card,
+    .history-card,
+    .evolution-card,
+    .requests-card,
+    .notes-card,
+    .details-column {
+        grid-column: 1 / -1;
+    }
+
+    .users-column {
+        height: 420px;
+    }
+
+    .conversation-card {
+        height: 650px;
+    }
+
+    .details-column {
+        display: grid;
+
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* ==========================================================================
+   25. CELULAR - ATÉ 520PX
+   ========================================================================== */
+
+@media (max-width: 520px) {
+
+    .sidebar {
+        padding: 0.75rem;
+    }
+
+    .sidebar-nav ul {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .nav-link {
+        padding: 0.55rem 0.3rem;
+
+        gap: 0.35rem;
+
+        font-size: clamp(0.68rem, 3vw, 0.82rem);
+    }
+
+    .main-content {
+        padding: 0.75rem;
+    }
+
+    .page-header h2 {
+        font-size: clamp(1.1rem, 5vw, 1.45rem);
+    }
+
+    .header-subtitle {
+        font-size: 0.82rem;
+    }
+
+    .header-title-wrapper {
+        gap: 10px;
+    }
+
+    .header-logo {
+        width: 42px;
+        height: 42px;
+    }
+
+    .users-column {
+        height: 420px;
+    }
+
+    .conversation-card {
+        height: 560px;
+    }
+
+    .details-column {
+        grid-template-columns: 1fr;
+    }
+
+    .details-column > .details-title {
+        grid-column: 1;
     }
 
     .requests-body {
-        align-items: flex-start;
         flex-direction: column;
+        align-items: flex-start;
     }
 
     .requests-body .btn {
         width: 100%;
     }
-}
 
-/* ==========================================================================
-   SCROLLBARS
-   ========================================================================== */
-
-.user-list::-webkit-scrollbar,
-.messages::-webkit-scrollbar,
-.details-column::-webkit-scrollbar {
-    width: 5px;
-}
-
-.user-list::-webkit-scrollbar-thumb,
-.messages::-webkit-scrollbar-thumb,
-.details-column::-webkit-scrollbar-thumb {
-    background-color: #e9b5c8;
-    border-radius: 10px;
-}
-
-.user-list::-webkit-scrollbar-track,
-.messages::-webkit-scrollbar-track,
-.details-column::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-/* ==========================================================================
-   UTILITÁRIO
-   ========================================================================== */
-
-.is-hidden {
-    display: none !important;
-}
-
-
-/* Ajustes finais para tablet e celular */
-@media (max-width: 768px) {
-  html, body { max-width: 100%; overflow-x: hidden; }
-  .app-layout { width: 100%; min-height: 100vh; flex-direction: column; }
-  .sidebar {
-    width: 100%; min-width: 0; min-height: 0; height: auto;
-    padding: 1rem; gap: .75rem; flex-direction: column; justify-content: flex-start;
-  }
-  .brand { justify-content: center; margin: 0; }
-  .sidebar-nav { width: 100%; min-width: 0; }
-  .sidebar-nav ul {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: .4rem; width: 100%;
-  }
-  .sidebar-nav li { min-width: 0; }
-  .nav-link {
-    min-width: 0; min-height: 42px; justify-content: center;
-    padding: .55rem .45rem; gap: .4rem; text-align: center;
-    font-size: clamp(.7rem, 2.4vw, .9rem); overflow-wrap: anywhere;
-  }
-  .sidebar-footer-card { display: none; }
-  .main-content {
-    width: 100%; min-width: 0; min-height: 0; height: auto;
-    padding: clamp(.8rem, 3.5vw, 1.4rem); overflow: visible;
-  }
-  .dashboard-grid { width: 100%; grid-template-columns: repeat(12, minmax(0, 1fr)); }
-  .dashboard-grid > *, .card, .page-header > *, .header-title-wrapper { min-width: 0; }
-  .page-header { flex-wrap: wrap; align-items: flex-start; gap: .8rem; }
-  .header-title-wrapper { flex: 1 1 220px; }
-  .main-content img { max-width: 100%; }
-}
-
-@media (max-width: 520px) {
-  .sidebar { padding: .75rem; }
-  .sidebar-nav ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .nav-link { padding: .55rem .3rem; gap: .35rem; font-size: clamp(.68rem, 3vw, .82rem); }
-  .main-content { padding: .75rem; }
-  .page-header h2 { font-size: clamp(1.1rem, 5vw, 1.45rem); }
-  .header-logo { width: 42px; height: 42px; }
-  .card { padding: clamp(.8rem, 4vw, 1.1rem); }
-  .resources-grid, .completed-grid, .moments-grid, .entries-grid, .achievement-grid {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 145px), 1fr));
-  }
-  .emotions-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .conversation-actions button:nth-child(2) {
+        display: none;
+    }
 }

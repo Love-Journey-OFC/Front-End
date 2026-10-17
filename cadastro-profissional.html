@@ -12,9 +12,10 @@
 
   <body class="corpo-comprovantes">
     <main class="pagina-profissional">
+
       <!-- ==========================================
-         FUNDO ANIMADO
-         ========================================== -->
+           FUNDO ANIMADO
+           ========================================== -->
 
       <div class="fundo-animado" aria-hidden="true">
         <span class="particula particula-1">♥</span>
@@ -31,41 +32,23 @@
       </div>
 
       <!-- ==========================================
-         DECORAÇÕES
-         ========================================== -->
+           DECORAÇÕES
+           ========================================== -->
 
       <div class="decoracao decoracao-topo"></div>
-
       <div class="decoracao decoracao-baixo"></div>
 
-      <!-- ÍCONES DECORATIVOS -->
-
-      <img
-        src="./assets/imgs/autenticacao/logo-icone.png"
-        alt=""
-        class="icone-decorativo icone-1"
-      />
-      <img
-        src="./assets/imgs/autenticacao/logo-icone.png"
-        alt=""
-        class="icone-decorativo icone-2"
-      />
-      <img
-        src="./assets/imgs/autenticacao/logo-icone.png"
-        alt=""
-        class="icone-decorativo icone-3"
-      />
-
       <!-- ==========================================
-         CONTEÚDO PRINCIPAL
-         ========================================== -->
+           CONTEÚDO PRINCIPAL
+           ========================================== -->
 
       <section class="conteudo-profissional">
-        <!-- LOGO (imagem no lugar do texto) -->
+
+        <!-- LOGO -->
 
         <div class="cabecalho-pagina">
           <img
-            src="./assets/imgs/autenticacao/icone_tipo.png"
+            src="/assets/imgs/usuarios/img/logo_tipo.png"
             alt="Love Journey"
             class="logo-pagina"
           />
@@ -74,10 +57,11 @@
         </div>
 
         <!-- ==========================================
-           ETAPAS
-           ========================================== -->
+             ETAPAS
+             ========================================== -->
 
         <div class="etapas">
+
           <div class="etapa concluida">
             <span>✓</span>
             <p>Cadastro</p>
@@ -96,13 +80,15 @@
             <span>3</span>
             <p>Verificação</p>
           </div>
+
         </div>
 
         <!-- ==========================================
-           CARD
-           ========================================== -->
+             CARD
+             ========================================== -->
 
         <div class="card-profissional">
+
           <!-- CABEÇALHO -->
 
           <div class="cabecalho-card">
@@ -111,20 +97,24 @@
             <div>
               <h2>Dados profissionais</h2>
 
-              <p>Essas informações serão usadas para validar seu perfil.</p>
+              <p>
+                Essas informações serão usadas para validar seu perfil.
+              </p>
             </div>
           </div>
 
           <!-- ==========================================
-             FORMULÁRIO
-             ========================================== -->
+               FORMULÁRIO
+               ========================================== -->
 
           <form id="form-profissional">
+
             <div class="grid-form">
+
               <!-- ÁREA -->
 
               <div class="campo-profissional">
-                <label for="area"> Área de atuação </label>
+                <label for="area">Área de atuação</label>
 
                 <select id="area" required>
                   <option value="">Selecione sua área</option>
@@ -132,7 +122,9 @@
                   <option value="terapia">Terapia</option>
                   <option value="psiquiatria">Psiquiatria</option>
                   <option value="nutricao">Nutrição</option>
-                  <option value="assistencia-social">Assistência Social</option>
+                  <option value="assistencia-social">
+                    Assistência Social
+                  </option>
                   <option value="educacao">Educação</option>
                   <option value="outra">Outra área</option>
                 </select>
@@ -141,7 +133,7 @@
               <!-- FORMAÇÃO -->
 
               <div class="campo-profissional">
-                <label for="formacao"> Formação </label>
+                <label for="formacao">Formação</label>
 
                 <input
                   type="text"
@@ -156,8 +148,7 @@
               <div class="campo-profissional">
                 <label for="registro">
                   Registro profissional
-
-                  <small> quando aplicável </small>
+                  <small>quando aplicável</small>
                 </label>
 
                 <input
@@ -170,7 +161,9 @@
               <!-- EXPERIÊNCIA -->
 
               <div class="campo-profissional">
-                <label for="experiencia"> Experiência profissional </label>
+                <label for="experiencia">
+                  Experiência profissional
+                </label>
 
                 <input
                   type="text"
@@ -178,37 +171,56 @@
                   placeholder="Ex.: 3 anos de experiência"
                 />
               </div>
+
             </div>
 
             <!-- ==========================================
-               COMPROVANTE
-               ========================================== -->
+                 COMPROVANTE
+                 ========================================== -->
 
             <div class="campo-comprovante">
+
               <div class="titulo-comprovante">
+
                 <div>
-                  <label for="arquivo"> Comprovante profissional </label>
+                  <label for="arquivo">
+                    Comprovante profissional
+                  </label>
 
                   <p>
                     Envie um documento que comprove sua formação ou atuação.
                   </p>
                 </div>
 
-                <span class="opcional"> Obrigatório </span>
+                <span class="opcional">
+                  Obrigatório
+                </span>
+
               </div>
 
               <!-- ÁREA DE UPLOAD -->
 
-              <label for="arquivo" class="area-upload" id="area-upload">
+              <label
+                for="arquivo"
+                class="area-upload"
+                id="area-upload"
+              >
+
                 <div class="icone-upload">↑</div>
 
                 <div class="texto-upload">
-                  <strong> Arraste seu documento aqui </strong>
+                  <strong>
+                    Arraste seu documento aqui
+                  </strong>
 
-                  <span> ou clique para selecionar </span>
+                  <span>
+                    ou clique para selecionar
+                  </span>
                 </div>
 
-                <small> PDF, JPG ou PNG • máximo 10MB </small>
+                <small>
+                  PDF, JPG ou PNG • máximo 10MB
+                </small>
 
                 <input
                   type="file"
@@ -216,43 +228,64 @@
                   accept=".pdf,.jpg,.jpeg,.png"
                   hidden
                 />
+
               </label>
 
-              <p class="arquivo-selecionado" id="arquivo-selecionado"></p>
+              <p
+                class="arquivo-selecionado"
+                id="arquivo-selecionado"
+              ></p>
+
             </div>
 
             <!-- ==========================================
-               SEGURANÇA
-               ========================================== -->
+                 SEGURANÇA
+                 ========================================== -->
 
             <div class="aviso-seguranca">
+
               <span>🔒</span>
 
               <p>
                 Seus dados serão protegidos e utilizados somente para
                 verificação profissional.
               </p>
+
             </div>
 
             <!-- ==========================================
-               AÇÕES
-               ========================================== -->
+                 AÇÕES
+                 ========================================== -->
 
             <div class="acoes-form">
-              <a href="cadastro.html" class="botao-voltar"> Voltar </a>
 
-              <button type="submit" class="btn btn-rosa btn-finalizar">
+              <a
+                href="cadastro.html"
+                class="botao-voltar"
+              >
+                Voltar
+              </a>
+
+              <button
+                type="submit"
+                class="btn btn-rosa btn-finalizar"
+              >
                 Enviar para verificação
               </button>
+
             </div>
 
             <p class="texto-verificacao">
               Após o envio, seu perfil ficará
               <strong>Em análise</strong>.
             </p>
+
           </form>
+
         </div>
+
       </section>
+
     </main>
 
     <script src="./js/autenticacao/comprovantes.js"></script>
