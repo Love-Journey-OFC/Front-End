@@ -40,7 +40,8 @@ if (mostrarSenha) {
 
       inputSenha.type = "password";
 
-      mostrarSenha.textContent = "👁";
+      mostrarSenha.innerHTML =
+        '<i aria-hidden="true" class="fa-solid fa-eye"></i>';
 
       mostrarSenha.setAttribute(
         "aria-label",
@@ -51,7 +52,8 @@ if (mostrarSenha) {
 
       inputSenha.type = "text";
 
-      mostrarSenha.textContent = "🙈";
+      mostrarSenha.innerHTML =
+        '<i aria-hidden="true" class="fa-solid fa-eye-slash"></i>';
 
       mostrarSenha.setAttribute(
         "aria-label",
@@ -341,8 +343,8 @@ formLogin.addEventListener("submit", (e) => {
       "login-sucesso"
     );
 
-    botaoEntrar.textContent =
-      "✓ Entrando!";
+    botaoEntrar.innerHTML =
+      '<i aria-hidden="true" class="fa-solid fa-check"></i> Entrando!';
 
 
     setTimeout(() => {

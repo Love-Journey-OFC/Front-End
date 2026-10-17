@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
+    <link
+      rel="icon"
+      href="./assets/imgs/jadi/img/logolove.png"
+      type="image/png"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Love Journey - Minhas emoções</title>
@@ -114,7 +119,7 @@
           <section class="card emotion-selector-card">
             <div class="card-header">
               <h3>
-                <span class="card-icon">📷</span> Como você está se sentindo
+                <span class="card-icon"><i aria-hidden="true" class="fa-solid fa-camera"></i></span> Como você está se sentindo
                 hoje?
               </h3>
             </div>
@@ -124,56 +129,56 @@
 
             <div class="emotions-grid" id="emotions-grid">
               <button class="emotion-item" data-emotion="Feliz">
-                <span class="emoji">😊</span>
+                <span class="emoji"><i aria-hidden="true" class="fa-regular fa-face-smile"></i></span>
                 <span class="label">Feliz</span>
               </button>
               <button class="emotion-item" data-emotion="Tranquila">
-                <span class="emoji">😌</span>
+                <span class="emoji"><i aria-hidden="true" class="fa-regular fa-face-smile"></i></span>
                 <span class="label">Tranquila</span>
               </button>
               <button class="emotion-item" data-emotion="Neutra">
-                <span class="emoji">😐</span>
+                <span class="emoji"><i aria-hidden="true" class="fa-regular fa-face-meh"></i></span>
                 <span class="label">Neutra</span>
               </button>
               <button class="emotion-item" data-emotion="Preocupada">
-                <span class="emoji">😟</span>
+                <span class="emoji"><i aria-hidden="true" class="fa-regular fa-face-frown"></i></span>
                 <span class="label">Preocupada</span>
               </button>
               <button class="emotion-item" data-emotion="Triste">
-                <span class="emoji">😢</span>
+                <span class="emoji"><i aria-hidden="true" class="fa-regular fa-face-sad-tear"></i></span>
                 <span class="label">Triste</span>
               </button>
               <button class="emotion-item" data-emotion="Calma">
-                <span class="emoji">😇</span>
+                <span class="emoji"><i aria-hidden="true" class="fa-regular fa-face-smile-beam"></i></span>
                 <span class="label">Calma</span>
               </button>
               <button class="emotion-item" data-emotion="Irritada">
-                <span class="emoji">😠</span>
+                <span class="emoji"><i aria-hidden="true" class="fa-regular fa-face-angry"></i></span>
                 <span class="label">Irritada</span>
               </button>
               <button class="emotion-item" data-emotion="Ansiosa">
-                <span class="emoji">😰</span>
+                <span class="emoji"><i aria-hidden="true" class="fa-regular fa-face-grimace"></i></span>
                 <span class="label">Ansiosa</span>
               </button>
               <button class="emotion-item" data-emotion="Animada">
-                <span class="emoji">🤩</span>
+                <span class="emoji"><i aria-hidden="true" class="fa-regular fa-face-grin-stars"></i></span>
                 <span class="label">Animada</span>
               </button>
               <button class="emotion-item" data-emotion="Apaixonada">
-                <span class="emoji">😍</span>
+                <span class="emoji"><i aria-hidden="true" class="fa-regular fa-face-grin-hearts"></i></span>
                 <span class="label">Apaixonada</span>
               </button>
             </div>
 
             <button class="btn btn-success btn-block" id="btn-save-emotion">
-              <span>📷</span> Registrar emoção
+              <span><i aria-hidden="true" class="fa-solid fa-camera"></i></span> Registrar emoção
             </button>
           </section>
 
           <!-- 2. BLOCO: MEU HUMOR NA SEMANA -->
           <section class="card weekly-mood-card">
             <div class="card-header">
-              <h3><span class="card-icon">📊</span> Meu humor na semana</h3>
+              <h3><span class="card-icon"><i aria-hidden="true" class="fa-solid fa-chart-column"></i></span> Meu humor na semana</h3>
             </div>
             <p class="card-instruction">
               Veja como suas emoções se comportaram nos últimos 7 dias.
@@ -254,7 +259,7 @@
           <!-- 3. BLOCO: RESUMO EMOCIONAL -->
           <section class="card summary-card">
             <div class="card-header">
-              <h3><span class="card-icon">💡</span> Resumo emocional</h3>
+              <h3><span class="card-icon"><i aria-hidden="true" class="fa-solid fa-lightbulb"></i></span> Resumo emocional</h3>
             </div>
 
             <div class="general-state">
@@ -266,7 +271,7 @@
             </div>
 
             <div class="tip-box">
-              <h5><span class="tip-icon">💡</span> Dica do dia</h5>
+              <h5><span class="tip-icon"><i aria-hidden="true" class="fa-solid fa-lightbulb"></i></span> Dica do dia</h5>
               <p>
                 Seja gentil com o que você sente. Todas as emoções são válidas.
               </p>
@@ -276,7 +281,7 @@
           <!-- 4. BLOCO: HISTÓRICO DE EMOÇÕES -->
           <section class="card history-card">
             <div class="card-header">
-              <h3><span class="card-icon">📊</span> Histórico de emoções</h3>
+              <h3><span class="card-icon"><i aria-hidden="true" class="fa-solid fa-chart-column"></i></span> Histórico de emoções</h3>
               <button class="btn btn-secondary btn-sm" id="btn-view-all">
                 Ver todas
               </button>
@@ -290,7 +295,7 @@
                 <!-- Card 1 -->
                 <article class="history-item theme-pink">
                   <span class="item-date">12/07/2026</span>
-                  <div class="item-emoji">😊</div>
+                  <div class="item-emoji"><i aria-hidden="true" class="fa-regular fa-face-smile"></i></div>
                   <h4 class="item-title">Feliz</h4>
                   <p class="item-text">Foi um dia leve e especial, com ele.</p>
                 </article>
@@ -298,7 +303,7 @@
                 <!-- Card 2 -->
                 <article class="history-item theme-purple">
                   <span class="item-date">11/07/2026</span>
-                  <div class="item-emoji">😌</div>
+                  <div class="item-emoji"><i aria-hidden="true" class="fa-regular fa-face-smile"></i></div>
                   <h4 class="item-title">Tranquila</h4>
                   <p class="item-text">
                     Consegui finalizar meus estudos e me senti orgulhosa.
@@ -308,7 +313,7 @@
                 <!-- Card 3 -->
                 <article class="history-item theme-teal">
                   <span class="item-date">10/07/2026</span>
-                  <div class="item-emoji">😰</div>
+                  <div class="item-emoji"><i aria-hidden="true" class="fa-regular fa-face-grimace"></i></div>
                   <h4 class="item-title">Ansiosa</h4>
                   <p class="item-text">
                     Muitas coisas na cabeça, mas estou tentando respirar.
@@ -318,7 +323,7 @@
                 <!-- Card 4 -->
                 <article class="history-item theme-yellow">
                   <span class="item-date">09/07/2026</span>
-                  <div class="item-emoji">😐</div>
+                  <div class="item-emoji"><i aria-hidden="true" class="fa-regular fa-face-meh"></i></div>
                   <h4 class="item-title">Neutra</h4>
                   <p class="item-text">Dia comum, com altos e baixos.</p>
                 </article>
@@ -326,7 +331,7 @@
                 <!-- Card 5 -->
                 <article class="history-item theme-pink-light">
                   <span class="item-date">08/07/2026</span>
-                  <div class="item-emoji">😍</div>
+                  <div class="item-emoji"><i aria-hidden="true" class="fa-regular fa-face-grin-hearts"></i></div>
                   <h4 class="item-title">Apaixonada</h4>
                   <p class="item-text">Só queria ele por perto o dia todo.</p>
                 </article>
@@ -356,7 +361,7 @@
           <!-- 5. BLOCO: EMOÇÕES POR CATEGORIA -->
           <section class="card category-card">
             <div class="card-header">
-              <h3><span class="card-icon">🍩</span> Emoções por categoria</h3>
+              <h3><span class="card-icon"><i aria-hidden="true" class="fa-solid fa-chart-pie"></i></span> Emoções por categoria</h3>
             </div>
 
             <div class="category-content">
@@ -399,7 +404,7 @@
           <section class="card triggers-card">
             <div class="card-header">
               <h3>
-                <span class="card-icon">💡</span> Seus gatilhos e preferências
+                <span class="card-icon"><i aria-hidden="true" class="fa-solid fa-lightbulb"></i></span> Seus gatilhos e preferências
               </h3>
             </div>
             <p class="card-instruction">
@@ -410,7 +415,7 @@
               <!-- Te faz bem -->
               <div class="trigger-row">
                 <span class="trigger-label good">
-                  <span class="heart-icon">♥</span> Te faz bem
+                  <span class="heart-icon"><i aria-hidden="true" class="fa-solid fa-heart"></i></span> Te faz bem
                 </span>
                 <div class="tag-group">
                   <span class="tag">Música</span>
@@ -440,14 +445,14 @@
           <!-- 7. BLOCO: SUA JORNADA EMOCIONAL -->
           <section class="card journey-card">
             <div class="card-header">
-              <h3><span class="card-icon">🚩</span> Sua jornada emocional</h3>
+              <h3><span class="card-icon"><i aria-hidden="true" class="fa-solid fa-flag"></i></span> Sua jornada emocional</h3>
             </div>
             <p class="card-instruction">
               Evolução das suas emoções ao longo do tempo.
             </p>
 
             <div class="quote-box">
-              <span class="quote-heart">♥</span>
+              <span class="quote-heart"><i aria-hidden="true" class="fa-solid fa-heart"></i></span>
               <p class="quote-text">
                 "Você já sentiu dias difíceis, mas também viveu muitos dias
                 incríveis."

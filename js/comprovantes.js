@@ -151,8 +151,13 @@ function validarArquivo(arquivo) {
     "arquivo-erro"
   );
 
-  arquivoSelecionado.textContent =
-    `✓ ${arquivo.name}`;
+  const iconeSucesso = document.createElement("i");
+  iconeSucesso.className = "fa-solid fa-check";
+  iconeSucesso.setAttribute("aria-hidden", "true");
+  arquivoSelecionado.replaceChildren(
+    iconeSucesso,
+    document.createTextNode(` ${arquivo.name}`)
+  );
 
 
   // Reinicia a animação
@@ -482,8 +487,8 @@ formProfissional.addEventListener(
         "botao-sucesso"
       );
 
-      botao.textContent =
-        "✓ Enviado!";
+      botao.innerHTML =
+        '<i aria-hidden="true" class="fa-solid fa-check"></i> Enviado!';
 
 
       setTimeout(() => {

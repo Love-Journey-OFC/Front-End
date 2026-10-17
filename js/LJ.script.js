@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        alert(`Emoção "${selectedEmotion}" registrada com sucesso! 💕`);
+        alert(`Emoção "${selectedEmotion}" registrada com sucesso!`);
         
         // Limpa a seleção após salvar
         emotionButtons.forEach(btn => btn.classList.remove('selected'));

@@ -130,12 +130,12 @@ body.corpo-senha-redefinida {
 ========================= */
 
 .icone-sucesso::after {
-  content: "✓";
+  content: "\f00c";
 
-  font-family: Arial, sans-serif;
+  font-family: "Font Awesome 7 Free";
 
   font-size: 2.2rem;
-  font-weight: 700;
+  font-weight: 900;
 
   opacity: 0;
 

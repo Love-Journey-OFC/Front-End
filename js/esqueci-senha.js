@@ -21,7 +21,9 @@ mostrarSenha.addEventListener("click", () => {
 
   inputSenha.type = visivel ? "password" : "text";
 
-  mostrarSenha.textContent = visivel ? "👁" : "🙈";
+  mostrarSenha.innerHTML = visivel
+    ? '<i aria-hidden="true" class="fa-solid fa-eye"></i>'
+    : '<i aria-hidden="true" class="fa-solid fa-eye-slash"></i>';
 
   mostrarSenha.setAttribute(
     "aria-label",
@@ -45,7 +47,9 @@ document.querySelectorAll(".botao-olho-esqueci").forEach((botao) => {
 
     input.type = visivel ? "password" : "text";
 
-    botao.textContent = visivel ? "👁" : "🙈";
+    botao.innerHTML = visivel
+      ? '<i aria-hidden="true" class="fa-solid fa-eye"></i>'
+      : '<i aria-hidden="true" class="fa-solid fa-eye-slash"></i>';
 
   });
 

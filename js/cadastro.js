@@ -196,10 +196,9 @@ document
             ? "password"
             : "text";
 
-        botao.textContent =
-          mostrando
-            ? "👁"
-            : "🙈";
+        botao.innerHTML = mostrando
+          ? '<i aria-hidden="true" class="fa-solid fa-eye"></i>'
+          : '<i aria-hidden="true" class="fa-solid fa-eye-slash"></i>';
 
       }
     );

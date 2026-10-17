@@ -608,7 +608,9 @@ button {
   color: #939187;
 }
 .plan li::before {
-  content: "✓";
+  content: "\f00c";
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;
   position: absolute;
   left: 0;
   top: -1px;
