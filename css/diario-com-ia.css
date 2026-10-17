@@ -607,6 +607,25 @@ button {
 }
 
 
+#status.status-error {
+  color: #b4234d;
+}
+
+
+.ai-privacy-note {
+  margin: 0 24px 7px;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+
+.send-btn:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+
 /* ==========================================================================
    INPUT DO CHAT
    ========================================================================== */

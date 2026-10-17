@@ -85,7 +85,7 @@
             </li>
 
             <li>
-              <a href="./apoio-psicologico.html" class="nav-link">
+              <a href="./apoio.html" class="nav-link">
                 <span class="icon"><i class="fa-solid fa-user"></i></span>
                 Apoio
               </a>
@@ -292,6 +292,8 @@
             aria-live="polite"
           ></p>
 
+          <p class="ai-privacy-note">No plano gratuito, suas mensagens e respostas podem ser usadas pelo Google para melhorar produtos. Evite compartilhar dados pessoais. <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener noreferrer">Saiba mais</a>.</p>
+
 
           <!-- CAMPO DE MENSAGEM -->
           <div class="message-input">
@@ -308,6 +310,7 @@
               placeholder="Digite sua mensagem..."
               id="mensagem-input"
               aria-label="Digite sua mensagem"
+              maxlength="2000"
               autocomplete="off"
             >
 
@@ -316,7 +319,6 @@
               id="btn-submit"
               class="send-btn"
               aria-label="Enviar"
-              onclick="sendMessage()"
             >
               <i aria-hidden="true" class="fa-solid fa-paper-plane"></i>
             </button>
