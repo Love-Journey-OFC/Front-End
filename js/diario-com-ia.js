@@ -1,4 +1,8 @@
 (() => {
+  const conta = LJ.exigirSessao('cliente');
+  if (!conta) return;
+  const treatment = conta.casal?.tratamento || 'feminino';
+  const word = (feminine, masculine) => LJ.flexao(treatment, feminine, masculine);
   const input = document.getElementById('mensagem-input');
   const sendButton = document.getElementById('btn-submit');
   const messages = document.getElementById('chat-messages');
@@ -16,7 +20,7 @@
     .filter((item) => item.text)
     .slice(-12);
 
-  const storageKey = 'loveJourney.diarioIA';
+  const storageKey = LJ.chave('diarioIA');
   const readState = () => {
     try { return JSON.parse(localStorage.getItem(storageKey) || '{}'); }
     catch { return {}; }
@@ -103,7 +107,22 @@
     status.classList.toggle('status-error', isError);
   };
 
+  const greeting = `Oi, ${LJ.primeiroNome(conta)}! Este é o seu espaço seguro para conversar sem julgamentos. Como você está se sentindo hoje?`;
   if (activeSession.messages?.length) renderMessages(activeSession.messages);
+  else addMessage('model', greeting);
+
+  // Textos no feminino da tela seguem o tratamento escolhido no perfil do casal.
+  if (treatment === 'masculino') {
+    const masculine = { Tranquila: 'Tranquilo', Neutra: 'Neutro', Preocupada: 'Preocupado' };
+    document.querySelectorAll('.emotion-item .label').forEach((label) => {
+      if (masculine[label.textContent.trim()]) label.textContent = masculine[label.textContent.trim()];
+    });
+    document.querySelectorAll('.safe-card *').forEach((element) => {
+      element.childNodes.forEach((node) => {
+        if (node.nodeType === Node.TEXT_NODE && node.textContent.includes('sozinha')) node.textContent = node.textContent.replace('sozinha', 'sozinho');
+      });
+    });
+  }
   renderHistory();
   if (state.dailyEmotion) {
     document.querySelectorAll('.emotion-item').forEach((button) => {
@@ -111,10 +130,15 @@
       button.setAttribute('aria-pressed', String(selected));
     });
   }
+  const renderReflectionDate = () => {
+    const dateLabel = document.querySelector('.diary-date');
+    if (dateLabel?.lastChild) dateLabel.lastChild.textContent = ` ${state.dailyReflectionDate ? LJ.formatarData(state.dailyReflectionDate) : 'Hoje'}`;
+  };
   if (state.dailyReflection) {
     const reflection = document.querySelector('.diary-text');
     if (reflection) reflection.textContent = state.dailyReflection;
   }
+  renderReflectionDate();
 
   const sendMessage = async () => {
     const text = input.value.trim();
@@ -223,7 +247,7 @@
     if (action === 'save-reflection') {
       const text = dialogContent.querySelector('[name="reflection"]').value.trim();
       if (!text) { dialogContent.querySelector('textarea').focus(); return; }
-      state.dailyReflection = text; persist();
+      state.dailyReflection = text; state.dailyReflectionDate = new Date().toISOString(); persist(); renderReflectionDate();
       const reflection = document.querySelector('.diary-text');
       if (reflection) reflection.textContent = text;
       closeDialog(); return;
@@ -263,7 +287,7 @@
   };
 
   document.getElementById('btn-new-entry')?.addEventListener('click', () => {
-    openDialog('Novo registro', '<p>Escreva uma reflexão para guardar no seu diário pessoal. O registro fica salvo apenas neste dispositivo.</p><label class="ai-field">Título<input name="entry-title" required maxlength="90" placeholder="Dê um título para este momento"></label><label class="ai-field">Como foi para você?<textarea name="entry-text" required rows="5" maxlength="2000" placeholder="Escreva no seu ritmo..."></textarea></label><label class="ai-field">Como você se sentiu?<select name="entry-mood"><option>Não quero marcar</option><option>Feliz</option><option>Tranquila</option><option>Neutra</option><option>Preocupada</option><option>Triste</option></select></label>', [{ label: 'Salvar registro', primary: true, action: 'save-entry' }, { label: 'Cancelar' }]);
+    openDialog('Novo registro', '<p>Escreva uma reflexão para guardar no seu diário pessoal. O registro fica salvo apenas neste dispositivo.</p><label class="ai-field">Título<input name="entry-title" required maxlength="90" placeholder="Dê um título para este momento"></label><label class="ai-field">Como foi para você?<textarea name="entry-text" required rows="5" maxlength="2000" placeholder="Escreva no seu ritmo..."></textarea></label><label class="ai-field">Como você se sentiu?<select name="entry-mood"><option>Não quero marcar</option><option>Feliz</option><option>' + word('Tranquila', 'Tranquilo') + '</option><option>' + word('Neutra', 'Neutro') + '</option><option>' + word('Preocupada', 'Preocupado') + '</option><option>Triste</option></select></label>', [{ label: 'Salvar registro', primary: true, action: 'save-entry' }, { label: 'Cancelar' }]);
   });
 
   document.querySelector('.chat-tools button[aria-label="Buscar na conversa"]')?.addEventListener('click', () => {
@@ -290,7 +314,7 @@
   });
 
   document.querySelector('.diary-edit')?.addEventListener('click', () => {
-    const current = state.dailyReflection || document.querySelector('.diary-text')?.textContent.trim() || '';
+    const current = state.dailyReflection || '';
     openDialog('Editar reflexão', `<label class="ai-field">Sua reflexão<textarea name="reflection" rows="5" required maxlength="2000">${escapeHtml(current)}</textarea></label>`, [{ label: 'Salvar', primary: true, action: 'save-reflection' }, { label: 'Cancelar' }]);
   });
 

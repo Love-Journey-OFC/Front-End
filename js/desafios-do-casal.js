@@ -1,5 +1,6 @@
 (() => {
-  const storageKey = 'loveJourney.desafiosCasal';
+  if (!LJ.exigirSessao('cliente')) return;
+  const storageKey = LJ.chave('desafiosCasal');
   const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const readStore = () => {
     try { return JSON.parse(localStorage.getItem(storageKey)) || { progress: {}, custom: [] }; }
@@ -30,7 +31,9 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     const state = readStore();
-    state.progress ||= {}; state.custom ||= [];
+    state.progress ||= {}; state.custom ||= []; state.log ||= {};
+    // Guarda o dia de cada etapa para as atividades da semana no dashboard.
+    const logActivity = title => { (state.log[title] ||= []).push(LJ.chaveData()); };
     const activeCard = document.querySelector('.challenges-card');
     const activeContainer = activeCard;
     const completedGrid = document.querySelector('.completed-grid');
@@ -82,7 +85,7 @@
     };
     const addCustomToPage = challenge => {
       if (activeCard.querySelector(`[data-challenge-title="${CSS.escape(challenge.title)}"]`)) return;
-      state.progress[challenge.title] ||= { done: challenge.done || 0, total: challenge.total, completed: Boolean(challenge.completed), category: challenge.category, dueLabel: `Prazo: ${challenge.due}` };
+      state.progress[challenge.title] ||= { done: challenge.done || 0, total: challenge.total, completed: Boolean(challenge.completed), category: challenge.category, dueLabel: `Prazo: ${LJ.formatarData(challenge.due)}` };
       if (state.progress[challenge.title].completed) completedGrid.prepend(buildCompletedCard({ ...challenge, completedAt: state.progress[challenge.title].completedAt }));
       else {
         const row = buildActiveRow(challenge); activeContainer.append(row); updateProgressUI(row);
@@ -92,12 +95,37 @@
       }
     };
     const refreshSummary = () => {
-      const customTotal = state.custom.length; const customDone = state.custom.filter(item => item.completed).length;
-      const total = 15 + customTotal; const done = 15 + customDone; const percent = Math.round(done / Math.max(1, total) * 100);
+      const total = state.custom.length; const done = state.custom.filter(item => item.completed).length;
+      const percent = total ? Math.round(done / total * 100) : 0;
       document.querySelector('.progress-card .ring').style.setProperty('--porcentagem', percent);
       document.querySelector('.progress-card .ring span').textContent = `${percent}%`;
-      document.querySelector('.progress-text').textContent = `Vocês já completaram ${done} de ${total} desafios.`;
+      document.querySelector('.progress-text').textContent = total ? `Vocês já completaram ${done} de ${total} ${total === 1 ? 'desafio' : 'desafios'}.` : 'Vocês ainda não concluíram desafios.';
+      const remaining = 5 - (done % 5);
+      document.querySelector('.progress-card .tip-box p').textContent = done && done % 5 === 0
+        ? `Vocês conquistaram ${done / 5 === 1 ? 'o primeiro ícone especial' : `${done / 5} ícones especiais`}! Continuem assim.`
+        : `${done ? 'Mais' : 'Concluam'} ${remaining} ${remaining === 1 ? 'desafio' : 'desafios'} e vocês ganham um ícone especial!`;
+      document.querySelectorAll('.category-item').forEach(item => {
+        const category = item.querySelector('.cat-name').textContent.trim();
+        const count = state.custom.filter(challenge => challenge.category === category).length;
+        item.querySelector('.cat-count').textContent = `${count} ${count === 1 ? 'desafio' : 'desafios'} ›`;
+      });
+      renderEmptyStates();
     };
+    const renderEmptyStates = () => {
+      const hasActive = [...activeCard.querySelectorAll('.challenge')].some(row => !row.hidden);
+      activeCard.querySelector('.lj-vazio')?.remove();
+      if (!hasActive) activeCard.insertAdjacentHTML('beforeend', '<div class="lj-vazio"><strong>Nenhum desafio em andamento.</strong>Escolham uma categoria ao lado ou criem um desafio do jeito de vocês.<br><button type="button" class="lj-vazio-acao" data-create-challenge>Criar desafio</button></div>');
+      activeCard.querySelector('.card-instruction').textContent = hasActive ? 'Vocês já estão em movimento! Continue assim!' : 'Escolham uma categoria ou criem um desafio para começar.';
+      const completedCount = completedGrid.querySelectorAll('.completed-item').length;
+      completedGrid.querySelector('.lj-vazio')?.remove();
+      if (!completedCount) completedGrid.insertAdjacentHTML('beforeend', '<p class="lj-vazio" style="grid-column: 1 / -1">Quando vocês concluírem um desafio, ele aparece aqui.</p>');
+      document.querySelector('.completed-card .card-instruction').textContent = completedCount ? 'Vocês já viveram momentos incríveis juntos!' : 'Os desafios concluídos pelo casal aparecem aqui.';
+      upcomingCard.querySelector('.lj-vazio')?.remove();
+      if (!upcomingCard.querySelector('.upcoming')) upcomingCard.insertAdjacentHTML('beforeend', '<p class="lj-vazio">Os prazos dos desafios em andamento aparecem aqui.</p>');
+    };
+    activeCard.addEventListener('click', event => {
+      if (event.target.closest('[data-create-challenge]')) document.getElementById('btn-new-challenge')?.click();
+    });
 
     // Ativa progresso e detalhes nos desafios estáticos da página.
     activeCard.querySelectorAll('.challenge').forEach(updateProgressUI);
@@ -114,13 +142,13 @@
       show(escapeHtml(title), `<p>${escapeHtml(description)}</p><p><strong>Progresso:</strong> ${progress.done} de ${progress.total} etapas</p><div class="actions"><button type="button" class="secondary" data-close>Fechar</button>${progress.completed ? '<span class="empty-state">Este desafio já foi concluído.</span>' : '<button type="button" class="secondary" data-step>Registrar etapa</button><button type="button" class="primary" data-complete>Concluir desafio</button>'}</div>`, body => {
         body.querySelector('[data-close]').onclick = () => modal.close();
         body.querySelector('[data-step]')?.addEventListener('click', () => {
-          progress.done = Math.min(progress.total, progress.done + 1);
+          progress.done = Math.min(progress.total, progress.done + 1); logActivity(title);
           if (progress.done >= progress.total) { progress.completed = true; progress.completedAt = new Intl.DateTimeFormat('pt-BR').format(new Date()); }
           save(); updateProgressUI(row); modal.close();
           if (progress.completed) addCompletedFromRow(row, progress);
         });
         body.querySelector('[data-complete]')?.addEventListener('click', () => {
-          progress.done = progress.total; progress.completed = true; progress.completedAt = new Intl.DateTimeFormat('pt-BR').format(new Date()); save(); updateProgressUI(row); modal.close(); addCompletedFromRow(row, progress);
+          logActivity(title); progress.done = progress.total; progress.completed = true; progress.completedAt = new Intl.DateTimeFormat('pt-BR').format(new Date()); save(); updateProgressUI(row); modal.close(); addCompletedFromRow(row, progress);
         });
       });
     }
