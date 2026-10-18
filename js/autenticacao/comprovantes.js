@@ -477,6 +477,32 @@ formProfissional.addEventListener(
       "Enviando...";
 
 
+    // ----------------------------------------
+    // DADOS PROFISSIONAIS NA CONTA
+    // ----------------------------------------
+
+    const contaId =
+      sessionStorage.getItem("loveJourney.cadastroPendente");
+
+    if (!contaId || !LJ.conta(contaId)) {
+      window.location.href = "cadastro.html?perfil=profissional";
+      return;
+    }
+
+    LJ.atualizarConta(contaId, {
+      cadastroCompleto: true,
+      profissional: {
+        area: campoArea.options[campoArea.selectedIndex]?.textContent.trim() || "",
+        formacao: campoFormacao.value.trim(),
+        registro: campoRegistro.value.trim(),
+        experiencia: campoExperiencia.value.trim(),
+        comprovante: inputArquivo.files[0]?.name || ""
+      }
+    });
+
+    sessionStorage.removeItem("loveJourney.cadastroPendente");
+
+
     setTimeout(() => {
 
       botao.classList.remove(
