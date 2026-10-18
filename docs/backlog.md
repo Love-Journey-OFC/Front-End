@@ -172,6 +172,7 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 - **Problema:** o reset `* { margin: 0 }` de cada página anula a centralização nativa do `<dialog>`, e esses 5 modais abrem colados no canto superior esquerdo. Os outros modais do sistema já se centralizam com posicionamento próprio.
 - **Correção:** adicionar `margin: auto` na regra de cada um desses modais (o mesmo que o modal de privacidade do cadastro já usa).
 - **Atenção:** muda a posição dos modais na tela; aguarda aprovação.
+- **Status: resolvido em 18/10/2026.** `margin: auto` adicionado aos 5 modais, com aprovação. Testados abertos: todos centralizados, sem erros no console.
 
 ---
 

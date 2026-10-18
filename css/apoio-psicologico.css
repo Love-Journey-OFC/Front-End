@@ -520,7 +520,7 @@ button {
 
 .resource-card:hover, .resource-card:focus-visible { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(90, 40, 70, .12); outline: 2px solid var(--primary-pink); outline-offset: 2px; }
 
-.support-dialog { border: 0; border-radius: 20px; padding: 0; width: min(560px, calc(100% - 28px)); max-height: min(88vh, 760px); color: var(--text-primary); box-shadow: 0 20px 70px rgba(37, 20, 53, .28); }
+.support-dialog { border: 0; border-radius: 20px; padding: 0; margin: auto; width: min(560px, calc(100% - 28px)); max-height: min(88vh, 760px); color: var(--text-primary); box-shadow: 0 20px 70px rgba(37, 20, 53, .28); }
 .support-dialog::backdrop { background: rgba(36, 24, 51, .58); backdrop-filter: blur(3px); }
 .support-dialog-card { padding: 24px; max-height: min(88vh, 760px); overflow: auto; font-family: var(--font-family); }
 .support-dialog-card header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; }

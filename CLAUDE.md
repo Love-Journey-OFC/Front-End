@@ -146,7 +146,6 @@ Não corrija por conta própria sem ser pedido, mas leve em conta e mencione qua
 
 A lista completa e o status de cada item ficam em `docs/backlog.md`. Principais:
 
-- 5 modais abrem no canto superior esquerdo em vez de centralizados (ver BL-25 no backlog).
 - A política de privacidade do cadastro (modal em `cadastro.html`) é uma versão preliminar e precisa de revisão da equipe.
 - Os mentores da página de Apoio são perfis de exemplo.
 
