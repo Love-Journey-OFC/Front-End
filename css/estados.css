@@ -1,0 +1,37 @@
+/* ==========================================================================
+   LOVE JOURNEY — ESTADOS VAZIOS
+   Mensagem exibida quando ainda não há registros em uma seção.
+   ========================================================================== */
+
+.lj-vazio {
+  margin: 8px 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #fff7fa;
+  color: var(--text-muted, #777777);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.lj-vazio strong {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--text-primary, #333333);
+  font-weight: 600;
+}
+
+.lj-vazio-acao {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--primary-pink, #f25287);
+  color: #ffffff;
+  font: 600 0.8rem var(--font-family, "Poppins", sans-serif);
+  cursor: pointer;
+}
+
+.lj-vazio-acao:hover {
+  background: var(--primary-hover, #d93d70);
+}

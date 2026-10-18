@@ -191,7 +191,7 @@ inputSenha.addEventListener("input", () => {
 // SUBMIT DO LOGIN
 // ==========================================
 
-formLogin.addEventListener("submit", (e) => {
+formLogin.addEventListener("submit", async (e) => {
 
   e.preventDefault();
 
@@ -330,8 +330,40 @@ formLogin.addEventListener("submit", (e) => {
 
 
   // ------------------------------------------
-  // SIMULAÇÃO
+  // AUTENTICAÇÃO
   // ------------------------------------------
+
+  let contaLogada;
+
+  try {
+
+    contaLogada = await LJ.autenticar(email, senha);
+
+  } catch (erro) {
+
+    botaoEntrar.disabled = false;
+    botaoEntrar.classList.remove("botao-enviando");
+    botaoEntrar.textContent = "Entrar";
+
+    if (erro.campo === "senha") {
+      mostrarErro(inputSenha, erroSenha, erro.message);
+      inputSenha.focus();
+    } else {
+      mostrarErro(inputEmail, erroEmail, erro.message);
+      inputEmail.focus();
+    }
+
+    return;
+  }
+
+  // Profissional que parou antes dos dados profissionais
+  if (!contaLogada.cadastroCompleto) {
+    sessionStorage.setItem("loveJourney.cadastroPendente", contaLogada.id);
+    window.location.href = "cadastro-profissional.html";
+    return;
+  }
+
+  LJ.iniciarSessao(contaLogada);
 
   setTimeout(() => {
 
@@ -349,7 +381,7 @@ formLogin.addEventListener("submit", (e) => {
 
     setTimeout(() => {
 
-      window.location.href = localStorage.getItem("perfilEscolhido") === "profissional" ? "dashboard-profissional.html" : "dashboard-casal.html";
+      window.location.href = LJ.paginaInicial(contaLogada);
 
     }, 700);
 
@@ -377,6 +409,23 @@ window.addEventListener("DOMContentLoaded", () => {
     lembrar.checked = true;
 
   }
+
+  // Acabou de se cadastrar: e-mail já preenchido
+  const emailRecente =
+    sessionStorage.getItem("loveJourney.emailRecente");
+
+  if (emailRecente && !inputEmail.value) {
+    inputEmail.value = emailRecente;
+  }
+
+  // "Esqueci minha senha" leva o e-mail digitado
+  document
+    .querySelector('a[href="recuperar-senha.html"]')
+    ?.addEventListener("click", () => {
+      const email = inputEmail.value.trim();
+      if (email) sessionStorage.setItem("loveJourney.emailRecuperacao", email);
+      else sessionStorage.removeItem("loveJourney.emailRecuperacao");
+    });
 
 });
 

@@ -30,6 +30,7 @@
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="./css/base.css" />
     <link rel="stylesheet" href="./css/sidebar.css" />
+    <link rel="stylesheet" href="./css/estados.css" />
     <link rel="stylesheet" href="./css/dashboard-casal.css" />
   </head>
   <body>
@@ -114,7 +115,7 @@
 
             <div>
               <h2>Dashboard do casal</h2>
-              <p class="header-subtitle">Olá, Ana e Lucas</p>
+              <p class="header-subtitle">Olá!</p>
             </div>
           </div>
         </header>
@@ -128,9 +129,9 @@
             </div>
             <p class="card-instruction">Como vocês estão hoje?</p>
 
-            <!-- ANA -->
+            <!-- VOCÊ -->
             <div class="person">
-              <strong class="person-name">Ana <i aria-hidden="true" class="fa-solid fa-heart"></i></strong>
+              <strong class="person-name">Você <i aria-hidden="true" class="fa-solid fa-heart"></i></strong>
               <div class="emotions-grid">
                 <button type="button" class="emotion-item" aria-pressed="false">
                   <span class="emoji"><i aria-hidden="true" class="fa-regular fa-face-smile"></i></span>
@@ -155,9 +156,9 @@
               </div>
             </div>
 
-            <!-- LUCAS -->
+            <!-- PARCEIRO(A) -->
             <div class="person">
-              <strong class="person-name">Lucas <i aria-hidden="true" class="fa-solid fa-heart"></i></strong>
+              <strong class="person-name">Parceiro(a) <i aria-hidden="true" class="fa-solid fa-heart"></i></strong>
               <div class="emotions-grid">
                 <button type="button" class="emotion-item" aria-pressed="false">
                   <span class="emoji"><i aria-hidden="true" class="fa-regular fa-face-smile"></i></span>
@@ -196,14 +197,14 @@
 
             <div class="mood-people">
               <div class="mood-person">
-                <span class="mood-face theme-pink"><i aria-hidden="true" class="fa-regular fa-face-smile"></i></span>
-                <strong>Ana</strong>
-                <small>Bem</small>
+                <span class="mood-face theme-pink"><i aria-hidden="true" class="fa-regular fa-face-meh"></i></span>
+                <strong>Você</strong>
+                <small>Sem registro</small>
               </div>
               <div class="mood-person">
-                <span class="mood-face theme-teal"><i aria-hidden="true" class="fa-regular fa-face-smile"></i></span>
-                <strong>Lucas</strong>
-                <small>Tranquilo</small>
+                <span class="mood-face theme-teal"><i aria-hidden="true" class="fa-regular fa-face-meh"></i></span>
+                <strong>Parceiro(a)</strong>
+                <small>Sem registro</small>
               </div>
             </div>
 
@@ -219,14 +220,14 @@
             >
               <polyline
                 class="line-ana"
-                points="0,40 30,25 60,35 90,15 120,30 150,20 200,28"
+                points=""
                 fill="none"
                 stroke-width="2"
                 vector-effect="non-scaling-stroke"
               ></polyline>
               <polyline
                 class="line-lucas"
-                points="0,30 30,38 60,22 90,32 120,18 150,30 200,20"
+                points=""
                 fill="none"
                 stroke-width="2"
                 vector-effect="non-scaling-stroke"
@@ -245,10 +246,10 @@
 
             <div class="chart-legend">
               <span class="legend-item"
-                ><span class="legend-dot pink"></span> Ana</span
+                ><span class="legend-dot pink"></span> Você</span
               >
               <span class="legend-item"
-                ><span class="legend-dot green"></span> Lucas</span
+                ><span class="legend-dot green"></span> Parceiro(a)</span
               >
             </div>
           </section>
@@ -262,12 +263,11 @@
             </div>
 
             <div class="compat-body">
-              <div class="ring" style="--porcentagem: 82">
-                <span>82%</span>
+              <div class="ring" style="--porcentagem: 0">
+                <span>0%</span>
               </div>
               <p class="compat-text">
-                Vocês estão em sintonia emocional. Sigam se apoiando nos
-                próximos dias.
+                Registrem as emoções de vocês dois para acompanhar a sintonia do casal.
               </p>
             </div>
 
@@ -287,10 +287,10 @@
               <div class="person-profile">
                 <img
                   class="avatar"
-                  src="./assets/imgs/jadi/img/ana.jpg"
-                  alt="Foto da Ana"
+                  src="./assets/imgs/logo-icone.png"
+                alt="Sua foto"
                 />
-                <strong>Ana</strong>
+                <strong>Você</strong>
               </div>
 
               <span class="connect-icon" aria-hidden="true"><i aria-hidden="true" class="fa-solid fa-link"></i></span>
@@ -298,10 +298,10 @@
               <div class="person-profile">
                 <img
                   class="avatar"
-                  src="./assets/imgs/jadi/img/lucas.jpg"
-                  alt="Foto do Lucas"
+                  src="./assets/imgs/logo-icone.png"
+                alt="Foto do(a) parceiro(a)"
                 />
-                <strong>Lucas</strong>
+                <strong>Parceiro(a)</strong>
               </div>
             </div>
 
@@ -310,7 +310,7 @@
             </button>
           </section>
 
-          <!-- 5. BLOCO: ATIVIDADES DA SEMANA (3 concluídas: Seg, Ter e Qua) -->
+          <!-- 5. BLOCO: ATIVIDADES DA SEMANA -->
           <section class="card activities-card">
             <div class="card-header">
               <h3><span class="card-icon"><i aria-hidden="true" class="fa-solid fa-bullseye"></i></span> Atividades da semana</h3>
@@ -318,19 +318,19 @@
             <p class="card-instruction">Atividades do convívio do casal.</p>
 
             <div class="week-days">
-              <div class="week-day done">
+              <div class="week-day">
                 <small>Seg</small>
-                <span class="check"><i aria-hidden="true" class="fa-solid fa-check"></i></span>
+                <span class="check"></span>
                 <em>Diálogo</em>
               </div>
-              <div class="week-day done">
+              <div class="week-day">
                 <small>Ter</small>
-                <span class="check"><i aria-hidden="true" class="fa-solid fa-check"></i></span>
+                <span class="check"></span>
                 <em>Gratidão</em>
               </div>
-              <div class="week-day done">
+              <div class="week-day">
                 <small>Qua</small>
-                <span class="check"><i aria-hidden="true" class="fa-solid fa-check"></i></span>
+                <span class="check"></span>
                 <em>Tempo juntos</em>
               </div>
               <div class="week-day">
@@ -364,21 +364,20 @@
               </h3>
             </div>
             <p class="card-instruction">
-              3 de 7 atividades concluídas. Que tal completar uma atividade
-              hoje?
+              0 de 7 atividades concluídas. Que tal completar uma atividade hoje?
             </p>
 
             <div
               class="progress-bar"
               role="progressbar"
-              aria-valuenow="3"
+              aria-valuenow="0"
               aria-valuemin="0"
               aria-valuemax="7"
               aria-label="Atividades concluídas"
             >
-              <div class="progress-fill" style="width: 43%"></div>
+              <div class="progress-fill" style="width: 0%"></div>
             </div>
-            <small class="progress-count">3/7</small>
+            <small class="progress-count">0/7</small>
           </section>
 
           <!-- 7. BLOCO: MENTORES DE RELACIONAMENTO -->
@@ -389,45 +388,7 @@
               </h3>
             </div>
 
-            <div class="mentor theme-pink-light">
-              <img
-                class="avatar-sm"
-                src="./assets/imgs/jadi/img/mentora.jpg"
-                alt="Foto de Fernanda Almeida"
-              />
-              <div class="mentor-info">
-                <strong class="mentor-name"
-                  >Fernanda Almeida <span class="verified"><i aria-hidden="true" class="fa-solid fa-check"></i></span></strong
-                >
-                <p class="mentor-role">
-                  Psicóloga | Especialista em relacionamentos
-                </p>
-                <p class="mentor-rating"><i aria-hidden="true" class="fa-solid fa-star"></i> 4,9 (124 avaliações)</p>
-              </div>
-              <button type="button" class="btn btn-secondary btn-sm">
-                Ver perfil
-              </button>
-            </div>
-
-            <div class="mentor theme-pink-light">
-              <img
-                class="avatar-sm"
-                src="./assets/imgs/jadi/img/mentor.jpg"
-                alt="Foto de Rodrigo Mendes"
-              />
-              <div class="mentor-info">
-                <strong class="mentor-name"
-                  >Rodrigo Mendes <span class="verified"><i aria-hidden="true" class="fa-solid fa-check"></i></span></strong
-                >
-                <p class="mentor-role">
-                  Terapeuta de Casais / Coach de Relacionamentos
-                </p>
-                <p class="mentor-rating"><i aria-hidden="true" class="fa-solid fa-star"></i> 4,8 (91 avaliações)</p>
-              </div>
-              <button type="button" class="btn btn-secondary btn-sm">
-                Ver perfil
-              </button>
-            </div>
+            <div class="mentor-list" data-mentor-list></div>
 
             <button type="button" class="btn btn-primary btn-block">
               Encontrar orientação
@@ -446,19 +407,19 @@
             <div class="topic">
               <span class="tag">Comunicação</span>
               <p>Como falar sobre sentimentos difíceis sem brigar?</p>
-              <small><i aria-hidden="true" class="fa-solid fa-comment"></i> 128</small>
+              <small><i aria-hidden="true" class="fa-solid fa-comment"></i> 0</small>
             </div>
 
             <div class="topic">
               <span class="tag">Dúvidas e conflitos</span>
               <p>Lidando com o ciúme de forma saudável</p>
-              <small><i aria-hidden="true" class="fa-solid fa-comment"></i> 96</small>
+              <small><i aria-hidden="true" class="fa-solid fa-comment"></i> 0</small>
             </div>
 
             <div class="topic">
               <span class="tag">Limites saudáveis</span>
               <p>Como estabelecer limites sem prejudicar a relação?</p>
-              <small><i aria-hidden="true" class="fa-solid fa-comment"></i> 73</small>
+              <small><i aria-hidden="true" class="fa-solid fa-comment"></i> 0</small>
             </div>
 
             <button type="button" class="btn btn-primary btn-block">
@@ -469,6 +430,7 @@
         <!-- /dashboard-grid -->
       </main>
     </div>
+    <script src="./js/conta.js"></script>
     <script src="./js/dashboard-casal.js" defer></script>
   </body>
 </html>

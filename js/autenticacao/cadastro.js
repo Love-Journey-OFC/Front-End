@@ -212,7 +212,7 @@ document
 
 formCadastro.addEventListener(
   "submit",
-  (e) => {
+  async (e) => {
 
     e.preventDefault();
 
@@ -388,6 +388,46 @@ formCadastro.addEventListener(
 
 
     // ========================================
+    // CRIAÇÃO DA CONTA
+    // ========================================
+
+    let novaConta;
+
+    try {
+
+      novaConta = await LJ.criarConta({
+        perfil,
+        nome: document.getElementById("nome").value,
+        sobrenome: document.getElementById("sobrenome").value,
+        email,
+        senha: inputSenha.value,
+        cnpj: inputCnpj.value
+      });
+
+    } catch (erro) {
+
+      if (botaoCadastrar) {
+        botaoCadastrar.disabled = false;
+        botaoCadastrar.textContent = "Cadastrar Agora";
+      }
+
+      inputEmail.classList.add("campo-invalido");
+      inputEmail.setCustomValidity(erro.message);
+      inputEmail.reportValidity();
+      inputEmail.addEventListener(
+        "input",
+        () => inputEmail.setCustomValidity(""),
+        { once: true }
+      );
+
+      return;
+    }
+
+    // E-mail pronto para a tela de login
+    sessionStorage.setItem("loveJourney.emailRecente", novaConta.email);
+
+
+    // ========================================
     // REDIRECIONAMENTO
     // ========================================
 
@@ -395,7 +435,12 @@ formCadastro.addEventListener(
 
       if (perfil === "profissional") {
 
-        // Profissional → comprovantes
+        // Profissional → dados profissionais
+        sessionStorage.setItem(
+          "loveJourney.cadastroPendente",
+          novaConta.id
+        );
+
         window.location.href =
           "cadastro-profissional.html";
 

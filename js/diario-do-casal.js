@@ -1,4 +1,5 @@
 (() => {
+  if (!LJ.exigirSessao('cliente')) return;
   const dialog = document.getElementById('new-entry-dialog');
   const form = document.getElementById('new-entry-form');
   const entriesGrid = document.querySelector('.entries-grid');
@@ -14,7 +15,7 @@
   document.body.append(modal);
   const detailTitle = modal.querySelector('h2');
   const detailContent = modal.querySelector('.diary-detail-content');
-  const storageKey = 'love-journey-diary-entries';
+  const storageKey = LJ.chave('diario');
   const categoryDetails = {
     'Reflexões': { icon: 'fa-comment-dots', theme: 'theme-purple' },
     'Sonhos': { icon: 'fa-moon', theme: 'theme-teal' },
@@ -165,6 +166,7 @@
       entriesGrid.querySelector(`[data-entry-id="${CSS.escape(article.dataset.entryId)}"]`)?.remove();
       article.remove();
       renderCalendar();
+      renderDerived();
       return;
     }
     const allMoments = event.target.closest('[data-show-moments]');
@@ -298,10 +300,76 @@
     else entriesGrid.prepend(buildEntry(entry));
     applyFilter('Todos');
     renderCalendar();
+    renderDerived();
     dialog.close();
   });
 
+  // Momentos (registros com foto), resumo, jornada e estados vazios vêm dos registros salvos.
+  const savedEntries = () => {
+    try { return JSON.parse(localStorage.getItem(storageKey) || '[]'); } catch { return []; }
+  };
+  const byDateDesc = (a, b) => (b.dateKey || '').localeCompare(a.dateKey || '');
+  const shorten = (text, size) => (text.length > size ? `${text.slice(0, size).trim()}...` : text);
+  const momentThemes = ['theme-pink', 'theme-purple', 'theme-teal', 'theme-yellow'];
+
+  function renderDerived() {
+    const entries = savedEntries().sort(byDateDesc);
+
+    const momentsGrid = document.querySelector('.moments-grid');
+    momentsGrid.replaceChildren();
+    const moments = entries.filter((entry) => entry.photo);
+    moments.slice(0, 4).forEach((entry, index) => {
+      const card = document.createElement('article');
+      card.className = `moment-item ${momentThemes[index % momentThemes.length]}`;
+      card.setAttribute('role', 'button'); card.tabIndex = 0;
+      const image = document.createElement('img'); image.src = entry.photo; image.alt = `Foto do registro: ${entry.category}`;
+      const date = document.createElement('span'); date.className = 'item-date'; date.textContent = entry.date;
+      const text = document.createElement('p'); text.className = 'item-text'; text.textContent = shorten(entry.content, 60);
+      card.append(image, date, text); momentsGrid.append(card);
+    });
+    if (!moments.length) {
+      momentsGrid.innerHTML = '<div class="lj-vazio" style="grid-column: 1 / -1"><strong>Nenhum momento especial ainda.</strong>Registros com foto aparecem aqui.<br><button type="button" class="lj-vazio-acao" data-shortcut="photo">Adicionar foto</button></div>';
+    }
+
+    entriesGrid.querySelector('.lj-vazio')?.remove();
+    if (!entries.length) {
+      entriesGrid.insertAdjacentHTML('beforeend', '<div class="lj-vazio" style="grid-column: 1 / -1"><strong>Seu diário está em branco.</strong>Que tal registrar como foi o seu dia?<br><button type="button" class="lj-vazio-acao" data-new-entry>Escrever no diário</button></div>');
+    }
+
+    const summary = document.querySelector('.summary-list');
+    summary.replaceChildren();
+    entries.slice(0, 5).forEach((entry) => {
+      const item = document.createElement('div');
+      item.className = 'summary-item';
+      item.innerHTML = `<span class="summary-icon ${entry.photo ? 'pink' : 'teal'}"><i aria-hidden="true" class="fa-solid ${entry.photo ? 'fa-camera' : 'fa-pen-to-square'}"></i></span><div class="summary-body"><div class="summary-top"><strong class="summary-title"></strong><span class="summary-date"></span></div><p class="summary-text"></p></div>`;
+      item.querySelector('.summary-title').textContent = entry.photo ? 'Momentos especiais' : 'Diário pessoal';
+      item.querySelector('.summary-date').textContent = entry.date;
+      item.querySelector('.summary-text').textContent = shorten(entry.content, 34);
+      summary.append(item);
+    });
+    if (!entries.length) summary.innerHTML = '<p class="lj-vazio">Os últimos registros do diário aparecem aqui.</p>';
+
+    const since = LJ.contaAtual()?.casal?.juntosDesde;
+    const journeyText = document.querySelector('.journey-card .card-instruction');
+    const journeyFill = document.querySelector('.journey-card .progress-fill');
+    const journeyBar = document.querySelector('.journey-card .progress-bar');
+    if (since) {
+      const days = Math.max(0, Math.floor((new Date(`${localDateKey()}T12:00:00`) - new Date(`${since}T12:00:00`)) / 86400000));
+      const yearProgress = Math.round((days % 365) / 365 * 100);
+      journeyText.textContent = `Juntos há ${days} ${days === 1 ? 'dia' : 'dias'}`;
+      journeyFill.style.width = `${yearProgress}%`;
+      journeyBar.setAttribute('aria-valuenow', String(yearProgress));
+    } else {
+      journeyFill.style.width = '0%';
+    }
+  }
+
+  document.addEventListener('click', (event) => {
+    if (event.target.closest('[data-new-entry]')) openEntryDialog();
+  });
+
   loadSavedEntries();
+  renderDerived();
   let calendarMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
   renderCalendar();
   function renderCalendar() {

@@ -187,6 +187,32 @@ formEsqueci.addEventListener("submit", (e) => {
 
   if (!valido) return;
 
+  /* =========================
+     CONTA DA REDEFINIÇÃO
+  ========================= */
+
+  const contas = LJ.contas();
+  const email =
+    sessionStorage.getItem("loveJourney.emailRecuperacao") ||
+    (contas.length === 1 ? contas[0].email : "");
+
+  if (!email || !LJ.buscarPorEmail(email)) {
+    mostrarErro(
+      inputSenha,
+      erroSenha,
+      email
+        ? "Não encontramos uma conta com o e-mail informado no login."
+        : "Volte ao login, digite seu e-mail e clique em \"Esqueci minha senha\"."
+    );
+    return;
+  }
+
+  botaoRedefinir.disabled = true;
+  LJ.redefinirSenha(email, senha).then(() => {
+    sessionStorage.removeItem("loveJourney.emailRecuperacao");
+    sessionStorage.setItem("loveJourney.emailRecente", email);
+  });
+
 
   /* =========================
      ANIMAÇÃO DE ENVIO

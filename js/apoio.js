@@ -1,5 +1,7 @@
 (() => {
-  const storageKey = 'loveJourney.apoio';
+  const conta = LJ.exigirSessao('cliente');
+  if (!conta) return;
+  const storageKey = LJ.chave('apoio');
   const readState = () => {
     try { return JSON.parse(localStorage.getItem(storageKey) || '{}'); }
     catch { return {}; }
@@ -51,7 +53,7 @@
     }
     const favorite = event.target.closest('.favorite');
     if (favorite) {
-      const name = favorite.closest('.mentor-card')?.querySelector('.item-title')?.textContent.trim();
+      const name = favorite.closest('.mentor-card')?.dataset.mentorId;
       state.favorites = state.favorites || [];
       const index = state.favorites.indexOf(name);
       if (index < 0) state.favorites.push(name); else state.favorites.splice(index, 1);
@@ -60,20 +62,22 @@
     }
     const profile = event.target.closest('[data-mentor-profile]');
     if (profile) {
-      const card = profile.closest('.mentor-card');
-      const name = card.querySelector('.item-title').textContent.trim();
-      const profession = card.querySelector('.item-text').textContent.trim();
-      const focus = card.querySelector('.mentor-focus').textContent.trim();
-      openDialog(name, `<p><strong>${escapeHtml(profession)}</strong> · foco em ${escapeHtml(focus.toLowerCase())}.</p><p>Este perfil faz parte da demonstração do Love Journey. Você pode registrar um pedido de conversa para experimentar o fluxo.</p>`, [{ label: 'Agendar conversa', primary: true, action: 'schedule' }, { label: 'Fechar' }]);
-      actions.querySelector('[data-action="schedule"]').addEventListener('click', () => openSchedule(name)); return;
+      const mentor = LJ.conta(profile.closest('.mentor-card').dataset.mentorId);
+      if (!mentor) return;
+      const info = mentor.profissional || {};
+      const request = requestTo(mentor.id);
+      const details = [info.area, info.formacao, info.experiencia].filter(Boolean).map(escapeHtml).join(' · ');
+      if (request) { openConversation(mentor, request); return; }
+      openDialog(LJ.nomeCompleto(mentor), `<p><strong>${details || 'Profissional'}</strong></p>${mentor.perfilPublico?.sobre ? `<p>${escapeHtml(mentor.perfilPublico.sobre)}</p>` : ''}`, [{ label: 'Agendar conversa', primary: true, action: 'schedule' }, { label: 'Fechar' }]);
+      actions.querySelector('[data-action="schedule"]')?.addEventListener('click', () => openSchedule(mentor.id)); return;
     }
     const showAll = event.target.closest('[data-show-all]');
     if (showAll) {
       const type = showAll.dataset.showAll;
       if (type === 'mentors') {
         const favorites = state.favorites || [];
-        const cards = [...document.querySelectorAll('.mentor-card')];
-        openDialog(favorites.length ? 'Mentores e favoritos' : 'Nossos mentores', `<p>${cards.map((card) => `${escapeHtml(card.querySelector('.item-title').textContent)} — ${escapeHtml(card.querySelector('.item-text').textContent)}${favorites.includes(card.querySelector('.item-title').textContent.trim()) ? ' · Favorito' : ''}`).join('<br>')}</p><p>Os mentores disponíveis nesta demonstração aparecem acima. Use o coração para guardar seus favoritos.</p>`);
+        const mentors = LJ.profissionais();
+        openDialog(favorites.length ? 'Mentores e favoritos' : 'Nossos mentores', mentors.length ? `<p>${mentors.map((mentor) => `${escapeHtml(LJ.nomeCompleto(mentor))} — ${escapeHtml(mentor.profissional?.area || 'Profissional')}${favorites.includes(mentor.id) ? ' · Favorito' : ''}`).join('<br>')}</p><p>Use o coração para guardar seus favoritos.</p>` : '<p>Ainda não há mentores cadastrados. Quando profissionais criarem a conta no Love Journey, eles aparecem aqui.</p>');
       } else {
         openDialog('Recursos e conteúdos', `<div class="support-resource-list">${[...document.querySelectorAll('.resource-card')].map((card) => `<p><strong>${escapeHtml(card.querySelector('.item-title').textContent.trim())}</strong> · ${escapeHtml(card.querySelector('.resource-type').textContent.trim())}</p>`).join('')}</div><p>Selecione um conteúdo na página para abrir um resumo e uma sugestão prática.</p>`);
       }
@@ -118,15 +122,71 @@
     openDialog('Novo contato de apoio', '<p>Adicione alguém de confiança para encontrar essas informações facilmente quando precisar.</p><label class="support-label">Nome<input name="name" required maxlength="80" placeholder="Nome da pessoa"></label><label class="support-label">Relação<select name="relation"><option>Amigo(a)</option><option>Familiar</option><option>Profissional</option><option>Outro</option></select></label><label class="support-label">Telefone (opcional)<input name="phone" type="tel" maxlength="30" placeholder="(00) 00000-0000"></label><label class="support-label">Observação (opcional)<textarea name="note" rows="2" maxlength="180" placeholder="Quando ou como essa pessoa pode ajudar"></textarea></label>', [{ label: 'Salvar contato', primary: true, action: 'save-contact' }, { label: 'Cancelar' }]);
     actions.querySelector('[data-action="save-contact"]').addEventListener('click', (event) => { event.preventDefault(); const form = dialog.querySelector('form'); if (form.reportValidity()) addContact(new FormData(form)); });
   }
-  function openSchedule(mentor = '') {
-    openDialog('Pedir uma conversa', `<p>Registre um pedido de conversa${mentor ? ` com <strong>${escapeHtml(mentor)}</strong>` : ' com um mentor'}. O pedido fica salvo neste dispositivo para você testar o fluxo.</p><label class="support-label">Mentor<select name="mentor">${[...document.querySelectorAll('.mentor-card .item-title')].map((el) => `<option ${el.textContent.trim() === mentor ? 'selected' : ''}>${escapeHtml(el.textContent.trim())}</option>`).join('')}</select></label><label class="support-label">Formato<select name="format"><option>Online</option><option>Presencial</option></select></label><label class="support-label">Melhor período<select name="period"><option>Manhã</option><option>Tarde</option><option>Noite</option></select></label><label class="support-label">O que gostaria de conversar? (opcional)<textarea name="topic" rows="3" maxlength="300" placeholder="Conte um pouco, se se sentir à vontade"></textarea></label>`, [{ label: 'Registrar pedido', primary: true, action: 'save-schedule' }, { label: 'Cancelar' }]);
+  function openSchedule(mentorId = '') {
+    const mentors = LJ.profissionais().filter((mentor) => !requestTo(mentor.id));
+    if (!mentors.length) {
+      openDialog('Pedir uma conversa', LJ.profissionais().length ? '<p>Você já enviou pedidos para todos os mentores disponíveis. Aguarde o retorno.</p>' : '<p>Ainda não há mentores cadastrados. Quando profissionais criarem a conta no Love Journey, você poderá pedir uma conversa por aqui.</p>', [{ label: 'Entendi', primary: true }]);
+      return;
+    }
+    const chosen = mentors.find((mentor) => mentor.id === mentorId);
+    openDialog('Pedir uma conversa', `<p>Envie um pedido de conversa${chosen ? ` para <strong>${escapeHtml(LJ.nomeCompleto(chosen))}</strong>` : ' para um mentor'}. O profissional verá o pedido na área de usuários.</p><label class="support-label">Mentor<select name="mentor">${mentors.map((mentor) => `<option value="${escapeHtml(mentor.id)}" ${mentor.id === mentorId ? 'selected' : ''}>${escapeHtml(LJ.nomeCompleto(mentor))}</option>`).join('')}</select></label><label class="support-label">Formato<select name="format"><option>Online</option><option>Presencial</option></select></label><label class="support-label">Melhor período<select name="period"><option>Manhã</option><option>Tarde</option><option>Noite</option></select></label><label class="support-label">O que gostaria de conversar? (opcional)<textarea name="topic" rows="3" maxlength="300" placeholder="Conte um pouco, se se sentir à vontade"></textarea></label>`, [{ label: 'Enviar pedido', primary: true, action: 'save-schedule' }, { label: 'Cancelar' }]);
     actions.querySelector('[data-action="save-schedule"]').addEventListener('click', (event) => {
       event.preventDefault(); const form = dialog.querySelector('form');
       const data = Object.fromEntries(new FormData(form));
-      state.requests = state.requests || []; state.requests.push({ ...data, date: new Date().toISOString() }); saveState();
-      openDialog('Pedido registrado', `<p>Seu pedido de conversa com <strong>${escapeHtml(data.mentor)}</strong> foi salvo nesta demonstração.</p><p>Formato: ${escapeHtml(data.format)} · Período: ${escapeHtml(data.period)}.</p>`);
+      LJ.criarPedido({ paraContaId: data.mentor, formato: data.format, periodo: data.period, mensagem: data.topic });
+      const mentor = LJ.conta(data.mentor);
+      openDialog('Pedido enviado', `<p>Seu pedido de conversa com <strong>${escapeHtml(LJ.nomeCompleto(mentor))}</strong> foi enviado.</p><p>Formato: ${escapeHtml(data.format)} · Período: ${escapeHtml(data.period)}.</p>`);
+      renderMentors();
     });
   }
+
+  // Conversa com o mentor: as mensagens ficam no mesmo lugar que o profissional lê.
+  function openConversation(mentor, request) {
+    const thread = LJ.mensagens(request.id);
+    const time = (value) => new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date(value));
+    const rows = thread.map((message) => `<div class="support-prompt"><strong>${message.autorId === conta.id ? 'Você' : escapeHtml(LJ.nomeCompleto(mentor))} · ${time(message.em)}</strong><p>${escapeHtml(message.texto)}</p></div>`).join('');
+    const status = request.status === 'aceito' ? 'Atendimento iniciado.' : 'Pedido enviado. Aguardando a resposta do profissional.';
+    openDialog(`Conversa com ${LJ.nomeCompleto(mentor)}`, `<p>${status}</p>${rows || '<p>Ainda não há mensagens nesta conversa.</p>'}<label class="support-label">Sua mensagem<textarea name="reply" rows="3" maxlength="1000" placeholder="Escreva para o profissional..."></textarea></label>`, [{ label: 'Enviar', primary: true, action: 'send-reply' }, { label: 'Fechar' }]);
+    actions.querySelector('[data-action="send-reply"]').addEventListener('click', () => {
+      const field = content.querySelector('[name="reply"]');
+      const text = field.value.trim();
+      if (!text) { field.focus(); return; }
+      LJ.enviarMensagem(request.id, text);
+      openConversation(mentor, LJ.pedidos().find((item) => item.id === request.id) || request);
+    });
+  }
+
+  // Mentores = profissionais com conta no Love Journey.
+  const requestTo = (mentorId) => LJ.pedidos().find((item) => item.deContaId === conta.id && item.paraContaId === mentorId);
+  function renderMentors() {
+    const grid = document.querySelector('.mentors-grid');
+    if (!grid) return;
+    const favorites = state.favorites || [];
+    const mentors = LJ.profissionais();
+    grid.replaceChildren();
+    if (!mentors.length) {
+      grid.innerHTML = '<div class="lj-vazio" style="grid-column: 1 / -1"><strong>Nenhum mentor por aqui ainda.</strong>Quando profissionais criarem a conta no Love Journey, eles aparecem aqui para você pedir uma conversa.</div>';
+      return;
+    }
+    mentors.slice(0, 3).forEach((mentor) => {
+      const name = LJ.nomeCompleto(mentor);
+      const isFavorite = favorites.includes(mentor.id);
+      const card = document.createElement('article');
+      card.className = 'mentor-card theme-pink-light';
+      card.dataset.mentorId = mentor.id;
+      card.innerHTML = `<button class="favorite${isFavorite ? ' is-favorite' : ''}" type="button" aria-pressed="${isFavorite}"><i aria-hidden="true" class="fa-solid fa-heart"></i></button><img class="avatar-md" alt=""><h4 class="item-title"></h4><p class="item-text"></p><small class="mentor-focus"></small><button class="btn btn-secondary btn-sm btn-block" type="button" data-mentor-profile>Ver perfil</button>`;
+      card.querySelector('.favorite').setAttribute('aria-label', `Favoritar ${name}`);
+      card.querySelector('img').src = mentor.perfilPublico?.foto || LJ.avatar(name, '#b39ddb');
+      card.querySelector('img').alt = `Mentor(a) ${name}`;
+      card.querySelector('.item-title').textContent = name;
+      card.querySelector('.item-text').textContent = mentor.profissional?.area || 'Profissional';
+      const request = requestTo(mentor.id);
+      card.querySelector('.mentor-focus').textContent = request ? (request.status === 'aceito' ? 'Em conversa' : 'Pedido enviado') : (mentor.perfilPublico?.especialidades?.split(',')[0]?.trim() || 'Relacionamentos');
+      if (request) card.querySelector('[data-mentor-profile]').textContent = 'Ver conversa';
+      grid.append(card);
+    });
+  }
+  renderMentors();
   function showResource(card) {
     const title = card.querySelector('.item-title').textContent.trim();
     const resource = resourceContent[title] || { summary: 'Um material para apoiar conversas mais cuidadosas e o autoconhecimento.', prompt: 'Que pequeno passo posso experimentar hoje?' };

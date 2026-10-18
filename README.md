@@ -44,7 +44,24 @@ Imagens compartilhadas ficam em `assets/imgs/`.
 
 ## Dados
 
-O projeto não usa backend nem banco de dados. Login e cadastro são simulados, e diários, emoções, desafios, comunidade e conversas com a IA ficam salvos no `localStorage` do navegador.
+O projeto não usa backend nem banco de dados. Tudo fica salvo no `localStorage` do navegador.
+
+Nesta branch (`site-zerado`) o sistema começa **sem nenhum dado**:
+
+- O cadastro cria uma conta de verdade no navegador (a senha é guardada só como hash) e o login confere e-mail e senha.
+- Cada conta tem seus próprios diários, emoções, desafios e conversas com a IA.
+- No primeiro acesso do casal, um modal pergunta o nome do(a) parceiro(a), como cada um prefere ser tratado e desde quando estão juntos.
+- Profissionais cadastrados aparecem como mentores para os casais. O pedido de conversa feito pelo casal chega em "Usuários" do profissional, e os dois conversam por ali e pela página de Apoio.
+- A comunidade é compartilhada entre os profissionais cadastrados no mesmo navegador.
+
+### Testar do zero
+
+1. `node server.mjs` e abra `http://127.0.0.1:4173`.
+2. Cadastre um profissional (Sou Profissional) e preencha os dados profissionais.
+3. Volte para `boas-vindas.html` e cadastre um casal (Sou Cliente) com outro e-mail. Para trocar de conta, basta entrar pela tela de login. As duas contas precisam estar **no mesmo navegador** (aba anônima não compartilha os dados).
+4. Para recomeçar, limpe os dados do site no navegador (DevTools → Application → Clear site data).
+
+A versão com dados de exemplo para demonstração fica na branch `preparacao-apresentacao`.
 
 ## Diário com IA (Gemini)
 
