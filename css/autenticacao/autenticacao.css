@@ -1,32 +1,4 @@
-:root {
-  --rosa: #F0808C;
-  --rosa-escuro: #E06070;
-
-  --verde: #4CAF77;
-  --verde-escuro: #3D8F60;
-
-  --amarelo: #F2C94C;
-
-  --roxo-texto: #6B3F5C;
-
-  --texto-escuro: #2E2A3A;
-  --texto-cinza: #6B7280;
-
-  --borda: #E2E2E2;
-
-  --branco: #FFFFFF;
-
-  --fonte-titulo:
-    'Baloo 2',
-    'Comic Sans MS',
-    cursive,
-    sans-serif;
-
-  --fonte-texto:
-    'Poppins',
-    Arial,
-    sans-serif;
-}
+/* Cores e fontes: css/base.css */
 
 * {
   margin: 0;

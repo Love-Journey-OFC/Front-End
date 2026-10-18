@@ -12,39 +12,7 @@
    1. VARIÁVEIS DO TEMA E RESET
    ========================================================================== */
 
-:root {
-
-    /* Cores principais */
-    --primary-pink: #f25287;
-    --primary-hover: #d93d70;
-
-    --secondary-green: #48a982;
-    --secondary-hover: #3a8c6b;
-
-    --bg-sidebar: #fde8ed;
-    --bg-overlay: rgba(255, 255, 255, 0.45);
-
-    --card-bg: #ffffff;
-
-    --card-radius: 16px;
-    --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-
-    /* Cores de categorias / tags */
-    --color-pink: #f8a5c2;
-    --color-purple: #b39ddb;
-    --color-teal: #80cbc4;
-    --color-yellow: #ffe082;
-    --color-blue: #90caf9;
-    --color-orange: #ffcc80;
-
-    /* Textos */
-    --text-primary: #333333;
-    --text-muted: #777777;
-    --text-light: #666666;
-
-    /* Fonte */
-    --font-family: 'Poppins', sans-serif;
-}
+/* Cores e fontes: css/base.css · regras comuns da sidebar: css/sidebar.css */
 
 
 /* RESET */
@@ -146,14 +114,6 @@ input:focus-visible {
 
 /* NAVEGAÇÃO */
 
-.sidebar-nav ul {
-    list-style: none;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 8px;
-}
 
 .sidebar-nav li {
     list-style: none;
@@ -197,17 +157,7 @@ input:focus-visible {
     transform: scale(1.05);
 }
 
-.nav-link:hover {
-    background-color: rgba(242, 82, 135, 0.1);
-}
 
-.nav-link.active {
-    background-color: var(--primary-pink);
-
-    color: #ffffff;
-
-    box-shadow: 0 4px 12px rgba(242, 82, 135, 0.3);
-}
 
 .nav-link.active .icon {
     color: currentColor;
@@ -228,21 +178,7 @@ input:focus-visible {
     margin-top: auto;
 }
 
-.sidebar-footer-card h3 {
-    color: var(--primary-pink);
 
-    font-size: 1rem;
-
-    margin-bottom: 8px;
-}
-
-.sidebar-footer-card p {
-    font-size: 0.82rem;
-
-    color: #881337;
-
-    line-height: 1.4;
-}
 
 
 /* CONTEÚDO PRINCIPAL */
