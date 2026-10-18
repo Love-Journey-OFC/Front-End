@@ -1,0 +1,18 @@
+name: Verificação
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Sintaxe, links e chaves
+        run: node scripts/verificar.mjs
+      - name: Build do Cloudflare Pages
+        run: node scripts/build-pages.mjs
