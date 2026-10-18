@@ -49,7 +49,8 @@
     const postAuthor = post => post.querySelector('.post-author strong')?.textContent.trim() || '';
     const updateCounts = post => {
       const like = post.querySelector('.post-like'); const commentButton = post.querySelector('.post-comment');
-      const commentsCount = (post.querySelectorAll('.comments .comment').length);
+      // Total exibido no card + comentários salvos neste dispositivo.
+      const commentsCount = Number(post.dataset.baseComments || 0) + (comments[post.dataset.postId]?.length || 0);
       if (commentButton) commentButton.innerHTML = `<i aria-hidden="true" class="fa-solid fa-comment"></i> ${commentsCount}`;
       if (like) like.setAttribute('aria-pressed', activity.likes.includes(post.dataset.postId));
     };
@@ -57,7 +58,7 @@
       if (post.querySelector('.post-like')) { updateCounts(post); return; }
       const stats = post.querySelector('.post-stats'); if (!stats) return;
       const spans = [...stats.querySelectorAll('span')];
-      const likes = Number(spans[0]?.textContent.match(/\d+/)?.[0] || 0);
+      const likes = Number(spans[0]?.textContent.match(/\d+/)?.[0] || 0) + (activity.likes.includes(post.dataset.postId) ? 1 : 0);
       const existingComments = Number(spans[1]?.textContent.match(/\d+/)?.[0] || post.querySelectorAll('.comments .comment').length);
       stats.innerHTML = `<button type="button" class="post-like" aria-label="Curtir publicação" aria-pressed="false"><i aria-hidden="true" class="fa-solid fa-heart"></i> <span>${likes}</span></button><button type="button" class="post-comment" aria-label="Ir para comentários"><i aria-hidden="true" class="fa-solid fa-comment"></i> <span>${existingComments}</span></button>`;
       post.dataset.baseComments = String(existingComments);
@@ -73,7 +74,7 @@
     };
     const renderComments = post => {
       const area = post.querySelector('.comments'); if (!area) return;
-      (comments[post.dataset.postId] || []).forEach(comment => area.insertBefore(buildComment(comment), area.querySelector('.comment-input-wrap') || area.querySelector('.comment-input'));
+      (comments[post.dataset.postId] || []).forEach(comment => area.insertBefore(buildComment(comment), area.querySelector('.comment-input-wrap') || area.querySelector('.comment-input')));
       updateCounts(post);
     };
 
