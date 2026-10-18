@@ -27,7 +27,8 @@ Enquanto o sistema estiver perto de uma apresentação, valem estas regras extra
 ## Durante a edição
 
 - Use `Edit` com trechos pequenos. Nunca reescreva um arquivo inteiro com `Write`.
-- CSS: use as variáveis do `:root` do próprio arquivo (`--primary-pink`, `--secondary-green`, `--font-family`, `--card-radius`...). Não traga tokens de outro arquivo nem valores novos. Sem `!important`.
+- CSS: use as variáveis de `css/base.css` do conjunto da página (internas: `--primary-pink`, `--secondary-green`, `--font-family`...; acesso: `--rosa`, `--verde`, `--fonte-texto`...; landing: `--pink`, `--green`...). Não misture conjuntos nem crie valores novos. Sem `!important`.
+- Para refatorar CSS sem mudar a aparência, compare o estilo calculado de cada elemento antes e depois (`getComputedStyle` + `getBoundingClientRect`, ignorando variáveis `--*` e elementos em animação).
 - Classe nova só se nenhuma existente servir; copie o visual de um componente que já existe na mesma página.
 - Responsividade: se tocar em layout, confira os `@media` do arquivo (os mais usados: 1200, 900, 768, 600, 480 px) e ajuste em todos os pontos necessários.
 - Sem emojis na interface. Ícones são Font Awesome (`<i class="fa-solid fa-..."></i>`), já carregado em todas as páginas.
@@ -43,5 +44,5 @@ Enquanto o sistema estiver perto de uma apresentação, valem estas regras extra
 
 - A correção parece exigir reescrever uma seção inteira.
 - Duas páginas mostram o mesmo componente com estilos diferentes e você quer "padronizar".
-- Você quer unificar cores ou fontes (os tokens variam por arquivo de propósito).
+- Você quer igualar cores ou fontes entre telas (os conjuntos em `css/base.css` têm valores diferentes por decisão da equipe).
 - Você quer apagar arquivo que parece não usado.

@@ -114,11 +114,13 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 - **Onde:** `acesso.html`, `comprovantes.html`, `esqueci-senha.html`, `css/auth.css`, `css/comprovantes.css`, `css/esqueci-senha.css`, `js/script.js`, `js/comprovantes.js`, `js/esqueci-senha.js`
 - **Problema:** existe um segundo conjunto de telas de acesso que nenhuma página do fluxo atual usa. `acesso.html` e `esqueci-senha.html` não recebem links; `comprovantes.html` só é citado por `js/cadastro.js`, que também não é usado.
 - **Próximo passo:** confirmar com a equipe e remover, ou documentar se alguma tela ainda for necessária.
+- **Status: resolvido em 18/10/2026.** `acesso.html`, `comprovantes.html`, `esqueci-senha.html` e seus CSS/JS removidos após confirmar que nenhuma página do fluxo atual os referenciava.
 
 ### BL-16 · Arquivos sem uso
 - **Onde:** `css/cadastro.css`, `css/login.css`, `css/senha-redefinida.css`, `js/cadastro.js`, `js/login.js` (`js/teste.js` já removido em BL-10)
 - **Problema:** nenhum HTML referencia esses arquivos. Aumentam o risco de editar o arquivo errado.
 - **Próximo passo:** remover junto com BL-15.
+- **Status: resolvido em 18/10/2026.** Arquivos sem uso removidos junto com BL-15.
 
 ### BL-17 · Página de política de privacidade e termos
 - **Onde:** `cadastro.html:161`
@@ -130,6 +132,7 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 - **Onde:** 9 páginas internas e seus CSS
 - **Problema:** cada página repete o markup da sidebar e declara o próprio `:root`. Qualquer ajuste precisa ser replicado à mão, o que gera divergências.
 - **Próximo passo:** extrair um CSS base (tokens + sidebar) e, se fizer sentido, injetar a sidebar via JS ou template, sem mudar o visual. Refatoração: só depois da apresentação.
+- **Status: resolvido em 18/10/2026.** Todas as cores e fontes foram para `css/base.css` (três conjuntos: páginas internas, fluxo de acesso e landing, com os mesmos valores de antes). As 5 regras da sidebar idênticas nas 9 páginas internas foram para `css/sidebar.css`; as que variam por página ficaram onde estavam. Verificado comparando o estilo calculado e a posição de todos os elementos das 16 páginas antes e depois: nenhuma diferença.
 
 ### BL-19 · Paleta e tipografia divergentes da identidade
 - **Onde:** CSS das páginas internas, `css/index.css`, `css/autenticacao/autenticacao.css`
@@ -146,20 +149,29 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 ### BL-21 · Testes e verificação automatizados
 - **Problema:** não há testes nem lint. Hoje existe apenas o verificador de links (`node .claude/skills/lj-navegacao/scripts/verificar-links.mjs`).
 - **Próximo passo:** adicionar `node --check` dos scripts e o verificador de links em um passo de CI. Avaliar testes de ponta a ponta (ex.: Playwright) do roteiro principal.
+- **Status: resolvido em 18/10/2026.** `scripts/verificar.mjs` confere a sintaxe de todos os scripts, links/imagens/redirecionamentos e se há chave de API no front-end. Roda no GitHub Actions (`.github/workflows/verificacao.yml`) a cada push e pull request, junto com o build do Cloudflare. Testes de ponta a ponta (ex.: Playwright) ficam para quando houver necessidade.
 
 ### BL-22 · Revisão de acessibilidade
 - **Problema:** não houve revisão sistemática de contraste, foco visível, navegação por teclado nos modais (`<dialog>`) e textos alternativos das imagens de conteúdo.
 - **Próximo passo:** auditoria com Lighthouse/axe por página, corrigindo sem alterar o visual aprovado.
+- **Status: resolvido em 18/10/2026 (parte sem mudança visual).** Varredura das 16 páginas: imagens com `alt`, botões e links com texto acessível, campos com rótulo e modais nativos (`<dialog>`, que já tratam foco e tecla Esc). Corrigido: ícones da sidebar das 6 páginas do casal agora são `aria-hidden`, como nas demais. Contraste não foi alterado porque mudaria as cores.
 
 ### BL-23 · Página de Apoio com canais reais
 - **Onde:** `apoio.html`, `js/apoio.js`
 - **Problema:** conferir se os profissionais e recursos exibidos são exemplos ou reais e se há canais oficiais de ajuda (CVV 188, Ligue 180, SAMU 192, Polícia 190) com números verificados.
 - **Próximo passo:** validar o conteúdo com a PO (Beatriz).
+- **Status: parcialmente resolvido em 18/10/2026.** As respostas "O que fazer em conflitos?" e "Quando pedir ajuda profissional?" agora listam os canais gratuitos 24h (CVV 188, Central de Atendimento à Mulher 180, Disque 100, SAMU 192, Polícia 190), dentro do modal e no estilo que já existia. Falta a equipe decidir se os mentores (perfis de exemplo) continuam na versão final.
 
 ### BL-24 · Persistência e privacidade das conversas com a IA
 - **Onde:** `js/diario-com-ia.js`, `server.mjs`
 - **Problema:** o histórico fica em texto puro no `localStorage` e as mensagens vão para o Gemini. Falta deixar isso claro para o usuário e oferecer "apagar conversa".
 - **Próximo passo:** oferecer "apagar conversa" e um aviso curto na tela, alinhados com Design. O modal de privacidade do cadastro já explica o envio ao Gemini.
+
+### BL-25 · Modais abrindo no canto da tela
+- **Onde:** `css/diario-do-casal.css` (`.diary-detail-dialog`), `css/diario-com-ia.css` (`.ai-dialog`), `css/dashboard-emocoes.css` (`.emotion-dialog`), `css/apoio-psicologico.css` (`.support-dialog`), `css/dashboard-profissional.css` (modal de editar perfil)
+- **Problema:** o reset `* { margin: 0 }` de cada página anula a centralização nativa do `<dialog>`, e esses 5 modais abrem colados no canto superior esquerdo. Os outros modais do sistema já se centralizam com posicionamento próprio.
+- **Correção:** adicionar `margin: auto` na regra de cada um desses modais (o mesmo que o modal de privacidade do cadastro já usa).
+- **Atenção:** muda a posição dos modais na tela; aguarda aprovação.
 
 ---
 
@@ -169,5 +181,5 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 |---|---|
 | P0 | BL-01 a BL-05 |
 | P1 | BL-06 a BL-14 |
-| P2 | BL-15 a BL-24 |
+| P2 | BL-15 a BL-25 |
 | Descartados | BL-06, BL-07, BL-08, BL-09, BL-13, BL-19, BL-20 |

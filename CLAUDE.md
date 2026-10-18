@@ -55,18 +55,11 @@ Todas as páginas ficam na raiz. Cada página tem, em geral, **um CSS e um JS pr
 
 Fluxo: `index.html` → `boas-vindas.html` → `login.html`. Após o login, `js/autenticacao/login.js` redireciona para `dashboard-profissional.html` ou `dashboard-casal.html` conforme `localStorage.perfilEscolhido`. O perfil também trafega por `?perfil=cliente|profissional`.
 
-### Fluxo de acesso duplicado (legado)
-
-Existem dois conjuntos de autenticação:
-
-- **Atual**: `css/autenticacao/` + `js/autenticacao/` (usado por `boas-vindas`, `login`, `cadastro`, `cadastro-profissional`, `recuperar-senha`, `senha-redefinida`).
-- **Legado**: `css/auth.css`, `css/comprovantes.css`, `css/esqueci-senha.css` + `js/script.js`, `js/comprovantes.js`, `js/esqueci-senha.js` (usado por `acesso.html`, `comprovantes.html`, `esqueci-senha.html`, que não recebem links do fluxo atual).
-
-Ao mexer no acesso, edite o conjunto **atual**. Não remova o legado sem confirmar com a equipe.
+O fluxo de acesso usa `css/autenticacao/` + `js/autenticacao/`. Uma versão antiga duplicada (`acesso.html`, `comprovantes.html`, `esqueci-senha.html` e seus CSS/JS) foi removida em 18/10/2026.
 
 ## Sidebar e navegação
 
-A sidebar **não é um componente compartilhado**: o markup está copiado em cada página e o estilo em cada CSS. Estrutura:
+O markup da sidebar está **copiado em cada página**. No CSS, as regras idênticas em todas as páginas internas (`.sidebar-nav ul`, `.nav-link:hover`, `.nav-link.active`, `.sidebar-footer-card h3/p`) ficam em `css/sidebar.css`; o restante (largura, espaçamentos, responsividade) varia por página e continua no CSS de cada uma. Estrutura:
 
 ```html
 <aside class="sidebar">
@@ -91,16 +84,22 @@ A sidebar **não é um componente compartilhado**: o markup está copiado em cad
 - Tom: acolhedor, leve, seguro, jovem, sem ser infantil. Evite aparência de template gerado por IA: excesso de gradientes, sombras, cards desnecessários, ícones decorativos aleatórios, textos genéricos.
 - **Sem emojis na interface** (sidebar, navegação, cards, botões, títulos). Use Font Awesome ou SVG. O commit `7b98b6c` trocou todos os emojis por ícones; não os reintroduza. Exceção: conteúdo escrito pelo usuário.
 - Paleta de referência da marca: rosa `#F0808C` / `#E06070`, verde `#4CAF77` / `#3D8F60`, amarelo `#F2C94C`.
-- **Na prática**, os tokens variam por arquivo. As páginas internas usam `--primary-pink: #f25287`, `--secondary-green: #48a982`, `--bg-sidebar: #fde8ed` etc. (ver `:root` de `css/dashboard-casal.css`); a paleta de referência aparece no fluxo de autenticação. **Não unifique as cores por conta própria**: use os tokens do `:root` do arquivo que estiver editando e pergunte antes de qualquer padronização.
-- Tipografia: Poppins nas páginas internas (`--font-family`); Baloo 2 + Poppins no fluxo `css/autenticacao/` (`--fonte-titulo`, `--fonte-texto`); Nunito na landing e no CSS legado. Mantenha a fonte já usada na página.
+- **Todas as cores e fontes ficam em `css/base.css`**, carregado por todas as páginas, em três conjuntos com nomes próprios:
+  - páginas internas: `--primary-pink: #f25287`, `--secondary-green: #48a982`, `--bg-sidebar`, `--font-family` (Poppins) etc.;
+  - fluxo de acesso: `--rosa: #F0808C`, `--verde: #4CAF77`, `--fonte-titulo` (Baloo 2), `--fonte-texto` (Poppins) etc.;
+  - landing: `--pink`, `--green`, `--yellow` etc. (fonte Nunito).
+- Os valores diferem entre os conjuntos **por decisão da equipe**: não iguale as cores entre telas. Para mudar uma cor, altere em `css/base.css`.
+- O Diário com IA redefine alguns tokens no próprio `:root` (`--card-radius`, `--card-shadow`, `--purple-text`, `--dark-pink`, `--border-pink`).
 
 ## CSS
 
-- Não existe `base.css` nem folha global. Cada página declara seu próprio `:root` e repete os estilos da sidebar. Antes de criar estilo novo, procure no CSS da página e nas páginas irmãs (ex.: o mesmo componente em outro dashboard).
-- Use as variáveis do `:root` do arquivo em vez de cores soltas.
+- Ordem de carregamento: `css/base.css` → `css/sidebar.css` (só páginas internas) → CSS da página. Página nova segue a mesma ordem.
+- Antes de criar estilo novo, procure no CSS da página e nas páginas irmãs (ex.: o mesmo componente em outro dashboard).
+- Use as variáveis de `css/base.css` em vez de cores soltas. Use o conjunto da área da página (interna, acesso ou landing).
+- Só leve uma regra para `css/sidebar.css` se ela for idêntica em todas as páginas internas; regra que varia fica na página.
+- Cada CSS de página zera margens com `* { margin: 0 }`. Isso desfaz a centralização nativa do `<dialog>`: todo modal novo precisa de `margin: auto` (ou posicionamento explícito).
 - Evite `!important` e sobrescrever estilos sem entender a origem.
 - Responsividade: confira desktop, tablet e celular. Não corrija o desktop quebrando o mobile.
-- Extrair um CSS compartilhado (sidebar, tokens) é uma melhoria desejável, mas é uma refatoração: só faça quando pedido.
 
 ## JavaScript
 
@@ -147,10 +146,9 @@ Não corrija por conta própria sem ser pedido, mas leve em conta e mencione qua
 
 A lista completa e o status de cada item ficam em `docs/backlog.md`. Principais:
 
-- Arquivos sem referência em nenhum HTML: `css/cadastro.css`, `css/login.css`, `css/senha-redefinida.css`, `js/cadastro.js`, `js/login.js`.
-- Fluxo de acesso legado duplicado (ver acima). Sidebar e tokens duplicados em todos os CSS.
+- 5 modais abrem no canto superior esquerdo em vez de centralizados (ver BL-25 no backlog).
 - A política de privacidade do cadastro (modal em `cadastro.html`) é uma versão preliminar e precisa de revisão da equipe.
-- `acesso.html`, `comprovantes.html` e `esqueci-senha.html` não recebem links do fluxo atual.
+- Os mentores da página de Apoio são perfis de exemplo.
 
 ## Skills do projeto
 
@@ -158,6 +156,8 @@ Em `.claude/skills/`. Use a que se aplica antes de começar:
 
 - `lj-alteracao-segura`: **sempre**, antes de editar qualquer arquivo. Inclui o modo congelado para apresentações.
 - `lj-navegacao`: links, sidebar, redirecionamentos. Tem o verificador `node .claude/skills/lj-navegacao/scripts/verificar-links.mjs`.
+
+Verificação completa (sintaxe, links e chaves no front-end), a mesma do GitHub Actions: `node scripts/verificar.mjs`.
 - `lj-funcionalidade-local`: interatividade com JS + `localStorage`, modais, formulários.
 - `lj-diario-ia`: Diário com IA, `lib/chat.mjs`, `server.mjs`, Function do Cloudflare, prompt do Gemini, novas APIs.
 - `lj-conteudo-acolhedor`: textos visíveis e temas sensíveis.

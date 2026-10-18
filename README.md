@@ -38,7 +38,7 @@ As páginas também abrem direto pelo arquivo ou em outro servidor estático, ma
 
 Fluxo de entrada: `index.html` → `boas-vindas.html` → `login.html` → `dashboard-casal.html` ou `dashboard-profissional.html`, conforme o perfil escolhido.
 
-Os arquivos `acesso.html`, `comprovantes.html`, `esqueci-senha.html`, `css/auth.css` e os demais CSS/JS soltos na raiz de `css/` e `js/` sem par na tabela pertencem a uma versão anterior do fluxo de acesso (ver `docs/backlog.md`).
+Todas as páginas carregam `css/base.css` (cores e fontes compartilhadas). As páginas internas também carregam `css/sidebar.css` (regras da sidebar comuns a todas elas).
 
 Imagens compartilhadas ficam em `assets/imgs/`.
 
@@ -74,4 +74,4 @@ O build publica apenas as páginas, `assets/`, `css/` e `js/`. A pasta `function
 
 - `CLAUDE.md`: regras do projeto, identidade visual e mapa técnico.
 - `docs/backlog.md`: pendências priorizadas.
-- `node .claude/skills/lj-navegacao/scripts/verificar-links.mjs`: confere links, imagens e redirecionamentos de todas as páginas.
+- `node scripts/verificar.mjs`: confere a sintaxe dos scripts, links, imagens e redirecionamentos, e se há chave de API no front-end. Roda também no GitHub Actions a cada push e pull request.

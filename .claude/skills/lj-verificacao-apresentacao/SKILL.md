@@ -22,10 +22,10 @@ git diff
 ## 2. Links e navegação
 
 ```bash
-node .claude/skills/lj-navegacao/scripts/verificar-links.mjs
+node scripts/verificar.mjs
 ```
 
-Zero erros. Os avisos conhecidos (fluxo legado, Diário com IA marcando "Diários") podem permanecer.
+Deve terminar com "Tudo certo." (sintaxe, links e chaves). O aviso do Diário com IA marcando "Diários" na sidebar é esperado.
 
 ## 3. Servidor e IA
 

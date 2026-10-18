@@ -67,4 +67,4 @@ Fluxo de entrada: `index.html` → `boas-vindas.html` → `login.html` → (JS) 
 ## Pontos conhecidos
 
 - `diario-com-ia.html` não tem item próprio na sidebar; é acessado por `diario-do-casal.html`.
-- `acesso.html`, `comprovantes.html` e `esqueci-senha.html` são do fluxo legado e não recebem links do fluxo atual. O verificador vai avisar; não é erro a corrigir sem pedido.
+- O CSS comum da sidebar fica em `css/sidebar.css`; o que varia por página continua no CSS da página.
