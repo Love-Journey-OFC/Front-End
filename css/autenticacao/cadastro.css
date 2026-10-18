@@ -197,6 +197,81 @@ body.corpo-cadastro {
   margin-bottom: 12px;
 }
 
+/* Modal da política de privacidade (mesma estrutura do modal de detalhes do diário) */
+.privacidade-dialog {
+  border: 0;
+  border-radius: 18px;
+  padding: 0;
+  width: min(600px, calc(100% - 28px));
+  max-height: 88vh;
+  margin: auto;
+  color: var(--texto-escuro);
+  box-shadow: 0 20px 70px rgba(37, 20, 53, 0.28);
+}
+
+.privacidade-dialog::backdrop {
+  background: rgba(36, 24, 51, 0.58);
+  backdrop-filter: blur(3px);
+}
+
+.privacidade-card {
+  padding: 24px;
+  max-height: 88vh;
+  overflow: auto;
+  font-family: var(--fonte-texto);
+}
+
+.privacidade-card header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.privacidade-kicker {
+  color: var(--rosa-escuro);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.privacidade-card h2 {
+  font-family: var(--fonte-titulo);
+  color: var(--roxo-texto);
+  font-size: 1.5rem;
+}
+
+.privacidade-card header button {
+  border: 0;
+  color: var(--texto-cinza);
+  background: transparent;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.privacidade-conteudo h3 {
+  margin: 16px 0 4px;
+  font-size: 0.9rem;
+  color: var(--texto-escuro);
+}
+
+.privacidade-conteudo p {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--texto-cinza);
+}
+
+.privacidade-conteudo a {
+  color: var(--verde-escuro);
+  font-weight: 600;
+}
+
+.privacidade-card footer {
+  margin-top: 22px;
+}
+
 .btn-google {
   display: flex;
   align-items: center;

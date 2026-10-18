@@ -158,7 +158,13 @@
 
             <span>
               Aceitar termos e condições
-              <a href="#"> política de privacidade </a>
+              <a
+                href="#politica-privacidade"
+                id="abrir-privacidade"
+                aria-haspopup="dialog"
+              >
+                política de privacidade
+              </a>
             </span>
           </label>
 
@@ -215,6 +221,81 @@
         </div>
       </div>
     </div>
+
+    <!-- Política de privacidade (versão preliminar) -->
+    <dialog
+      id="politica-privacidade"
+      class="privacidade-dialog"
+      aria-labelledby="privacidade-titulo"
+    >
+      <div class="privacidade-card">
+        <header>
+          <div>
+            <p class="privacidade-kicker">LOVE JOURNEY · VERSÃO PRELIMINAR</p>
+            <h2 id="privacidade-titulo">Política de privacidade</h2>
+          </div>
+
+          <button type="button" data-fechar-privacidade aria-label="Fechar">
+            &times;
+          </button>
+        </header>
+
+        <div class="privacidade-conteudo">
+          <p>
+            O Love Journey é um espaço para você se conhecer e cuidar das suas
+            relações. Por isso, levamos a sério o que você compartilha aqui.
+          </p>
+
+          <h3>O que coletamos</h3>
+          <p>
+            Os dados do cadastro (nome, e-mail e, para profissionais, CNPJ e
+            documentos) e o que você registra na plataforma, como diários,
+            emoções e desafios.
+          </p>
+
+          <h3>Onde seus dados ficam</h3>
+          <p>
+            Nesta versão, seus registros ficam salvos no próprio navegador do
+            seu dispositivo. Se você limpar os dados do navegador, eles serão
+            apagados.
+          </p>
+
+          <h3>Diário com IA</h3>
+          <p>
+            As mensagens que você escreve no Diário com IA são enviadas a um
+            serviço de inteligência artificial do Google (Gemini) apenas para
+            gerar as respostas. Evite incluir nomes, endereços ou outros dados
+            que identifiquem você ou outras pessoas.
+          </p>
+
+          <h3>O que não fazemos</h3>
+          <p>
+            Não vendemos seus dados e não usamos o que você escreve para
+            publicidade. A IA não substitui o acompanhamento de um profissional
+            de saúde.
+          </p>
+
+          <h3>Menores de 18 anos</h3>
+          <p>
+            Se você tem menos de 18 anos, converse com seu responsável antes de
+            criar sua conta.
+          </p>
+
+          <h3>Seus direitos</h3>
+          <p>
+            Você pode pedir acesso, correção ou exclusão dos seus dados, conforme
+            a Lei Geral de Proteção de Dados (LGPD), pelo e-mail
+            <a href="mailto:contato@lovejourney.com.br">contato@lovejourney.com.br</a>.
+          </p>
+        </div>
+
+        <footer>
+          <button type="button" class="btn btn-rosa" data-fechar-privacidade>
+            Entendi
+          </button>
+        </footer>
+      </div>
+    </dialog>
 
     <script src="./js/autenticacao/cadastro.js"></script>
   </body>
