@@ -5,7 +5,7 @@ description: Use ao adicionar ou corrigir interatividade nas páginas do Love Jo
 
 # Funcionalidades no front-end (JS + localStorage)
 
-Ainda não há backend de dados: o estado é salvo no `localStorage`. As funcionalidades devem usar **o HTML e o CSS que já existem**; o JS só dá vida ao que está na tela.
+O projeto não terá backend nem banco de dados (decisão da equipe): todo estado é salvo no `localStorage`. Não proponha APIs de dados, autenticação real ou Supabase. As funcionalidades devem usar **o HTML e o CSS que já existem**; o JS só dá vida ao que está na tela.
 
 ## Onde fica cada coisa
 

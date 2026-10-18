@@ -44,7 +44,7 @@ Imagens compartilhadas ficam em `assets/imgs/`.
 
 ## Dados
 
-Ainda não há backend de dados. Login e cadastro são simulados, e diários, emoções, desafios, comunidade e conversas com a IA ficam salvos no `localStorage` do navegador.
+O projeto não usa backend nem banco de dados. Login e cadastro são simulados, e diários, emoções, desafios, comunidade e conversas com a IA ficam salvos no `localStorage` do navegador.
 
 ## Diário com IA (Gemini)
 

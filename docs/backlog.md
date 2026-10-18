@@ -2,6 +2,8 @@
 
 Pendências levantadas na análise do repositório em 18/10/2026 (branch `main`, commit `c5bbae5`).
 
+Escopo: o Love Journey é um front-end sem backend nem banco de dados. Os dados ficam no `localStorage`; o único serviço no servidor é o proxy do Diário com IA.
+
 Prioridades:
 
 - **P0**: corrigir antes da apresentação ao cliente. Correções pequenas que **não mudam a aparência**.
@@ -55,20 +57,24 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 - **Onde:** `js/autenticacao/login.js:333` (`// SIMULAÇÃO`), `js/autenticacao/cadastro.js`, `js/autenticacao/esqueci-senha.js`
 - **Problema:** qualquer e-mail e senha válidos no formato entram no sistema. O perfil (casal ou profissional) vem só de `localStorage.perfilEscolhido`. A recuperação de senha também não envia e-mail.
 - **Próximo passo:** definir o backend de autenticação (ex.: Supabase Auth ou API própria), com sessão e proteção das páginas internas.
+- **Status: descartado em 18/10/2026.** Fora do escopo: o projeto não terá backend nem banco de dados; login e dados continuam simulados no navegador.
 
 ### BL-07 · Não existe "Sair" (logout)
 - **Onde:** todas as páginas internas
 - **Problema:** não há opção de encerrar a sessão nem de trocar de perfil sem limpar o navegador.
 - **Próximo passo:** definir com Design onde a ação entra (ex.: `sidebar-footer-card`) antes de implementar, porque altera a interface.
+- **Status: descartado em 18/10/2026.** Decisão da equipe: não será feito.
 
 ### BL-08 · Páginas internas acessíveis sem login
 - **Onde:** dashboards, diários, apoio, comunidade
 - **Problema:** basta digitar a URL. Depende de BL-06.
+- **Status: descartado em 18/10/2026.** Fora do escopo: o projeto não terá backend nem banco de dados; login e dados continuam simulados no navegador.
 
 ### BL-09 · Dados apenas no navegador
 - **Onde:** todos os scripts de página
 - **Problema:** diários, emoções, desafios e conversas com a IA ficam só no `localStorage`. Somem ao limpar o navegador e não sincronizam entre dispositivos ou entre as duas pessoas do casal.
 - **Próximo passo:** modelar entidades (usuário, casal, registro de diário, emoção, desafio, conversa, profissional e vínculo) e migrar para um banco, mantendo a separação interface / lógica / dados.
+- **Status: descartado em 18/10/2026.** Fora do escopo: o projeto não terá backend nem banco de dados; login e dados continuam simulados no navegador.
 
 ### BL-10 · Arquivo de teste chama o Gemini pelo navegador
 - **Onde:** `js/teste.js`
@@ -92,6 +98,7 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 - **Onde:** sidebar do casal (6 páginas)
 - **Problema:** o acesso é só por `diario-do-casal.html`; dentro do Diário com IA, o item ativo é "Diários".
 - **Próximo passo:** decisão de produto/design. Adicionar item muda a sidebar em todas as páginas.
+- **Status: descartado em 18/10/2026.** Decisão da equipe: não será feito.
 
 ### BL-14 · README desatualizado
 - **Onde:** `README.md`
@@ -128,11 +135,13 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 - **Onde:** CSS das páginas internas, `css/index.css`, `css/autenticacao/autenticacao.css`
 - **Problema:** a identidade define rosa `#F0808C`/`#E06070`, verde `#4CAF77`/`#3D8F60`, amarelo `#F2C94C`, Baloo 2 + Poppins. As páginas internas usam `#f25287`/`#48a982` e Poppins; a landing usa Nunito; só o fluxo de autenticação segue a identidade.
 - **Próximo passo:** decisão de Design (Cibelly) sobre qual versão vale. **Não alterar sem aprovação**, porque muda a aparência.
+- **Status: descartado em 18/10/2026.** Decisão da equipe: as cores e fontes de cada tela permanecem como estão.
 
 ### BL-20 · Chave de armazenamento fora do padrão
 - **Onde:** `js/diario-do-casal.js` (`love-journey-diary-entries`)
 - **Problema:** as outras chaves usam `loveJourney.*`.
 - **Próximo passo:** padronizar só junto com a migração para o backend (BL-09), para não perder dados já salvos.
+- **Status: descartado em 18/10/2026.** Sem migração para backend, a chave fica como está para não perder dados salvos.
 
 ### BL-21 · Testes e verificação automatizados
 - **Problema:** não há testes nem lint. Hoje existe apenas o verificador de links (`node .claude/skills/lj-navegacao/scripts/verificar-links.mjs`).
@@ -150,7 +159,7 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 ### BL-24 · Persistência e privacidade das conversas com a IA
 - **Onde:** `js/diario-com-ia.js`, `server.mjs`
 - **Problema:** o histórico fica em texto puro no `localStorage` e as mensagens vão para o Gemini. Falta deixar isso claro para o usuário e oferecer "apagar conversa".
-- **Próximo passo:** texto de aviso na tela (alinhado com Design) e definição de retenção quando houver backend.
+- **Próximo passo:** oferecer "apagar conversa" e um aviso curto na tela, alinhados com Design. O modal de privacidade do cadastro já explica o envio ao Gemini.
 
 ---
 
@@ -161,3 +170,4 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 | P0 | BL-01 a BL-05 |
 | P1 | BL-06 a BL-14 |
 | P2 | BL-15 a BL-24 |
+| Descartados | BL-06, BL-07, BL-08, BL-09, BL-13, BL-19, BL-20 |

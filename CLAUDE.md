@@ -105,7 +105,7 @@ A sidebar **não é um componente compartilhado**: o markup está copiado em cad
 ## JavaScript
 
 - Scripts por página, sem módulos. Padrões comuns: IIFE ou `DOMContentLoaded`, `querySelector`, `<dialog>` criado em JS para modais, função `escapeHtml` antes de inserir texto do usuário via `innerHTML`.
-- **Persistência é `localStorage`** (não há backend de dados ainda), com chaves prefixadas `loveJourney.*`: `dashboardCasal`, `dashboardEmotions`, `desafiosCasal`, `diarioIA`, `forumCasal`, `apoio`, `profissional`, `comunidade.*`. Exceção: o diário do casal usa `love-journey-diary-entries` (não renomear, para não perder dados salvos). Ao criar estado novo, siga o prefixo e trate `JSON.parse` com `try/catch`.
+- **Persistência é `localStorage`, por decisão do projeto**: não haverá backend nem banco de dados. Não proponha nem implemente APIs de dados, autenticação real ou serviços como Supabase. O único código de servidor é o proxy do Diário com IA. As chaves usam o prefixo `loveJourney.*`: `dashboardCasal`, `dashboardEmotions`, `desafiosCasal`, `diarioIA`, `forumCasal`, `apoio`, `profissional`, `comunidade.*`. Exceção: o diário do casal usa `love-journey-diary-entries` (não renomear, para não perder dados salvos). Ao criar estado novo, siga o prefixo e trate `JSON.parse` com `try/catch`.
 - Sempre escape conteúdo do usuário antes de renderizar em HTML.
 - Funções pequenas, nomes claros, feedback ao usuário (status com `aria-live`, estados de loading, vazio e erro).
 
@@ -147,7 +147,6 @@ Não corrija por conta própria sem ser pedido, mas leve em conta e mencione qua
 
 A lista completa e o status de cada item ficam em `docs/backlog.md`. Principais:
 
-- Login e cadastro simulados, sem logout, sem backend de dados (tudo em `localStorage`).
 - Arquivos sem referência em nenhum HTML: `css/cadastro.css`, `css/login.css`, `css/senha-redefinida.css`, `js/cadastro.js`, `js/login.js`.
 - Fluxo de acesso legado duplicado (ver acima). Sidebar e tokens duplicados em todos os CSS.
 - A política de privacidade do cadastro (modal em `cadastro.html`) é uma versão preliminar e precisa de revisão da equipe.
