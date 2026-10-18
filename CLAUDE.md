@@ -30,7 +30,8 @@ node server.mjs   # http://127.0.0.1:4173
 ```
 
 - Copie `.env.example` para `.env` e preencha `GEMINI_API_KEY` (também lê `HOST` e `PORT` do ambiente). `.env` está no `.gitignore`.
-- A raiz `/` do servidor abre `diario-com-ia.html`, não `index.html`. Para a landing, acesse `/index.html`.
+- A raiz `/` do servidor abre `index.html` (landing).
+- A lógica do chat fica em `lib/chat.mjs` e é usada por `server.mjs` (local) e por `functions/api/chat.js` (Cloudflare Pages Function). Mudanças no chat são feitas em `lib/chat.mjs`.
 - Abrir os HTML direto pelo arquivo funciona para tudo, exceto o Diário com IA (precisa do `/api/chat`).
 - O servidor bloqueia caminhos com segmentos iniciados por `.` (ex.: `.env`, `.git`). Preserve essa proteção.
 
@@ -111,8 +112,8 @@ A sidebar **não é um componente compartilhado**: o markup está copiado em cad
 ## Diário com IA (Gemini)
 
 - Front: `js/diario-com-ia.js` faz `fetch('/api/chat')` com `{ messages: [{ role: 'user'|'model', text }] }` e recebe `{ reply }` ou `{ error }`. O histórico fica em `localStorage` (`loveJourney.diarioIA`).
-- Back: `server.mjs` → `handleChat`. Modelo `gemini-3.8-flash`; limites de 12 mensagens, 2.000 caracteres por mensagem, 24 KB por requisição, 15 requisições por minuto por IP, timeout de 45 s. Erros voltam em português, prontos para exibir.
-- O `systemInstruction` em `server.mjs` define a persona: acolhedora, em português, sem julgamentos, **não se apresenta como psicóloga nem substitui apoio profissional**, prioriza segurança em relatos de violência ou risco, não pede dados pessoais. Ao editar esse texto, preserve essas garantias.
+- Back: `lib/chat.mjs` → `generateReply`, chamado por `server.mjs` e `functions/api/chat.js`. Modelo `gemini-3.8-flash`; limites de 12 mensagens, 2.000 caracteres por mensagem, 24 KB por requisição, 15 requisições por minuto por IP, timeout de 45 s. Erros voltam em português, prontos para exibir.
+- O `systemInstruction` em `lib/chat.mjs` define a persona: acolhedora, em português, sem julgamentos, **não se apresenta como psicóloga nem substitui apoio profissional**, prioriza segurança em relatos de violência ou risco, não pede dados pessoais. Ao editar esse texto, preserve essas garantias.
 - **A chave nunca vai para o front-end.** Nada de `GEMINI_API_KEY` em HTML/JS. Qualquer nova integração de API segue o mesmo modelo: proxy no servidor + variável de ambiente.
 - A IA é apoio à reflexão, nunca diagnóstico. Textos da interface devem deixar isso claro.
 
@@ -131,8 +132,12 @@ Estrutura semântica (`header`, `nav`, `main`, `section`, `article`, `aside`, `f
 
 ## Deploy, Git e Cloudflare
 
-- Não existe `wrangler.toml` nem etapa de build. Uma hospedagem estática (Cloudflare Pages) **não executa `server.mjs`**: o Diário com IA precisa do proxy Node rodando no mesmo domínio (ou um Worker/Function equivalente) com `GEMINI_API_KEY` como secret.
-- Se o deploy apontar para a raiz do repositório, garanta que `.git`, `.env` e arquivos de servidor não sejam publicados. Em erro de tamanho ou arquivo inesperado, confira primeiro Output Directory, configuração do Wrangler e arquivos incluídos, antes de mexer em imagens ou páginas.
+- Hospedagem: **Cloudflare Pages**, configurado no painel (não existe `wrangler.toml`):
+  - Build command: `node scripts/build-pages.mjs` · Build output directory: `dist`.
+  - O build copia só os `.html` da raiz, `assets/`, `css/` e `js/` para `dist/` (ignorado no Git). `.git`, `.env`, `docs/`, `.claude/`, `lib/` e `server.mjs` não são publicados.
+  - `functions/api/chat.js` vira o endpoint `/api/chat` em produção. Configure `GEMINI_API_KEY` como secret do projeto (Settings → Variables and Secrets).
+  - Página nova na raiz entra no build automaticamente; pasta pública nova precisa ser adicionada em `publicDirs` no script.
+- Em erro de tamanho ou arquivo inesperado no deploy, confira primeiro Output Directory e o conteúdo de `dist/`, antes de mexer em imagens ou páginas.
 - Nunca modificar ou remover `.git` como parte de build.
 - Mensagens de commit seguem `feat: ...` em português.
 
@@ -140,12 +145,12 @@ Estrutura semântica (`header`, `nav`, `main`, `section`, `article`, `aside`, `f
 
 Não corrija por conta própria sem ser pedido, mas leve em conta e mencione quando for relevante:
 
-- `recuperar-senha.html` e `senha-redefinida.html` apontam para `assets/imgs/autenticacao/logo-icone.png`, que não existe (a pasta está vazia; o arquivo está em `assets/imgs/logo-icone.png`).
-- `comunidade.html` não carrega nenhum `<script>`; `js/comunidade.js` existe mas não está ligado.
-- Arquivos sem referência em nenhum HTML: `css/cadastro.css`, `css/login.css`, `css/senha-redefinida.css`, `js/cadastro.js`, `js/login.js`, `js/teste.js`.
-- `js/teste.js` chama a API do Gemini direto do navegador: não usar como base, pois exporia a chave.
-- `README.md` está desatualizado (cita `css/style.css`, que não existe, e não descreve as páginas internas).
+A lista completa e o status de cada item ficam em `docs/backlog.md`. Principais:
+
+- Login e cadastro simulados, sem logout, sem backend de dados (tudo em `localStorage`).
+- Arquivos sem referência em nenhum HTML: `css/cadastro.css`, `css/login.css`, `css/senha-redefinida.css`, `js/cadastro.js`, `js/login.js`.
 - Fluxo de acesso legado duplicado (ver acima). Sidebar e tokens duplicados em todos os CSS.
+- A política de privacidade do cadastro (modal em `cadastro.html`) é uma versão preliminar e precisa de revisão da equipe.
 - `acesso.html`, `comprovantes.html` e `esqueci-senha.html` não recebem links do fluxo atual.
 
 ## Skills do projeto
@@ -155,7 +160,7 @@ Em `.claude/skills/`. Use a que se aplica antes de começar:
 - `lj-alteracao-segura`: **sempre**, antes de editar qualquer arquivo. Inclui o modo congelado para apresentações.
 - `lj-navegacao`: links, sidebar, redirecionamentos. Tem o verificador `node .claude/skills/lj-navegacao/scripts/verificar-links.mjs`.
 - `lj-funcionalidade-local`: interatividade com JS + `localStorage`, modais, formulários.
-- `lj-diario-ia`: Diário com IA, `server.mjs`, prompt do Gemini, novas APIs.
+- `lj-diario-ia`: Diário com IA, `lib/chat.mjs`, `server.mjs`, Function do Cloudflare, prompt do Gemini, novas APIs.
 - `lj-conteudo-acolhedor`: textos visíveis e temas sensíveis.
 - `lj-verificacao-apresentacao`: checklist depois de alterar e antes de apresentar.
 

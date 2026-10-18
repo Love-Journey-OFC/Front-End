@@ -11,19 +11,21 @@ description: Use ao mexer no Diário com IA, no proxy server.mjs, no prompt do G
 diario-com-ia.html + js/diario-com-ia.js
         │  POST /api/chat  { messages: [{ role: "user"|"model", text }] }
         ▼
-server.mjs (Node 18+, sem dependências)  ── GEMINI_API_KEY do .env/ambiente
+local:    server.mjs (Node 18+)          ── GEMINI_API_KEY do .env/ambiente
+produção: functions/api/chat.js (Pages)  ── GEMINI_API_KEY nos secrets do Cloudflare
+        │  ambos chamam lib/chat.mjs → generateReply()
         │  generateContent (modelo gemini-3.8-flash)
         ▼
 Gemini  →  { reply }  ou  { error: "mensagem em português" }
 ```
 
-Rodar: `node server.mjs` → `http://127.0.0.1:4173` (a raiz abre `diario-com-ia.html`). Sem chave, o endpoint responde 503 com mensagem amigável, e a página deve continuar utilizável.
+Rodar: `node server.mjs` → `http://127.0.0.1:4173/diario-com-ia.html`. Regras do chat (prompt, limites, erros) ficam **só** em `lib/chat.mjs`; não duplique nos dois pontos de entrada. Sem chave, o endpoint responde 503 com mensagem amigável, e a página deve continuar utilizável.
 
 ## Regras de segurança (inegociáveis)
 
 - **Chave nunca no front-end.** Nada de chave em `.html`, `.js` ou commit. `.env` está no `.gitignore`; só `.env.example` (sem valor) é versionado.
-- `js/teste.js` chama o Gemini direto do navegador. **Não use como referência** e não o carregue em página nenhuma.
-- Toda API nova segue o mesmo modelo: rota no `server.mjs` + segredo em variável de ambiente + validação de entrada + limite de tamanho + timeout.
+- Nunca chame APIs com chave direto do navegador (um `js/teste.js` que fazia isso foi removido).
+- Toda API nova segue o mesmo modelo: lógica em `lib/` + rota no `server.mjs` + Function em `functions/api/` + segredo em variável de ambiente + validação de entrada + limite de tamanho + timeout.
 - Mantenha as proteções do servidor: limite de 24 KB por requisição, 12 mensagens, 2.000 caracteres por mensagem, 15 req/min por IP, timeout de 45 s e bloqueio de caminhos com `.` (protege `.env` e `.git`).
 - Não registre no console o conteúdo das mensagens do usuário (são desabafos pessoais). O servidor só registra o status HTTP.
 
@@ -36,7 +38,7 @@ O servidor devolve `{ error }` já em português e acolhedor, e o front exibe es
 
 ## Comportamento da IA
 
-O `systemInstruction` em `server.mjs` define a persona. Ao editar, **preserve**:
+O `systemInstruction` em `lib/chat.mjs` define a persona. Ao editar, **preserve**:
 
 - português brasileiro, tom caloroso, natural e conciso;
 - ajudar a nomear sentimentos e refletir, sem julgar nem tomar partido;
@@ -49,4 +51,4 @@ A IA é **apoio à reflexão, não diagnóstico**. Qualquer texto novo na tela d
 
 ## Deploy
 
-Hospedagem estática (Cloudflare Pages) não executa `server.mjs`. Para o chat funcionar publicado, é preciso o proxy Node no mesmo domínio ou uma Function/Worker equivalente com `GEMINI_API_KEY` como secret. Na apresentação local, confirme que a chave está no `.env` e faça uma mensagem de teste antes.
+Cloudflare Pages: build `node scripts/build-pages.mjs`, output `dist`, secret `GEMINI_API_KEY`. A Function em `functions/api/chat.js` atende `/api/chat`. Para testar o handler sem deploy, importe o módulo no Node 18+ e chame `onRequestPost({ request: new Request(...), env })`. Na apresentação local, confirme que a chave está no `.env` e faça uma mensagem de teste antes.

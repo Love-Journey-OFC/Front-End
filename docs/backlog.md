@@ -33,16 +33,19 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 - **Problema:** o chat depende de `GEMINI_API_KEY` no `.env` e do servidor Node rodando. Abrindo o HTML direto ou por outro servidor, o chat não responde.
 - **Correção:** confirmar a chave, rodar `node server.mjs` e enviar uma mensagem de teste em `http://127.0.0.1:4173/diario-com-ia.html`. Ter uma resposta de exemplo preparada caso a cota gratuita acabe (erro 429).
 - **Aceite:** uma mensagem enviada recebe resposta durante o ensaio.
+- **Status: resolvido em 18/10/2026.** Chave configurada no `.env` e mensagem de teste respondida pelo Gemini. Em um dos testes o Gemini devolveu HTTP 503 (instabilidade momentânea do Google); a tela mostra uma mensagem amigável e a nova tentativa funcionou. Na apresentação, se acontecer, basta reenviar.
 
 ### BL-04 · Limpar dados de teste do navegador da apresentação
 - **Onde:** `localStorage` (chaves `loveJourney.*`, `love-journey-diary-entries`, `perfilEscolhido`)
 - **Problema:** registros criados em testes ficam salvos e aparecem para o cliente.
 - **Correção:** apresentar em uma janela anônima ou limpar o armazenamento do site antes. Conferir se as telas carregam os dados de exemplo.
+- **Status: pendente (ação manual no dia).** Abrir a demo em janela anônima.
 
 ### BL-05 · Link "política de privacidade" sem destino
 - **Onde:** `cadastro.html:161` (`href="#"`)
 - **Problema:** o link não leva a lugar nenhum; ao clicar, a página volta ao topo.
 - **Correção para a demo:** evitar clicar durante a apresentação. A correção definitiva está em BL-17.
+- **Status: resolvido em 18/10/2026.** O link abre um modal com a política de privacidade (versão preliminar), no mesmo padrão do modal de detalhes do diário e com as cores do fluxo de acesso. Não marca o checkbox nem muda a URL; testado no desktop e em 390 px.
 
 ---
 
@@ -71,16 +74,19 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 - **Onde:** `js/teste.js`
 - **Problema:** chama `generativelanguage.googleapis.com` direto do front, o que exporia a chave. Não está carregado em nenhuma página, mas pode ser reaproveitado por engano.
 - **Próximo passo:** remover após confirmar com a equipe.
+- **Status: resolvido em 18/10/2026.** `js/teste.js` removido.
 
 ### BL-11 · Deploy não executa o proxy da IA
 - **Onde:** configuração de hospedagem (não existe `wrangler.toml`)
 - **Problema:** Cloudflare Pages serve só arquivos estáticos; `server.mjs` não roda lá, então `/api/chat` não existe em produção. Se o output for a raiz do repositório, `.git` e arquivos de servidor podem ser publicados.
 - **Próximo passo:** criar uma Pages Function/Worker para `/api/chat` com `GEMINI_API_KEY` como secret e definir um output directory só com os arquivos públicos.
+- **Status: resolvido em 18/10/2026 (falta configurar o painel).** Lógica do chat extraída para `lib/chat.mjs`, usada por `server.mjs` e pela nova Pages Function `functions/api/chat.js`. Criado `scripts/build-pages.mjs`, que gera `dist/` só com os arquivos públicos. Falta no painel do Cloudflare: build command `node scripts/build-pages.mjs`, output `dist` e secret `GEMINI_API_KEY` (ver README).
 
 ### BL-12 · Servidor abre o Diário com IA na raiz
 - **Onde:** `server.mjs` (`pathname === "/" ? "diario-com-ia.html"`)
 - **Problema:** `http://127.0.0.1:4173/` abre o diário em vez da landing `index.html`.
 - **Próximo passo:** confirmar com a equipe se era intencional para testes; se não, apontar para `index.html`.
+- **Status: resolvido em 18/10/2026.** A raiz agora abre `index.html`.
 
 ### BL-13 · Diário com IA sem item próprio na sidebar
 - **Onde:** sidebar do casal (6 páginas)
@@ -91,6 +97,7 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 - **Onde:** `README.md`
 - **Problema:** cita `css/style.css`, que não existe, descreve só o fluxo de acesso e não lista as páginas internas.
 - **Próximo passo:** atualizar com base no mapa de páginas do `CLAUDE.md`.
+- **Status: resolvido em 18/10/2026.** README reescrito com mapa de páginas, como rodar, dados e deploy.
 
 ---
 
@@ -102,7 +109,7 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 - **Próximo passo:** confirmar com a equipe e remover, ou documentar se alguma tela ainda for necessária.
 
 ### BL-16 · Arquivos sem uso
-- **Onde:** `css/cadastro.css`, `css/login.css`, `css/senha-redefinida.css`, `js/cadastro.js`, `js/login.js`, `js/teste.js`
+- **Onde:** `css/cadastro.css`, `css/login.css`, `css/senha-redefinida.css`, `js/cadastro.js`, `js/login.js` (`js/teste.js` já removido em BL-10)
 - **Problema:** nenhum HTML referencia esses arquivos. Aumentam o risco de editar o arquivo errado.
 - **Próximo passo:** remover junto com BL-15.
 
@@ -110,6 +117,7 @@ Regra para todos os itens: seguir a skill `lj-alteracao-segura` e validar com `l
 - **Onde:** `cadastro.html:161`
 - **Problema:** não existe página de privacidade. O público é jovem e adolescente e o sistema coleta desabafos pessoais e conversas enviadas ao Gemini, então isso é importante (LGPD, consentimento de responsáveis para menores).
 - **Próximo passo:** produzir o conteúdo com a equipe e criar a página no padrão visual do fluxo de acesso.
+- **Status: parcialmente resolvido em 18/10/2026.** Existe uma versão preliminar no modal do cadastro (BL-05). Falta a equipe revisar e validar o texto (LGPD, consentimento de responsáveis) e decidir se também haverá termos de uso.
 
 ### BL-18 · Sidebar e tokens copiados em cada página
 - **Onde:** 9 páginas internas e seus CSS
