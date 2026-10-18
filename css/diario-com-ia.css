@@ -2,28 +2,16 @@
    LOVE JOURNEY — DIÁRIO COM A IA
    ========================================================================== */
 
+/* Cores e fontes: css/base.css · regras comuns da sidebar: css/sidebar.css */
+/* Valores próprios desta página: */
 :root {
-  --primary-pink: #f25287;
-  --primary-hover: #d93d70;
-
-  --secondary-green: #48a982;
-
-  --bg-sidebar: #fde8ed;
-
-  --card-bg: #ffffff;
   --card-radius: 18px;
   --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-
-  --text-primary: #333333;
-  --text-muted: #777777;
-  --text-light: #666666;
 
   --purple-text: #5e3a73;
   --dark-pink: #5b1b4a;
 
   --border-pink: #f3d0dc;
-
-  --font-family: "Poppins", sans-serif;
 }
 
 
@@ -121,13 +109,6 @@ button {
 }
 
 
-.sidebar-nav ul {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  list-style: none;
-}
 
 
 .nav-link {
@@ -150,19 +131,8 @@ button {
 }
 
 
-.nav-link:hover {
-  background-color: rgba(242, 82, 135, 0.1);
-}
 
 
-.nav-link.active {
-  color: #ffffff;
-
-  background-color: var(--primary-pink);
-
-  box-shadow:
-    0 4px 12px rgba(242, 82, 135, 0.3);
-}
 
 
 .sidebar-footer-card {
@@ -178,22 +148,8 @@ button {
 }
 
 
-.sidebar-footer-card h3 {
-  margin-bottom: 8px;
-
-  color: var(--primary-pink);
-
-  font-size: 1rem;
-}
 
 
-.sidebar-footer-card p {
-  color: #881337;
-
-  font-size: 0.82rem;
-
-  line-height: 1.4;
-}
 
 
 /* ==========================================================================
@@ -982,7 +938,7 @@ button {
 @keyframes messageSearchPulse { 0%, 100% { background: transparent; } 40% { background: #fff0f5; } }
 .emotion-save { display: block; margin: 12px 0 0 auto; }
 .emotion-save[hidden] { display: none; }
-.ai-dialog { border: 0; border-radius: 20px; padding: 0; width: min(560px, calc(100% - 28px)); max-height: min(88vh, 760px); color: var(--text-primary); box-shadow: 0 20px 70px rgba(37, 20, 53, .28); }
+.ai-dialog { border: 0; border-radius: 20px; padding: 0; margin: auto; width: min(560px, calc(100% - 28px)); max-height: min(88vh, 760px); color: var(--text-primary); box-shadow: 0 20px 70px rgba(37, 20, 53, .28); }
 .ai-dialog::backdrop { background: rgba(36, 24, 51, .58); backdrop-filter: blur(3px); }
 .ai-dialog-card { padding: 24px; max-height: min(88vh, 760px); overflow: auto; font-family: var(--font-family); }
 .ai-dialog-card header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 18px; }

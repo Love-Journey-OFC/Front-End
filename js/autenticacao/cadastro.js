@@ -411,3 +411,35 @@ formCadastro.addEventListener(
 
   }
 );
+
+// ============================================
+// POLÍTICA DE PRIVACIDADE
+// ============================================
+
+const modalPrivacidade =
+  document.getElementById("politica-privacidade");
+
+document
+  .getElementById("abrir-privacidade")
+  ?.addEventListener("click", (event) => {
+
+    // Evita marcar o checkbox e mudar a URL
+    event.preventDefault();
+
+    modalPrivacidade?.showModal();
+  });
+
+modalPrivacidade
+  ?.querySelectorAll("[data-fechar-privacidade]")
+  .forEach((botao) => {
+    botao.addEventListener("click", () =>
+      modalPrivacidade.close()
+    );
+  });
+
+// Fecha ao clicar fora do conteúdo
+modalPrivacidade?.addEventListener("click", (event) => {
+  if (event.target === modalPrivacidade) {
+    modalPrivacidade.close();
+  }
+});

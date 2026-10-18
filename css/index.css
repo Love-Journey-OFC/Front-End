@@ -1,13 +1,4 @@
-:root {
-  --pink: #f17f89;
-  --pink-light: #f5a0a0;
-  --green: #56a77a;
-  --yellow: #f6d363;
-  --ink: #5f625b;
-  --cream: #fff7d5;
-  --white: #fff;
-  --shadow: 0 18px 38px #504c3720;
-}
+/* Cores: css/base.css */
 
 * {
   box-sizing: border-box;
