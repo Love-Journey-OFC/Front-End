@@ -26,6 +26,7 @@
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="./css/base.css" />
     <link rel="stylesheet" href="./css/sidebar.css" />
+    <link rel="stylesheet" href="./css/estados.css" />
     <link rel="stylesheet" href="./css/usuarios-do-profissional.css" />
   </head>
 
@@ -216,129 +217,17 @@
             </div>
 
             <div class="tab-group status-tabs">
-              <button class="tab-btn active">Todos <small>(12)</small></button>
+              <button class="tab-btn active">Todos <small>(0)</small></button>
 
               <button class="tab-btn">
-                Em atendimento <small>(6)</small>
+                Em atendimento <small>(0)</small>
               </button>
 
-              <button class="tab-btn">Solicitações <small>(3)</small></button>
+              <button class="tab-btn">Solicitações <small>(0)</small></button>
             </div>
 
             <div class="user-list">
-              <div class="user-item">
-                <span class="avatar purple">A</span>
 
-                <div class="user-info">
-                  <b>Ana Clara</b>
-                  <small class="user-status online">● Online</small>
-                  <p>Oi! Gostei muito da sua abordagem...</p>
-                </div>
-
-                <em>2 min</em>
-                <button class="favorite" aria-label="Favoritar"><i aria-hidden="true" class="fa-solid fa-heart"></i></button>
-                <span class="chevron">›</span>
-              </div>
-
-              <div class="user-item selected">
-                <span class="avatar blue">L</span>
-
-                <div class="user-info">
-                  <b>Lucas Ferreira</b>
-                  <small class="user-status online">● Online</small>
-                  <p>Pode me ajudar com uma dúvida...</p>
-                </div>
-
-                <em>15 min</em>
-                <button class="favorite" aria-label="Favoritar"><i aria-hidden="true" class="fa-solid fa-heart"></i></button>
-                <span class="chevron">›</span>
-              </div>
-
-              <div class="user-item">
-                <span class="avatar pink">C</span>
-
-                <div class="user-info">
-                  <b>Camila Santos</b>
-                  <small class="user-status busy">● Em atendimento</small>
-                  <p>Obrigada pela conversa de hoje!</p>
-                </div>
-
-                <em>32 min</em>
-                <button class="favorite" aria-label="Favoritar"><i aria-hidden="true" class="fa-solid fa-heart"></i></button>
-                <span class="chevron">›</span>
-              </div>
-
-              <div class="user-item">
-                <span class="avatar orange">R</span>
-
-                <div class="user-info">
-                  <b>Rodrigo Mendes</b>
-                  <small class="user-status busy">● Em atendimento</small>
-                  <p>Vou pensar sobre o que você falou...</p>
-                </div>
-
-                <em>1 h</em>
-                <button class="favorite" aria-label="Favoritar"><i aria-hidden="true" class="fa-solid fa-heart"></i></button>
-                <span class="chevron">›</span>
-              </div>
-
-              <div class="user-item">
-                <span class="avatar gray">L</span>
-
-                <div class="user-info">
-                  <b>Larissa Oliveira</b>
-                  <small class="user-status request">
-                    Solicitação de conversa
-                  </small>
-                  <p>Olá! Gostaria de conversar sobre...</p>
-                </div>
-
-                <em>2 h</em>
-                <button class="favorite" aria-label="Favoritar"><i aria-hidden="true" class="fa-solid fa-heart"></i></button>
-                <span class="chevron">›</span>
-              </div>
-
-              <div class="user-item">
-                <span class="avatar dark">F</span>
-
-                <div class="user-info">
-                  <b>Felipe Souza</b>
-                  <small class="user-status offline">● Offline</small>
-                  <p>Tudo bem? Queria tirar uma dúvida...</p>
-                </div>
-
-                <em>3 h</em>
-                <button class="favorite" aria-label="Favoritar"><i aria-hidden="true" class="fa-solid fa-heart"></i></button>
-                <span class="chevron">›</span>
-              </div>
-
-              <div class="user-item">
-                <span class="avatar gray">G</span>
-
-                <div class="user-info">
-                  <b>Giovana Lima</b>
-                  <small class="user-status offline">● Offline</small>
-                  <p>Podemos conversar mais tarde?</p>
-                </div>
-
-                <em>5 h</em>
-                <button class="favorite" aria-label="Favoritar"><i aria-hidden="true" class="fa-solid fa-heart"></i></button>
-                <span class="chevron">›</span>
-              </div>
-
-              <div class="user-item">
-                <span class="avatar navy">B</span>
-
-                <div class="user-info">
-                  <b>Bruno Alves</b>
-                  <small class="user-status offline">● Offline</small>
-                  <p>Muito obrigado pela ajuda!</p>
-                </div>
-
-                <em>6 h</em>
-                <button class="favorite" aria-label="Favoritar"><i aria-hidden="true" class="fa-solid fa-heart"></i></button>
-                <span class="chevron">›</span>
-              </div>
             </div>
           </section>
 
@@ -349,17 +238,17 @@
           <section class="card conversation-card">
             <div class="conversation-header">
               <div class="conversation-user">
-                <span class="avatar large blue">L</span>
+                <span class="avatar large purple">?</span>
 
                 <div>
-                  <h3>Lucas Ferreira <i aria-hidden="true" class="fa-solid fa-check"></i></h3>
+                  <h3>Nenhuma conversa selecionada</h3>
 
                   <p>
-                    24 anos • Suzano - SP
-                    <span class="user-status online">● Online</span>
+                    Escolha uma pessoa na lista
+                    <span class="user-status offline">●</span>
                   </p>
 
-                  <span class="tag purple"><i aria-hidden="true" class="fa-solid fa-user"></i> Em atendimento</span>
+                  <span class="tag purple"><i aria-hidden="true" class="fa-solid fa-user"></i> Sem atendimento</span>
                 </div>
               </div>
 
@@ -371,49 +260,7 @@
             </div>
 
             <div class="messages">
-              <div class="message received">
-                <span class="avatar mini blue">L</span>
 
-                <div class="bubble">
-                  <p>
-                    Oi, Beatriz! Eu tô um pouco perdido e queria sua ajuda.
-                    Estou começando a me conhecer melhor e queria saber como
-                    lidar com a ansiedade no trabalho...
-                  </p>
-
-                  <time>14:23</time>
-                </div>
-              </div>
-
-              <div class="message sent">
-                <div class="bubble">
-                  <p>
-                    Oi, Lucas! <i aria-hidden="true" class="fa-solid fa-heart"></i> Que bom que você veio conversar. A ansiedade
-                    no trabalho é algo super comum, e a gente pode trabalhar
-                    isso juntos. Você já consegue identificar o que mais te
-                    afeta?
-                  </p>
-
-                  <time>14:26</time>
-                </div>
-              </div>
-
-              <div class="message received">
-                <span class="avatar mini blue">L</span>
-
-                <div class="bubble">
-                  <p>
-                    Acho que é a pressão e o medo de não dar conta... Às vezes
-                    fico muito ansioso antes de reuniões.
-                  </p>
-                </div>
-              </div>
-
-              <div class="attachment">
-                <span><i aria-hidden="true" class="fa-solid fa-file-lines"></i></span>
-                <b>Ansiedade no trabalho</b> - dicas.pdf
-                <span class="file-size">2.4 MB ⬇</span>
-              </div>
             </div>
 
             <div class="message-input">
@@ -441,20 +288,6 @@
               </h3>
             </div>
 
-            <div class="history-item">
-              <strong>12/07/2025</strong>
-              <p>Primeiro contato • Solicitação de conversa</p>
-            </div>
-
-            <div class="history-item">
-              <strong>12/07/2025</strong>
-              <p>Encontro • Conversa sobre ansiedade</p>
-            </div>
-
-            <div class="history-item">
-              <strong>10/07/2025</strong>
-              <p>Postagem curtida • Conteúdo de autoestima</p>
-            </div>
           </section>
 
           <!-- ====================================== -->
@@ -476,27 +309,17 @@
               aria-label="Evolução do acompanhamento"
             >
               <polyline
-                points="5,70 55,40 105,55 155,30 205,45 255,18 295,55"
+                points=""
                 fill="none"
                 stroke="currentColor"
                 stroke-width="4"
               />
 
-              <g fill="currentColor">
-                <circle cx="5" cy="70" r="4" />
-                <circle cx="55" cy="40" r="4" />
-                <circle cx="105" cy="55" r="4" />
-                <circle cx="155" cy="30" r="4" />
-                <circle cx="205" cy="45" r="4" />
-                <circle cx="255" cy="18" r="4" />
-                <circle cx="295" cy="55" r="4" />
-              </g>
+              <g fill="currentColor"></g>
             </svg>
 
         <div class="evolution-stats">
-          <p class="stat-line"><i aria-hidden="true" class="fa-solid fa-calendar-days"></i> 3 encontros</p>
-          <p class="stat-line"><i aria-hidden="true" class="fa-solid fa-circle-check"></i> 2 tarefas concluídas</p>
-          <p class="stat-line">⭐ 1 evolução significativa</p>
+
         </div>
           </section>
 
@@ -518,14 +341,10 @@
             </div>
 
             <div class="requests-body">
-              <div class="avatar-stack">
-                <span class="avatar gray">L</span>
-                <span class="avatar purple">M</span>
-              </div>
+              <div class="avatar-stack"></div>
 
               <p>
-                <b>Larissa Oliveira, Mariana Alves e mais 1 pessoa</b> querem
-                iniciar uma conversa com você.
+                Nenhuma solicitação nova.
               </p>
 
               <button class="btn btn-primary btn-sm">Responder</button>
@@ -548,11 +367,7 @@
               </a>
             </div>
 
-            <p class="about-text">
-              Paciente muito receptivo, demonstra interesse em aprender e
-              evoluir. Se sente mais confortável em conversas no período da
-              noite.
-            </p>
+            <p class="about-text">Selecione uma pessoa para registrar suas observações.</p>
           </section>
 
           <!-- ====================================== -->
@@ -570,23 +385,18 @@
             </div>
 
             <div class="card profile-summary">
-              <span class="avatar large blue">L</span>
+              <span class="avatar large purple">?</span>
 
               <div>
-                <strong>Lucas Ferreira <i aria-hidden="true" class="fa-solid fa-check"></i></strong>
+                <strong>Nenhum usuário selecionado</strong>
+                <p>Os dados aparecem ao escolher alguém da lista</p>
 
-                <p>24 anos • Suzano - SP</p>
-
-                <span class="tag purple"><i aria-hidden="true" class="fa-solid fa-user"></i> Em atendimento</span>
+                <span class="tag purple"><i aria-hidden="true" class="fa-solid fa-user"></i> Sem atendimento</span>
               </div>
             </div>
 
             <div class="card">
-              <p class="about-text">
-                Gosto de aprender coisas novas, sou curioso e sempre busco
-                evoluir. Tenho um pouco de dificuldade com ansiedade, mas estou
-                trabalhando nisso.
-              </p>
+              <p class="about-text">Quando um casal pedir uma conversa com você, a mensagem dele aparece aqui.</p>
             </div>
 
             <div class="card">
@@ -601,29 +411,25 @@
                 <div
                   class="progress-bar"
                   role="progressbar"
-                  aria-valuenow="8"
+                  aria-valuenow="0"
                   aria-valuemin="0"
-                  aria-valuemax="10"
+                  aria-valuemax="3"
                   aria-label="Perguntas respondidas"
                 >
-                  <div class="progress-fill" style="width: 80%"></div>
+                  <div class="progress-fill" style="width: 0%"></div>
                 </div>
-
-                <small>8/10</small>
+                <small>0/3</small>
               </div>
 
               <dl class="answers">
                 <dt><i aria-hidden="true" class="fa-solid fa-bullseye"></i> Principais objetivos</dt>
-                <dd>
-                  Melhorar minha autoestima, lidar com a ansiedade e construir
-                  relações mais saudáveis.
-                </dd>
+                <dd>Não informado</dd>
 
                 <dt><i aria-hidden="true" class="fa-solid fa-lightbulb"></i> Áreas de interesse</dt>
-                <dd>Relacionamentos, carreira e saúde mental.</dd>
+                <dd>Não informado</dd>
 
                 <dt><i aria-hidden="true" class="fa-solid fa-heart"></i> Como prefere ser atendido(a)?</dt>
-                <dd>Conversas online, com materiais de apoio.</dd>
+                <dd>Não informado</dd>
               </dl>
 
               <button class="btn btn-soft btn-block">
@@ -635,6 +441,7 @@
       </main>
     </div>
 
+    <script src="./js/conta.js"></script>
     <script src="./js/usuarios.js"></script>
   </body>
 </html>
