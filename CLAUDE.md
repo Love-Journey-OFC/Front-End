@@ -10,6 +10,11 @@ Guia para o Claude Code trabalhar neste repositório. Leia antes de qualquer alt
 
 Princípios: pessoas antes da tecnologia · experiência antes da complexidade · clareza antes de excesso de funcionalidades · acolhimento antes de julgamento · consistência antes de mudanças desnecessárias.
 
+## Branches
+
+- `preparacao-apresentacao` / `main`: versão com **dados de exemplo** (Ana e Lucas, Gabriel Queiroz...), usada para gravação e demonstração.
+- `site-zerado`: versão **sem nenhum dado prévio**, com contas reais no navegador, para testar a jornada do zero. Mudanças de dados e jornada nesta branch não devem ser levadas para a outra sem pedido.
+
 ## Regra principal
 
 **Evoluir o Love Journey, não recriá-lo.** Leia o código existente, entenda a intenção e preserve o que já funciona.
@@ -53,7 +58,7 @@ Todas as páginas ficam na raiz. Cada página tem, em geral, **um CSS e um JS pr
 | Profissional — Usuários | `usuarios-do-profissional.html` | `css/usuarios-do-profissional.css` | `js/usuarios.js` |
 | Profissional — Comunidade | `comunidade.html` | `css/comunidade.css` | — (ver pendências) |
 
-Fluxo: `index.html` → `boas-vindas.html` → `login.html`. Após o login, `js/autenticacao/login.js` redireciona para `dashboard-profissional.html` ou `dashboard-casal.html` conforme `localStorage.perfilEscolhido`. O perfil também trafega por `?perfil=cliente|profissional`.
+Fluxo: `index.html` → `boas-vindas.html` → `login.html`. Após o login, `js/autenticacao/login.js` confere e-mail e senha da conta e redireciona para `dashboard-profissional.html` ou `dashboard-casal.html` conforme o perfil da conta. O perfil também trafega por `?perfil=cliente|profissional`.
 
 O fluxo de acesso usa `css/autenticacao/` + `js/autenticacao/`. Uma versão antiga duplicada (`acesso.html`, `comprovantes.html`, `esqueci-senha.html` e seus CSS/JS) foi removida em 18/10/2026.
 
@@ -104,13 +109,15 @@ O markup da sidebar está **copiado em cada página**. No CSS, as regras idênti
 ## JavaScript
 
 - Scripts por página, sem módulos. Padrões comuns: IIFE ou `DOMContentLoaded`, `querySelector`, `<dialog>` criado em JS para modais, função `escapeHtml` antes de inserir texto do usuário via `innerHTML`.
-- **Persistência é `localStorage`, por decisão do projeto**: não haverá backend nem banco de dados. Não proponha nem implemente APIs de dados, autenticação real ou serviços como Supabase. O único código de servidor é o proxy do Diário com IA. As chaves usam o prefixo `loveJourney.*`: `dashboardCasal`, `dashboardEmotions`, `desafiosCasal`, `diarioIA`, `forumCasal`, `apoio`, `profissional`, `comunidade.*`. Exceção: o diário do casal usa `love-journey-diary-entries` (não renomear, para não perder dados salvos). Ao criar estado novo, siga o prefixo e trate `JSON.parse` com `try/catch`.
+- **Persistência é `localStorage`, por decisão do projeto**: não haverá backend nem banco de dados. Não proponha nem implemente APIs de dados, autenticação real ou serviços como Supabase. O único código de servidor é o proxy do Diário com IA.
+- **Contas e dados por usuário (branch `site-zerado`)**: `js/conta.js` expõe o objeto global `LJ` (cadastro, login com senha em hash, sessão, `LJ.exigirSessao(perfil)` no início de cada página interna e `LJ.chave(nome)` para guardar dados de cada conta separadamente). Casais e profissionais se conectam por pedidos de conversa (`loveJourney.pedidos`, `loveJourney.conversas`). Detalhes e tabela de chaves na skill `lj-funcionalidade-local`.
+- Nada de dados de exemplo no HTML ou no JS: tudo vem da conta ou dos registros, com estado vazio (`.lj-vazio`, em `css/estados.css`) quando não há nada.
 - Sempre escape conteúdo do usuário antes de renderizar em HTML.
 - Funções pequenas, nomes claros, feedback ao usuário (status com `aria-live`, estados de loading, vazio e erro).
 
 ## Diário com IA (Gemini)
 
-- Front: `js/diario-com-ia.js` faz `fetch('/api/chat')` com `{ messages: [{ role: 'user'|'model', text }] }` e recebe `{ reply }` ou `{ error }`. O histórico fica em `localStorage` (`loveJourney.diarioIA`).
+- Front: `js/diario-com-ia.js` faz `fetch('/api/chat')` com `{ messages: [{ role: 'user'|'model', text }] }` e recebe `{ reply }` ou `{ error }`. O histórico fica em `localStorage` (`LJ.chave('diarioIA')`).
 - Back: `lib/chat.mjs` → `generateReply`, chamado por `server.mjs` e `functions/api/chat.js`. Modelo `gemini-3.8-flash`; limites de 12 mensagens, 2.000 caracteres por mensagem, 24 KB por requisição, 15 requisições por minuto por IP, timeout de 45 s. Erros voltam em português, prontos para exibir.
 - O `systemInstruction` em `lib/chat.mjs` define a persona: acolhedora, em português, sem julgamentos, **não se apresenta como psicóloga nem substitui apoio profissional**, prioriza segurança em relatos de violência ou risco, não pede dados pessoais. Ao editar esse texto, preserve essas garantias.
 - **A chave nunca vai para o front-end.** Nada de `GEMINI_API_KEY` em HTML/JS. Qualquer nova integração de API segue o mesmo modelo: proxy no servidor + variável de ambiente.
