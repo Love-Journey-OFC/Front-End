@@ -40,6 +40,7 @@ Aplicação web de autoconhecimento, comunicação e educação sobre relacionam
 - [Estrutura de pastas](#estrutura-de-pastas)
 - [Como rodar localmente](#como-rodar-localmente)
 - [Deploy](#deploy-cloudflare-pages)
+- [Aplicativo Android](#aplicativo-android)
 - [Decisões técnicas](#decisões-técnicas)
 - [Roadmap](#roadmap)
 - [Equipe](#equipe)
@@ -347,6 +348,14 @@ O projeto publicado em **https://front-end-4cu.pages.dev/boas-vindas** usa esta 
 | Secret (Settings → Variables and Secrets) | `GEMINI_API_KEY`, em Production e Preview |
 
 O build copia só os `.html` da raiz, `assets/`, `css/` e `js/` para `dist/`. A pasta `functions/` é detectada automaticamente pelo Pages e vira o endpoint `/api/chat`. Uma página nova na raiz entra no build sem nenhuma configuração extra.
+
+---
+
+## Aplicativo Android
+
+O app Android fica no repositório **[Love-Journey-OFC/Mobile](https://github.com/Love-Journey-OFC/Mobile)**. Ele empacota este mesmo front-end com [Capacitor](https://capacitorjs.com), a partir do `dist/` gerado aqui, sem duplicar páginas, CSS ou JS. Clone os dois repositórios lado a lado (`GitHub/Front-End` e `GitHub/Mobile`); as instruções para gerar APK e AAB estão no README do Mobile.
+
+No app, o Diário com IA chama a API de produção (`https://front-end-4cu.pages.dev/api/chat`); a chave do Gemini continua só no Cloudflare.
 
 ---
 
