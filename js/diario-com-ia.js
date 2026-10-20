@@ -4,6 +4,9 @@
   const messages = document.getElementById('chat-messages');
   const status = document.getElementById('status');
   const maxMessageLength = 2000;
+  // No aplicativo Android (Capacitor) não existe /api/chat local: usa a API de produção.
+  const isApp = Boolean(window.Capacitor?.isNativePlatform?.());
+  const chatUrl = isApp ? 'https://front-end-4cu.pages.dev/api/chat' : '/api/chat';
   let sending = false;
 
   if (!input || !sendButton || !messages || !status) return;
@@ -137,7 +140,7 @@
     setStatus('Estou aqui com você. Vou pensar com carinho...');
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch(chatUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: readHistory() })
@@ -163,9 +166,10 @@
       saveCurrentSession();
       setStatus('');
     } catch (error) {
-      const message = error instanceof TypeError
-        ? 'Não foi possível conectar ao servidor da IA. Inicie `node server.mjs` e abra http://127.0.0.1:4173.'
-        : error.message;
+      const offlineMessage = isApp
+        ? 'Não foi possível conectar ao diário com IA. Confira sua conexão com a internet e tente de novo.'
+        : 'Não foi possível conectar ao servidor da IA. Inicie `node server.mjs` e abra http://127.0.0.1:4173.';
+      const message = error instanceof TypeError ? offlineMessage : error.message;
       setStatus(message || 'Não foi possível conectar ao diário com IA.', true);
     } finally {
       sending = false;

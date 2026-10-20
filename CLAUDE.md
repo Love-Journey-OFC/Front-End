@@ -140,6 +140,12 @@ Estrutura semântica (`header`, `nav`, `main`, `section`, `article`, `aside`, `f
 - Nunca modificar ou remover `.git` como parte de build.
 - Mensagens de commit seguem `feat: ...` em português.
 
+## Aplicativo Android (repositório `Mobile`)
+
+- O app fica no repositório [Love-Journey-OFC/Mobile](https://github.com/Love-Journey-OFC/Mobile), clonado ao lado deste (`GitHub/Front-End` e `GitHub/Mobile`). Ele empacota **este** front-end com Capacitor: roda `scripts/build-pages.mjs` daqui e copia o `dist/`. Não duplique páginas, CSS ou JS lá.
+- Por isso, mudanças em `scripts/build-pages.mjs`, nos links de Font Awesome/Google Fonts ou em fontes novas afetam o app: o script de preparo do Mobile falha se encontrar um CDN ou fonte que não conhece.
+- No app, `js/diario-com-ia.js` detecta `window.Capacitor` e chama a API de produção (`https://front-end-4cu.pages.dev/api/chat`); `CapacitorHttp` evita CORS. Nenhuma chave vai para o app. Se o domínio de produção mudar, atualize essa URL.
+
 ## Pendências conhecidas
 
 Não corrija por conta própria sem ser pedido, mas leve em conta e mencione quando for relevante:
